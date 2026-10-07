@@ -1,0 +1,74 @@
+{%- comment -%} Les signatures — catalogue spreads (numbered, facts from gianato.* metafields). {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="section signatures" aria-labelledby="t-{{ section.id }}">
+  <div class="container" data-rail>
+    <div class="section-head rail-head reveal">
+      <div>
+        <p class="eyebrow">{{ s.eyebrow }}</p>
+        <h2 id="t-{{ section.id }}">{{ s.title }}</h2>
+        {%- if s.text != blank -%}<p>{{ s.text }}</p>{%- endif -%}
+      </div>
+      <div class="rail-head__aside">
+        {%- if s.collection != blank -%}<a class="link" href="{{ s.collection.url }}">{{ s.cta_label }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+        <div class="rail-nav"><button type="button" data-rail-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'arrow-left' %}</button><button type="button" data-rail-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'arrow' %}</button></div>
+      </div>
+    </div>
+    <div class="rail" data-list="Signatures — accueil">
+      {%- for p in s.products -%}
+        {%- liquid
+          assign mf = p.metafields.gianato
+          assign facts = ''
+          if mf.construction != blank
+            assign facts = mf.construction.value
+          endif
+          if mf.material != blank
+            assign facts = facts | append: ' · ' | append: mf.material.value
+          endif
+          if mf.lining != blank
+            assign lin = mf.lining.value | downcase
+            assign facts = facts | append: ' · Doublure ' | append: lin
+          endif
+          assign facts = facts | remove_first: ' · '
+          assign packshot = p.featured_media.preview_image
+          for m in p.media
+            unless m.preview_image.src contains '/DSC' or m.preview_image.src contains '/CLD'
+              assign packshot = m.preview_image
+              break
+            endunless
+          endfor
+          assign sib = mf.siblings.value
+        -%}
+        <article class="sig" data-ga='{"item_id":"{{ p.selected_or_first_available_variant.id }}","item_name":{{ p.title | json | escape }},"item_brand":"GIANATO","price":{{ p.price | divided_by: 100.0 }},"index":{{ forloop.index0 }}}'>
+          <span class="sig__no">N° {{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <div class="media">{% render 'image', image: packshot, sizes: '(min-width:1024px) 40vw, 80vw', alt: p.title, max: 1600 %}</div>
+          <div class="sig__body">
+            <h3><a href="{{ p.url }}">{{ mf.model.value | default: p.title }}</a></h3>
+            <p class="sig__facts">{{ facts | default: p.type }}</p>
+            <div class="sig__aside">
+              {% render 'swatches', product: p, max: 6 %}
+              <span class="price">{{ p.price | money_without_trailing_zeros }}</span>
+              {%- if sib.size > 1 -%}<span class="label muted">{{ 'product.colors_count' | t: count: sib.size }}</span>{%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    <div class="rail-progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Les signatures",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Les signatures" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les modèles qui font la Maison" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Quatre souliers que nos clients choisissent, et reviennent choisir." },
+    { "type": "product_list", "id": "products", "label": "Modèles signatures", "limit": 6 },
+    { "type": "collection", "id": "collection", "label": "Collection « Toutes les signatures »" },
+    { "type": "text", "id": "cta_label", "label": "Lien", "default": "Toutes les signatures" }
+  ],
+  "presets": [{ "name": "Les signatures" }]
+}
+{% endschema %}

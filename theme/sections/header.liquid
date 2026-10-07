@@ -1,0 +1,158 @@
+{%- comment -%}
+  Header + mega menu + mobile navigation.
+  Menu structure (Boutique en ligne › Navigation) — 3 levels:
+    Souliers ▸ Les styles ▸ Mocassins, Richelieu…   (level 2 = column title, level 3 = links)
+  A top-level link without children is a plain link. The last N top-level links sit on the right (setting right_count).
+  Blocks « Mise en avant » attach a visual to a top-level item (matched by its title).
+{%- endcomment -%}
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+  assign right_count = section.settings.right_count
+  assign split_at = menu.links.size | minus: right_count
+-%}
+{%- capture logo -%}
+  <a class="header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} — {{ 'general.home' | t }}">
+    {%- if settings.logo != blank -%}
+      {{ settings.logo | image_url: width: 480 | image_tag: class: 'logo-espresso', alt: '', width: settings.logo_width, height: nil }}
+    {%- else -%}
+      <img class="logo-espresso" src="{{ 'logo-espresso.png' | asset_url }}" alt="" width="1400" height="335">
+    {%- endif -%}
+    {%- if settings.logo_inverse != blank -%}
+      {{ settings.logo_inverse | image_url: width: 480 | image_tag: class: 'logo-ivory', alt: '', width: settings.logo_width, height: nil }}
+    {%- else -%}
+      <img class="logo-ivory" src="{{ 'logo-ivory.png' | asset_url }}" alt="" width="1400" height="335">
+    {%- endif -%}
+  </a>
+{%- endcapture -%}
+
+<style>.header__logo img { width: {{ settings.logo_width }}px; } @media (max-width: 767px) { .header__logo img { width: {{ settings.logo_width | times: 0.8 | round }}px; } }</style>
+
+<header class="header" data-header>
+  <div class="container header__bar">
+    <div class="header__start">
+      <button class="icon-btn header__menu-btn" type="button" aria-label="{{ 'header.open_menu' | t }}" aria-controls="mnav" aria-expanded="false" data-open-mnav>{% render 'icon', name: 'menu' %}</button>
+      <button class="icon-btn header__search-m" type="button" aria-label="{{ 'header.search' | t }}" data-open-search>{% render 'icon', name: 'search' %}</button>
+      <nav aria-label="{{ 'header.main_nav' | t }}">
+        <ul class="header__nav" role="list">
+          {%- for link in menu.links -%}
+            {%- if forloop.index0 < split_at -%}<li>{% render 'nav-item', link: link, index: forloop.index %}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+    {{ logo }}
+    <div class="header__tools">
+      {%- for link in menu.links -%}
+        {%- if forloop.index0 >= split_at -%}<span class="header__end hide-m">{% render 'nav-item', link: link, index: forloop.index %}</span>{%- endif -%}
+      {%- endfor -%}
+      <button class="icon-btn hide-m" type="button" aria-label="{{ 'header.search' | t }}" data-open-search>{% render 'icon', name: 'search' %}</button>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="icon-btn hide-m" href="{{ routes.account_url }}" aria-label="{{ 'header.account' | t }}">{% render 'icon', name: 'user' %}</a>
+      {%- endif -%}
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart' | t }}" aria-controls="cart" data-open-cart>{% render 'icon', name: 'bag' %}<span class="cart-count" data-cart-count>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span></a>
+    </div>
+  </div>
+
+  {%- for link in menu.links -%}
+    {%- if link.links.size > 0 -%}
+      {%- assign feature = nil -%}
+      {%- for block in section.blocks -%}{%- if block.settings.menu_item == link.title -%}{%- assign feature = block -%}{%- endif -%}{%- endfor -%}
+      <div class="mega" id="mega-{{ forloop.index }}" data-mega="{{ forloop.index }}" aria-hidden="true">
+        <div class="container mega__inner">
+          <div class="mega__cols">
+            {%- for col in link.links -%}
+              {%- if col.links.size > 0 -%}
+                <div class="mega__col"><h3>{{ col.title }}</h3>
+                  <ul role="list">{%- for l in col.links -%}<li><a href="{{ l.url }}">{{ l.title }}</a></li>{%- endfor -%}</ul>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+            <div class="mega__aside">
+              {%- if link.url != '#' and link.url != blank -%}<a class="link" href="{{ link.url }}">{{ 'header.view_all' | t }} {% render 'icon', name: 'arrow' %}</a>{%- else -%}<span></span>{%- endif -%}
+              {%- for col in link.links -%}
+                {%- if col.links.size == 0 -%}<a class="mega__quiet" href="{{ col.url }}">{{ col.title }}</a>{%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+          {%- if feature -%}
+            <a class="mega__feature" href="{{ feature.settings.url | default: link.url }}" {{ feature.shopify_attributes }}>
+              <div class="media">{% render 'image', image: feature.settings.image, fallback: feature.settings.fallback, sizes: '22vw', alt: '', max: 960 %}</div>
+              <div>
+                <p class="eyebrow eyebrow--plain">{{ feature.settings.kicker }}</p>
+                <p class="h4" style="color:var(--heading);margin-top:.75rem">{{ feature.settings.title }}</p>
+                <p>{{ feature.settings.text }}</p>
+                <span class="link" style="margin-top:1.25rem">{{ 'general.discover' | t }} {% render 'icon', name: 'arrow' %}</span>
+              </div>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</header>
+<div class="mega-scrim" data-mega-scrim></div>
+
+{%- comment -%} Mobile navigation: same menu as accordions {%- endcomment -%}
+<div class="layer drawer drawer--left mnav" id="mnav" aria-hidden="true" data-layer>
+  <div class="layer__scrim" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'header.menu' | t }}">
+    <div class="drawer__head">
+      <a class="mnav__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}"><img src="{{ 'logo-espresso.png' | asset_url }}" alt="" width="1400" height="335"></a>
+      <button class="icon-btn" type="button" data-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      <ul class="mnav__list" role="list">
+        {%- for link in menu.links -%}
+          {%- if link.links.size > 0 -%}
+            <li><details><summary>{{ link.title }}{% render 'icon', name: 'plus' %}</summary>
+              <div class="mnav__sub">
+                {%- for col in link.links -%}
+                  {%- if col.links.size > 0 -%}
+                    <div><h3>{{ col.title }}</h3><ul role="list">{%- for l in col.links -%}<li><a href="{{ l.url }}">{{ l.title }}</a></li>{%- endfor -%}</ul></div>
+                  {%- else -%}
+                    <a class="muted" href="{{ col.url }}" style="font-size:var(--fs-sm)">{{ col.title }}</a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </details></li>
+          {%- else -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      <div class="mnav__aux">
+        {%- if shop.customer_accounts_enabled -%}<a href="{{ routes.account_url }}">{% render 'icon', name: 'user' %} {{ 'header.account' | t }}</a>{%- endif -%}
+        {%- if settings.size_page != blank -%}<a href="{{ settings.size_page.url }}">{% render 'icon', name: 'ruler' %} {{ 'sizes.title' | t }}</a>{%- endif -%}
+        {%- if settings.whatsapp_number != blank -%}<a href="{% render 'whatsapp-url' %}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp' %} {{ 'general.whatsapp_advice' | t }}</a>{%- endif -%}
+        {%- if settings.phone != blank -%}<a href="tel:{{ settings.phone | remove: ' ' }}">{% render 'icon', name: 'phone' %} {{ settings.phone }}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "class": "section-header",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "range", "id": "right_count", "label": "Liens placés à droite du logotype", "min": 0, "max": 3, "step": 1, "default": 1, "info": "Les derniers liens du menu (ex. « La Maison »)." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Mise en avant du méga-menu",
+      "settings": [
+        { "type": "text", "id": "menu_item", "label": "Titre exact du lien du menu", "default": "Souliers" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Image par défaut (fichier du thème)", "default": "editorial-life-rocks.webp" },
+        { "type": "text", "id": "kicker", "label": "Surtitre", "default": "À découvrir" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "La nouvelle collection" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Loro, en sept cuirs." },
+        { "type": "url", "id": "url", "label": "Lien" }
+      ]
+    }
+  ]
+}
+{% endschema %}

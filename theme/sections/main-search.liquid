@@ -1,0 +1,71 @@
+{%- comment -%} Search results — same grid, filters and load-more as collections. {%- endcomment -%}
+{%- assign list_name = 'Recherche' -%}
+<div class="plp-root" data-plp data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="plp-head plp-head--plain">
+      <div class="plp-head__text">
+        {%- assign crumb = 'search.title' | t -%}
+        {% render 'breadcrumbs', current: crumb %}
+        <div>
+          {%- if search.performed -%}
+            <p class="eyebrow">{{ 'search.title' | t }}</p>
+            <h1 style="margin-top:1rem">« {{ search.terms | escape }} »</h1>
+          {%- else -%}
+            <h1>{{ 'search.title' | t }}</h1>
+          {%- endif -%}
+          <form action="{{ routes.search_url }}" method="get" role="search" style="margin-top:2rem;max-width:34rem">
+            <input type="hidden" name="type" value="product">
+            <div class="field"><input id="search-page-q" type="search" name="q" value="{{ search.terms | escape }}" placeholder=" "><label for="search-page-q">{{ 'search.placeholder' | t }}</label></div>
+          </form>
+        </div>
+      </div>
+    </header>
+  </div>
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <div class="toolbar"><div class="container toolbar__inner">
+        <div class="toolbar__start">
+          <button class="ui" type="button" data-filters-toggle aria-expanded="true" aria-controls="filters">{% render 'icon', name: 'filter' %}{{ 'collections.filters' | t }}<span class="count"></span></button>
+          <span class="ui count hide-m" data-plp-count aria-live="polite">{{ 'search.results_count' | t: count: search.results_count }}</span>
+        </div>
+        <div class="toolbar__end">
+          <label class="visually-hidden" for="sort">{{ 'collections.sort' | t }}</label>
+          <select class="select" id="sort" data-sort>
+            {%- for option in search.sort_options -%}<option value="{{ option.value }}"{% if option.value == search.sort_by %} selected{% endif %}>{{ option.name }}</option>{%- endfor -%}
+          </select>
+        </div>
+      </div></div>
+      <div class="container">
+        <div class="chips" data-active-filters>
+          {%- for f in search.filters -%}{%- for v in f.active_values -%}<a class="chip" href="{{ v.url_to_remove }}" data-facet-link>{{ v.label }}{% render 'icon', name: 'close' %}</a>{%- endfor -%}{%- endfor -%}
+        </div>
+        <div class="plp" data-density="3">
+          {% render 'facets', results: search %}
+          <div>
+            <h2 class="visually-hidden">{{ 'collections.products' | t }}</h2>
+            <div class="product-grid" data-plp-grid data-list="{{ list_name }}">
+              {%- for item in search.results -%}
+                {%- if item.object_type == 'product' -%}{% render 'product-card', product: item, list: list_name, index: forloop.index0 %}{%- endif -%}
+              {%- else -%}
+                <div class="plp-empty">
+                  <p class="h3">{{ 'search.no_results' | t: terms: search.terms | escape }}</p>
+                  <p>{{ 'search.no_results_hint' | t }}</p>
+                  {%- assign msg = 'search.whatsapp' | t: terms: search.terms -%}
+                  <div class="empty-state__links"><a class="link" href="{% render 'whatsapp-url', message: msg %}" target="_blank" rel="noopener">{{ 'general.whatsapp_advice' | t }}</a></div>
+                </div>
+              {%- endfor -%}
+            </div>
+            <div class="plp-more" data-plp-more>
+              {%- if paginate.next -%}<a class="btn btn--ghost" href="{{ paginate.next.url }}" data-load-more>{{ 'collections.load_more' | t }}</a>{%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+<script src="{{ 'facets.js' | asset_url }}" defer></script>
+
+{% schema %}
+{ "name": "Résultats de recherche", "settings": [] }
+{% endschema %}

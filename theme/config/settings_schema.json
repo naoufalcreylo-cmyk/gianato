@@ -1,0 +1,76 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Gianato Maison",
+    "theme_version": "1.0.0",
+    "theme_author": "Refonte GIANATO 2026",
+    "theme_documentation_url": "https://gianato.ma",
+    "theme_support_url": "https://gianato.ma"
+  },
+  {
+    "name": "Identité",
+    "settings": [
+      { "type": "paragraph", "content": "Logotype GIANATO (Brand Book 2026). Laisser vide pour utiliser les fichiers livrés avec le thème : espresso sur fond clair, ivoire sur image." },
+      { "type": "image_picker", "id": "logo", "label": "Logotype espresso (fond clair)" },
+      { "type": "image_picker", "id": "logo_inverse", "label": "Logotype ivoire (sur image / fond sombre)" },
+      { "type": "range", "id": "logo_width", "label": "Largeur du logotype (bureau)", "min": 110, "max": 220, "step": 5, "unit": "px", "default": 168 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon (monogramme, 96 × 96 px)" },
+      { "type": "checkbox", "id": "transparent_header", "label": "En-tête transparent sur l’image d’ouverture (accueil, La Maison)", "default": true }
+    ]
+  },
+  {
+    "name": "Service client",
+    "settings": [
+      { "type": "text", "id": "phone", "label": "Téléphone service client", "default": "+212 6 75 07 53 70" },
+      { "type": "text", "id": "whatsapp_number", "label": "Numéro WhatsApp (format international, sans +)", "default": "212675576435" },
+      { "type": "text", "id": "whatsapp_message", "label": "Message WhatsApp pré-rempli", "default": "Bonjour, j’aimerais un conseil." },
+      { "type": "text", "id": "email", "label": "E-mail", "default": "contact@gianato.ma" },
+      { "type": "text", "id": "hours", "label": "Horaires", "default": "Du lundi au samedi, 9 h – 12 h et 14 h – 18 h" },
+      { "type": "text", "id": "instagram", "label": "Instagram (URL)", "default": "https://www.instagram.com/gianato.maroc/" },
+      { "type": "text", "id": "facebook", "label": "Facebook (URL)", "default": "https://www.facebook.com/Gianatomaroc" },
+      { "type": "text", "id": "tiktok", "label": "TikTok (URL)" }
+    ]
+  },
+  {
+    "name": "Promesses de service",
+    "settings": [
+      { "type": "paragraph", "content": "Une seule source pour toutes les mentions de service (fiche produit, panier, bandeau). À aligner avec les conditions publiées." },
+      { "type": "text", "id": "promise_delivery", "label": "Livraison", "default": "Livraison offerte partout au Maroc, en 2 à 5 jours ouvrés." },
+      { "type": "text", "id": "promise_exchange", "label": "Échange", "default": "Échange offert sous 30 jours, collecte à domicile ou au bureau." },
+      { "type": "text", "id": "promise_payment", "label": "Paiement", "default": "En espèces à la livraison, ou par carte via CMI." },
+      { "type": "text", "id": "promise_warranty", "label": "Garantie", "default": "Garantie 1 an contre les défauts de fabrication." },
+      { "type": "page", "id": "service_page", "label": "Page « Service client »" },
+      { "type": "page", "id": "size_page", "label": "Page « Guide des pointures »" }
+    ]
+  },
+  {
+    "name": "Prix & promotions",
+    "settings": [
+      { "type": "paragraph", "content": "Brand Book : « aucun prix barré permanent ». Le prix barré reste affiché lorsqu’un prix comparé existe, mais avec retenue." },
+      { "type": "checkbox", "id": "show_compare_at", "label": "Afficher le prix barré", "default": true },
+      { "type": "checkbox", "id": "show_discount_rate", "label": "Afficher le taux de remise sur la fiche produit (ex. −20 %)", "default": true },
+      { "type": "checkbox", "id": "show_discount_rate_cards", "label": "Afficher le taux de remise sur les cartes produit", "default": false },
+      { "type": "collection", "id": "new_collection", "label": "Collection « Nouveautés » (étiquette Nouveau)" },
+      { "type": "collection", "id": "end_of_line_collection", "label": "Collection « Fin de collection »" }
+    ]
+  },
+  {
+    "name": "Fiche produit",
+    "settings": [
+      { "type": "checkbox", "id": "show_quick_add", "label": "Ajout rapide par pointure au survol des cartes (bureau)", "default": true },
+      { "type": "checkbox", "id": "show_whatsapp_order", "label": "Bouton « Commander sur WhatsApp »", "default": true },
+      { "type": "range", "id": "low_stock_threshold", "label": "« Dernières pointures » à partir de (pointures restantes)", "min": 1, "max": 4, "step": 1, "default": 2 },
+      { "type": "collection", "id": "complete_collection", "label": "Complétez votre style : collection d’accessoires", "info": "Proposée sous les souliers de la collection Business." },
+      { "type": "collection", "id": "business_collection", "label": "Collection Business" }
+    ]
+  },
+  {
+    "name": "Suivi & mesure",
+    "settings": [
+      { "type": "paragraph", "content": "Balises reprises de l’ancien thème. GA4, Meta, Judge.me et Omnisend restent gérés par leurs applications (Événements clients) : ne pas les dupliquer ici." },
+      { "type": "text", "id": "gtm_id", "label": "Google Tag Manager", "default": "GTM-PGWWD2HC" },
+      { "type": "text", "id": "google_ads_id", "label": "Google Ads (gtag)", "default": "AW-696565317" },
+      { "type": "text", "id": "tiktok_pixel_id", "label": "Pixel TikTok", "default": "CETC91JC77U87C9MQG6G", "info": "À vider si le pixel est déjà installé via l’application TikTok (éviter le double comptage)." }
+    ]
+  }
+]

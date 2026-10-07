@@ -1,0 +1,94 @@
+{%- comment -%}
+  Classic customer accounts — one section for every customers/* template (switch on request.page_type).
+  If the store uses new customer accounts, Shopify serves its own pages and this section is not used.
+{%- endcomment -%}
+{%- assign type = request.page_type -%}
+<div class="container container--text page-head">
+  <p class="eyebrow">{{ 'account.eyebrow' | t }}</p>
+  <h1 style="margin-top:1rem">
+    {%- case type -%}
+      {%- when 'customers/login' -%}{{ 'account.login' | t }}
+      {%- when 'customers/register' -%}{{ 'account.register' | t }}
+      {%- when 'customers/reset_password' -%}{{ 'account.reset' | t }}
+      {%- when 'customers/activate_account' -%}{{ 'account.activate' | t }}
+      {%- when 'customers/order' -%}{{ 'account.order' | t: name: order.name }}
+      {%- when 'customers/addresses' -%}{{ 'account.addresses' | t }}
+      {%- else -%}{{ 'account.hello' | t: name: customer.first_name }}
+    {%- endcase -%}
+  </h1>
+</div>
+<div class="container container--text" style="padding-bottom:var(--section)">
+  {%- case type -%}
+    {%- when 'customers/login' -%}
+      {%- form 'customer_login', class: 'stack', style: '--stack:1.5rem' -%}
+        {%- if form.errors -%}<p class="notice" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <div class="field"><input id="l-email" type="email" name="customer[email]" placeholder=" " autocomplete="email" required><label for="l-email">{{ 'account.email' | t }}</label></div>
+        <div class="field"><input id="l-pass" type="password" name="customer[password]" placeholder=" " autocomplete="current-password" required><label for="l-pass">{{ 'account.password' | t }}</label></div>
+        <button class="btn btn--block" type="submit">{{ 'account.sign_in' | t }}</button>
+        <p class="small"><a class="text-link" href="#recover" data-recover-toggle>{{ 'account.forgot' | t }}</a> · <a class="text-link" href="{{ routes.account_register_url }}">{{ 'account.create' | t }}</a></p>
+      {%- endform -%}
+      <div id="recover" style="margin-top:3rem">
+        {%- form 'recover_customer_password', class: 'stack', style: '--stack:1.25rem' -%}
+          <h2 class="h4">{{ 'account.reset' | t }}</h2>
+          {%- if form.posted_successfully? -%}<p class="notice" role="status">{{ 'account.reset_sent' | t }}</p>{%- endif -%}
+          <div class="field"><input id="r-email" type="email" name="email" placeholder=" " autocomplete="email" required><label for="r-email">{{ 'account.email' | t }}</label></div>
+          <button class="btn btn--ghost" type="submit">{{ 'account.send' | t }}</button>
+        {%- endform -%}
+      </div>
+    {%- when 'customers/register' -%}
+      {%- form 'create_customer', class: 'stack', style: '--stack:1.5rem' -%}
+        {%- if form.errors -%}<p class="notice" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <div class="field"><input id="g-first" type="text" name="customer[first_name]" placeholder=" " autocomplete="given-name"><label for="g-first">{{ 'account.first_name' | t }}</label></div>
+        <div class="field"><input id="g-last" type="text" name="customer[last_name]" placeholder=" " autocomplete="family-name"><label for="g-last">{{ 'account.last_name' | t }}</label></div>
+        <div class="field"><input id="g-email" type="email" name="customer[email]" placeholder=" " autocomplete="email" required><label for="g-email">{{ 'account.email' | t }}</label></div>
+        <div class="field"><input id="g-pass" type="password" name="customer[password]" placeholder=" " autocomplete="new-password" required><label for="g-pass">{{ 'account.password' | t }}</label></div>
+        <label class="opt"><input type="checkbox" name="customer[accepts_marketing]">{{ 'account.newsletter' | t }}</label>
+        <button class="btn btn--block" type="submit">{{ 'account.create' | t }}</button>
+      {%- endform -%}
+    {%- when 'customers/reset_password' -%}
+      {%- form 'reset_customer_password', class: 'stack', style: '--stack:1.5rem' -%}
+        {%- if form.errors -%}<p class="notice" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <div class="field"><input id="n-pass" type="password" name="customer[password]" placeholder=" " autocomplete="new-password" required><label for="n-pass">{{ 'account.password' | t }}</label></div>
+        <div class="field"><input id="n-pass2" type="password" name="customer[password_confirmation]" placeholder=" " autocomplete="new-password" required><label for="n-pass2">{{ 'account.password_confirm' | t }}</label></div>
+        <button class="btn btn--block" type="submit">{{ 'account.save' | t }}</button>
+      {%- endform -%}
+    {%- when 'customers/activate_account' -%}
+      {%- form 'activate_customer_password', class: 'stack', style: '--stack:1.5rem' -%}
+        {%- if form.errors -%}<p class="notice" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <div class="field"><input id="a-pass" type="password" name="customer[password]" placeholder=" " autocomplete="new-password" required><label for="a-pass">{{ 'account.password' | t }}</label></div>
+        <div class="field"><input id="a-pass2" type="password" name="customer[password_confirmation]" placeholder=" " autocomplete="new-password" required><label for="a-pass2">{{ 'account.password_confirm' | t }}</label></div>
+        <button class="btn btn--block" type="submit">{{ 'account.activate' | t }}</button>
+      {%- endform -%}
+    {%- when 'customers/order' -%}
+      <p class="muted">{{ order.created_at | date: format: 'date' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+      <ul role="list" style="margin-top:2rem">
+        {%- for line in order.line_items -%}
+          <li class="cart-line"><div class="media">{% render 'image', image: line.image, sizes: '104px', alt: '', max: 360 %}</div>
+            <div><div class="cart-line__top"><div><p class="cart-line__name">{{ line.title }}</p><p class="cart-line__meta">× {{ line.quantity }}</p></div><span class="price">{{ line.final_line_price | money_without_trailing_zeros }}</span></div></div></li>
+        {%- endfor -%}
+      </ul>
+      <div class="cart-sum"><span>{{ 'cart.total' | t }}</span><span class="price">{{ order.total_price | money_without_trailing_zeros }}</span></div>
+      <p style="margin-top:2rem"><a class="link" href="{{ routes.account_url }}">{{ 'account.back' | t }}</a></p>
+    {%- when 'customers/addresses' -%}
+      {%- for address in customer.addresses -%}
+        <div class="service-block"><p>{{ address | format_address }}</p></div>
+      {%- endfor -%}
+      <p style="margin-top:2rem"><a class="link" href="{{ routes.account_url }}">{{ 'account.back' | t }}</a></p>
+    {%- else -%}
+      <h2 class="h4">{{ 'account.orders' | t }}</h2>
+      {%- if customer.orders.size == 0 -%}
+        <p class="muted" style="margin-top:1rem">{{ 'account.no_orders' | t }}</p>
+      {%- else -%}
+        <ul role="list" style="margin-top:1rem">
+          {%- for o in customer.orders -%}
+            <li class="service-block" style="padding-block:1.25rem"><a class="link link--quiet" href="{{ o.customer_url }}">{{ o.name }}</a> · {{ o.created_at | date: format: 'date' }} · <span class="price">{{ o.total_price | money_without_trailing_zeros }}</span> · {{ o.fulfillment_status_label }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <p style="margin-top:2.5rem;display:flex;gap:2rem;flex-wrap:wrap"><a class="link" href="{{ routes.account_addresses_url }}">{{ 'account.addresses' | t }}</a><a class="link" href="{{ routes.account_logout_url }}">{{ 'account.logout' | t }}</a></p>
+  {%- endcase -%}
+</div>
+
+{% schema %}
+{ "name": "Compte client", "settings": [] }
+{% endschema %}

@@ -1,0 +1,539 @@
+Handle,Command,Metafield: gianato.model [single_line_text_field],Metafield: gianato.colorway [single_line_text_field],Metafield: gianato.color_family [single_line_text_field],Metafield: gianato.swatch [color],Metafield: gianato.style [single_line_text_field],Metafield: gianato.siblings [list.product_reference],Metafield: gianato.material [single_line_text_field],Metafield: gianato.construction [single_line_text_field],Metafield: gianato.lining [single_line_text_field],Metafield: gianato.sole [single_line_text_field],Metafield: gianato.dimensions [single_line_text_field]
+loro-sabbia,UPDATE,Loro,Sabbia,Sable,#c8b08b,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+loro-oliva,UPDATE,Loro,Oliva,Olive,#6b6a3f,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+loro-gold,UPDATE,Loro,Gold,Cognac,#94622f,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+loro-cocoa,UPDATE,Loro,Cocoa,Marron,#5b3a29,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+loro-cielo,UPDATE,Loro,Cielo,Bleu ciel,#7c97b8,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+loro-marino,UPDATE,Loro,Marino,Bleu marine,#1f2a44,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+loro,UPDATE,Loro,Noir,Noir,#1c1b1a,Mocassin,"loro-sabbia
+loro-oliva
+loro-gold
+loro-cocoa
+loro-cielo
+loro-marino
+loro",,,,,
+1816t,UPDATE,Alessio,Cocoa,Marron,#5b3a29,,"1816t
+alessio",,,,Gomme,
+marco-bleu,UPDATE,Marco,Marino,Bleu marine,#1f2a44,Basket cuir,"marco-bleu
+marco-nero
+marco-marrone",Cuir crust,,,Gomme,
+1926dbm,UPDATE,Julio,Marino,Bleu marine,#1f2a44,Mocassin,"1926dbm
+julio-bleu
+julio-gris
+julio-taupe
+julio-tabac
+julio-kaki",,,,Gomme,
+108mv,UPDATE,Mory,Land,Bordeaux,#5e1f22,Mocassin,"108mv
+108sv
+mory-tabac
+mory-bleu
+mory-bleu-marine
+mory-rouge",,,,Gomme,
+108sv,UPDATE,Mory,Silver,Gris,#9b9a96,Mocassin,"108mv
+108sv
+mory-tabac
+mory-bleu
+mory-bleu-marine
+mory-rouge",,,,Gomme,
+108bg,UPDATE,Fabio,Bleu Grainé,Bleu,#27427a,Mocassin,"108bg
+fabio-bleu
+fabio-marron
+fabio-noir
+fabio-gold",,,,Gomme,
+diego-marron,UPDATE,Diego,Gold,Cognac,#94622f,Basket cuir,,Cuir crust,,,,
+daz-cocoa,UPDATE,Daz,Cocoa,Marron,#5b3a29,Basket cuir,"daz-cocoa
+daz-marino
+daz-gold
+daz
+daz-gold-2",,Cousu Blake,,,
+hugo-bleu-marine-cuir-graine,UPDATE,Maldive,Saphir,Bleu,#27427a,Mocassin,"hugo-bleu-marine-cuir-graine
+maldive-marino
+maldive-gold
+maldive-cocoa
+maldive-sombre",,,Cuir,Gomme,
+erwin-marino,UPDATE,Erwin,Marino,Bleu marine,#1f2a44,Basket cuir,"erwin-marino
+erwin-gold
+erwin",,,,,
+erwin-gold,UPDATE,Erwin,Gold,Cognac,#94622f,Basket cuir,"erwin-marino
+erwin-gold
+erwin",,,,,
+erwin,UPDATE,Erwin,Noir,Noir,#1c1b1a,Basket cuir,"erwin-marino
+erwin-gold
+erwin",,,,,
+razo,UPDATE,Razo,Marron,Marron,#5b3a29,Mocassin,,,,,,
+mariano-nero,UPDATE,Mariano,Noir,Noir,#1c1b1a,Basket cuir,,Cuir crust,,,Gomme,
+ray-marino-copy,UPDATE,Ray,Marino,Bleu marine,#1f2a44,Basket cuir,"ray-marino-copy
+ray-marino
+ray-gold
+ray",,Cousu Blake,,,
+lorenzo-marrone,UPDATE,Lorenzo,Cocoa,Marron,#5b3a29,Mocassin,"lorenzo-marrone
+lorenzo-nero",Cuir crust,,,Gomme,
+ray-marino,UPDATE,Ray,Marino Grainé,Bleu marine,#1f2a44,Basket cuir,"ray-marino-copy
+ray-marino
+ray-gold
+ray",,Cousu Blake,,,
+pietroblue,UPDATE,Pietro,Marino,Bleu marine,#1f2a44,Basket cuir,"pietroblue
+pietro-marrone
+pietro-nero",Cuir de veau,,Cuir,,
+city-cocoa-copy,UPDATE,City,Gold,Cognac,#94622f,Basket cuir,"city-cocoa-copy
+city-marino
+city-cocoa
+city",,,Cuir,Gomme,
+julio-bleu,UPDATE,Julio,Cielo,Bleu ciel,#7c97b8,Mocassin,"1926dbm
+julio-bleu
+julio-gris
+julio-taupe
+julio-tabac
+julio-kaki",,,,,
+julio-gris,UPDATE,Julio,Silver,Gris,#9b9a96,Mocassin,"1926dbm
+julio-bleu
+julio-gris
+julio-taupe
+julio-tabac
+julio-kaki",,,,,
+mory-tabac,UPDATE,Mory,Gold,Cognac,#94622f,Mocassin,"108mv
+108sv
+mory-tabac
+mory-bleu
+mory-bleu-marine
+mory-rouge",,,,,
+mory-bleu,UPDATE,Mory,Cielo,Bleu ciel,#7c97b8,Mocassin,"108mv
+108sv
+mory-tabac
+mory-bleu
+mory-bleu-marine
+mory-rouge",,,,,
+vero-marino,UPDATE,Vero,Marino,Bleu marine,#1f2a44,Basket cuir,"vero-marino
+vero-cocoa",Daim,,Cuir,,
+vero-cocoa,UPDATE,Vero,Cocoa,Marron,#5b3a29,Basket cuir,"vero-marino
+vero-cocoa",Daim,,Cuir,,
+carly-cocoa,UPDATE,Carly,Cocoa,Marron,#5b3a29,Basket cuir,"carly-cocoa
+carly-marino
+carly",,,Cuir,,
+marly-coco,UPDATE,Marly,Cocoa,Marron,#5b3a29,Basket cuir,"marly-coco
+marly",Cuir grainé,,,Gomme,
+alessandro-limitless-imperial,UPDATE,Alessandro Limitless,Impérial,Mauve,#563248,Richelieu,"alessandro-limitless-imperial
+alessandro-limitless-sombre
+alessandro-limitless-coaco
+alessandro-limitless-marino",Cuir crust,,,Gomme,
+monte-cristo-blanco,UPDATE,Monte Cristo,Blanco,Blanc,#efece6,Mocassin,"monte-cristo-blanco
+monte-cristo-cocoa
+monte-cristo-cielo
+monte-cristo-marino
+monte-cristo-gold
+monte-cristo",Cuir de veau box brossé,Cousu Blake à la main,Cuir vert émeraude,Gomme,
+marly,UPDATE,Marly,Noir,Noir,#1c1b1a,Basket cuir,"marly-coco
+marly",Cuir grainé,,,Gomme,
+city-marino,UPDATE,City,Marino,Bleu marine,#1f2a44,Basket cuir,"city-cocoa-copy
+city-marino
+city-cocoa
+city",,,Cuir,Gomme,
+city-cocoa,UPDATE,City,Cocoa,Marron,#5b3a29,Basket cuir,"city-cocoa-copy
+city-marino
+city-cocoa
+city",,,Cuir,Gomme,
+urban,UPDATE,Urban,Noir,Noir,#1c1b1a,Bottine,"urban
+urban-classic",,,,,
+urban-classic,UPDATE,Urban,Classic,Noir,#1c1b1a,Derby,"urban
+urban-classic",,,,,
+braker-cocoa,UPDATE,Braker,Cocoa,Marron,#5b3a29,Bottine,"braker-cocoa
+braker",,,,Gomme,
+carly-marino,UPDATE,Carly,Marino,Bleu marine,#1f2a44,Basket cuir,"carly-cocoa
+carly-marino
+carly",,,Cuir,,
+twix-cocoa,UPDATE,Twix,Cocoa,Marron,#5b3a29,Bottine,,,,Cuir,Gomme,
+parto,UPDATE,Parto,Noir,Noir,#1c1b1a,Derby,,,,Cuir,Gomme,
+napoleon,UPDATE,Napoleon,Noir,Noir,#1c1b1a,Derby,,,,Cuir,Gomme,
+brad,UPDATE,Brad,Noir,Noir,#1c1b1a,Soulier à boucles,,,,Cuir,Gomme,
+carly,UPDATE,Carly,Noir,Noir,#1c1b1a,Basket cuir,"carly-cocoa
+carly-marino
+carly",,,Cuir,,
+city,UPDATE,City,Noir,Noir,#1c1b1a,Basket cuir,"city-cocoa-copy
+city-marino
+city-cocoa
+city",,,Cuir,Gomme,
+zoren-marino,UPDATE,Zoren,Marino,Bleu marine,#1f2a44,Mocassin,"zoren-marino
+zoren-gold
+zoren-cocoa",Cuir grainé,,,Semelle italienne,
+zoren-gold,UPDATE,Zoren,Gold,Cognac,#94622f,Mocassin,"zoren-marino
+zoren-gold
+zoren-cocoa",Cuir grainé,,,Semelle italienne,
+zoren-cocoa,UPDATE,Zoren,Cocoa,Marron,#5b3a29,Mocassin,"zoren-marino
+zoren-gold
+zoren-cocoa",Cuir grainé,,,Semelle italienne,
+bellagio-marino,UPDATE,Bellagio,Marino,Bleu marine,#1f2a44,Bottine,"bellagio-marino
+bellagio",Cuir box calf pleine fleur,,,Semelle italienne,
+bellagio,UPDATE,Bellagio,Noir,Noir,#1c1b1a,Bottine,"bellagio-marino
+bellagio",Cuir box calf pleine fleur,,,Semelle italienne,
+william-marrone,UPDATE,William,Cocoa,Marron,#5b3a29,Bottine,"william-marrone
+william-nero",,,,Gomme,
+william-nero,UPDATE,William,Noir,Noir,#1c1b1a,Bottine,"william-marrone
+william-nero",,,,Gomme,
+renato-cocoa,UPDATE,Renato,Cocoa,Marron,#5b3a29,Bottine,"renato-cocoa
+renato",,,,Gomme,
+paolo-cammello,UPDATE,Paolo,Gold,Cognac,#94622f,Derby,"paolo-cammello
+paolo",Cuir de veau,,,Gomme,
+lorenz-gold,UPDATE,Lorenz,Gold,Cognac,#94622f,Mocassin,"lorenz-gold
+lorenz",,,,Gomme,
+fabio-bleu,UPDATE,Fabio,Marino,Bleu marine,#1f2a44,Mocassin,"108bg
+fabio-bleu
+fabio-marron
+fabio-noir
+fabio-gold",,,,,
+ennio-marrone,UPDATE,Ennio,Cocoa,Marron,#5b3a29,Basket cuir,"ennio-marrone
+ennio-blanco
+ennio-azzuro
+ennio-nero",Cuir crust,,,Gomme,
+edmond,UPDATE,Edmond,Noir,Noir,#1c1b1a,Derby,"edmond
+edmond-marino",,,,,
+daz-marino,UPDATE,Daz,Marino,Bleu marine,#1f2a44,Basket cuir,"daz-cocoa
+daz-marino
+daz-gold
+daz
+daz-gold-2",,Cousu Blake,,,
+daz-gold,UPDATE,Daz,Cocoa,Marron,#5b3a29,Basket cuir,"daz-cocoa
+daz-marino
+daz-gold
+daz
+daz-gold-2",,Cousu Blake,,,
+parker,UPDATE,Parker,Noir,Noir,#1c1b1a,Basket cuir,"parker
+parker-lait
+parker-cocoa",,,,,
+parker-lait,UPDATE,Parker,Bianco,Blanc,#efece6,Basket cuir,"parker
+parker-lait
+parker-cocoa",,,,,
+coflan-soft-sombre,UPDATE,Coflan,Noir,Noir,#1c1b1a,,,,,,Gomme,
+barlord-cocoa-1,UPDATE,Barlord,Cocoa,Marron,#5b3a29,Derby,"barlord-cocoa-1
+barlord-marino
+barlord-cocoa
+barlord-gold
+barlord",,,,Gomme,
+barlord-marino,UPDATE,Barlord,Marino,Bleu marine,#1f2a44,Derby,"barlord-cocoa-1
+barlord-marino
+barlord-cocoa
+barlord-gold
+barlord",,,,Gomme,
+daz,UPDATE,Daz,Noir,Noir,#1c1b1a,Basket cuir,"daz-cocoa
+daz-marino
+daz-gold
+daz
+daz-gold-2",,Cousu Blake,,,
+dovan-cocoa,UPDATE,Dovan,Cocoa,Marron,#5b3a29,Derby,"dovan-cocoa
+dovan",,,,Semelle italienne,
+dovan,UPDATE,Dovan,Noir,Noir,#1c1b1a,Derby,"dovan-cocoa
+dovan",,,,Semelle italienne,
+milo-gold,UPDATE,Milo,Gold,Cognac,#94622f,Richelieu,"milo-gold
+milo-cocoa
+milo-nero",Cuir crust,,,Gomme,
+antonio-cocoa,UPDATE,Antonio,Cocoa,Marron,#5b3a29,Richelieu,,Daim,,,Gomme,
+ray-gold,UPDATE,Ray,Gold,Cognac,#94622f,Basket cuir,"ray-marino-copy
+ray-marino
+ray-gold
+ray",,Cousu Blake,,,
+ray,UPDATE,Ray,Noir,Noir,#1c1b1a,Basket cuir,"ray-marino-copy
+ray-marino
+ray-gold
+ray",,Cousu Blake,,,
+antique-ritchie,UPDATE,Montecarlo Ritchie,Noir,Noir,#1c1b1a,Bottine,"antique-ritchie
+montecarlo-ritchie-cocoa",Cuir box calf,,,Gomme,
+ennio-blanco,UPDATE,Ennio,Blanco,Blanc,#efece6,Mocassin,"ennio-marrone
+ennio-blanco
+ennio-azzuro
+ennio-nero",,,,Gomme,
+flex,UPDATE,Flex,Noir,Noir,#1c1b1a,,,,,,,
+milo-cocoa,UPDATE,Milo,Cocoa,Marron,#5b3a29,Richelieu,"milo-gold
+milo-cocoa
+milo-nero",Cuir crust,,,Gomme,
+veneto,UPDATE,Veneto,Noir,Noir,#1c1b1a,Richelieu,,,,,Gomme,
+ritz-cocoa,UPDATE,Ritz,Cocoa,Marron,#5b3a29,Bottine,,,,,,
+ugo-marino,UPDATE,Ugo,Marino,Bleu marine,#1f2a44,Basket cuir,"ugo-marino
+ugo-gold
+ugo",Cuir crust,,,Gomme,
+british-chukka-sombre,UPDATE,British Chukka,Noir,Noir,#1c1b1a,Bottine,,Cuir box calf,,Cuir,Gomme,
+monte-cristo-cocoa,UPDATE,Monte Cristo,Cocoa,Marron,#5b3a29,Mocassin,"monte-cristo-blanco
+monte-cristo-cocoa
+monte-cristo-cielo
+monte-cristo-marino
+monte-cristo-gold
+monte-cristo",Cuir de veau box brossé,Cousu Blake à la main,Cuir vert émeraude,Gomme,
+ugo-gold,UPDATE,Ugo,Gold,Cognac,#94622f,Basket cuir,"ugo-marino
+ugo-gold
+ugo",Cuir crust,,,Gomme,
+monte-cristo-cielo,UPDATE,Monte Cristo,Cielo,Bleu ciel,#7c97b8,Mocassin,"monte-cristo-blanco
+monte-cristo-cocoa
+monte-cristo-cielo
+monte-cristo-marino
+monte-cristo-gold
+monte-cristo",Cuir de veau box brossé,Cousu Blake à la main,Cuir vert émeraude,Gomme,
+barlord-cocoa,UPDATE,Barlord,Grainé Cocoa,Marron,#5b3a29,Derby,"barlord-cocoa-1
+barlord-marino
+barlord-cocoa
+barlord-gold
+barlord",,,,Gomme,
+santino-marino,UPDATE,Santino,Marino,Bleu marine,#1f2a44,Basket cuir,"santino-marino
+copy-of-aldo-marino",,,,,
+ugo,UPDATE,Ugo,Noir,Noir,#1c1b1a,Basket cuir,"ugo-marino
+ugo-gold
+ugo",Cuir crust,,,Gomme,
+copy-of-aldo-marino,UPDATE,Santino,Cocoa,Marron,#5b3a29,Basket cuir,"santino-marino
+copy-of-aldo-marino",,,,,
+roman-marron,UPDATE,Roman,Cocoa,Marron,#5b3a29,,,,,Cuir,,
+pietro-marrone,UPDATE,Pietro,Cocoa,Marron,#5b3a29,Basket cuir,"pietroblue
+pietro-marrone
+pietro-nero",,,,,
+renato,UPDATE,Renato,Noir,Noir,#1c1b1a,Bottine,"renato-cocoa
+renato",,,,Gomme,
+parker-cocoa,UPDATE,Parker,Cocoa,Marron,#5b3a29,Basket cuir,"parker
+parker-lait
+parker-cocoa",,,,,
+novak-marino,UPDATE,Novak,Marino,Bleu marine,#1f2a44,Basket cuir,,,,,,
+paolo,UPDATE,Paolo,Noir,Noir,#1c1b1a,Derby,"paolo-cammello
+paolo",Cuir de veau,,,Gomme,
+mory-bleu-marine,UPDATE,Mory,Marino,Bleu marine,#1f2a44,Mocassin,"108mv
+108sv
+mory-tabac
+mory-bleu
+mory-bleu-marine
+mory-rouge",,,,,
+mory-rouge,UPDATE,Mory,Rubis,Rouge,#8b2331,Mocassin,"108mv
+108sv
+mory-tabac
+mory-bleu
+mory-bleu-marine
+mory-rouge",,,,,
+montecarlo-ritchie-cocoa,UPDATE,Montecarlo Ritchie,Cocoa,Marron,#5b3a29,Bottine,"antique-ritchie
+montecarlo-ritchie-cocoa",Cuir box calf pleine fleur,,,Gomme,
+milan-cocoa,UPDATE,Milan,Cocoa,Marron,#5b3a29,Mocassin,,,,,Gomme,
+marco-nero,UPDATE,Marco,Noir,Noir,#1c1b1a,Basket cuir,"marco-bleu
+marco-nero
+marco-marrone",Cuir crust,,,Gomme,
+marco-marrone,UPDATE,Marco,Cocoa,Marron,#5b3a29,Basket cuir,"marco-bleu
+marco-nero
+marco-marrone",Cuir crust,,,Gomme,
+lorenzo-nero,UPDATE,Lorenzo,Noir,Noir,#1c1b1a,Mocassin,"lorenzo-marrone
+lorenzo-nero",Cuir crust,,,Gomme,
+maldive-marino,UPDATE,Maldive,Marino,Bleu marine,#1f2a44,Mocassin,"hugo-bleu-marine-cuir-graine
+maldive-marino
+maldive-gold
+maldive-cocoa
+maldive-sombre",,,,Gomme,
+julio-taupe,UPDATE,Julio,Nacre,Taupe,#b5a593,Basket cuir,"1926dbm
+julio-bleu
+julio-gris
+julio-taupe
+julio-tabac
+julio-kaki",,,,,
+julio-tabac,UPDATE,Julio,Gold,Cognac,#94622f,Basket cuir,"1926dbm
+julio-bleu
+julio-gris
+julio-taupe
+julio-tabac
+julio-kaki",,,,,
+julio-kaki,UPDATE,Julio,Citrine,Beige,#b9a36c,Mocassin,"1926dbm
+julio-bleu
+julio-gris
+julio-taupe
+julio-tabac
+julio-kaki",,,,,
+a-voir,UPDATE,Gianni,Noir,Noir,#1c1b1a,Soulier à boucles,,,,,,
+giovani,UPDATE,Giovani,Noir,Noir,#1c1b1a,Bottine,,Cuir grainé,,,Gomme,
+ennio-azzuro,UPDATE,Ennio,Marino,Bleu marine,#1f2a44,Basket cuir,"ennio-marrone
+ennio-blanco
+ennio-azzuro
+ennio-nero",Cuir crust,,,Gomme,
+ennio-nero,UPDATE,Ennio,Noir,Noir,#1c1b1a,Basket cuir,"ennio-marrone
+ennio-blanco
+ennio-azzuro
+ennio-nero",Cuir crust,,,,
+enzo,UPDATE,Ezio,Noir,Noir,#1c1b1a,,,,,Cuir,,
+elmerio-saga,UPDATE,Elmerio Saga,Noir,Noir,#1c1b1a,Bottine,"elmerio-saga
+elmerio-saga-cocoa",Cuir box calf,,,Gomme,
+elmerio-saga-cocoa,UPDATE,Elmerio Saga,Cocoa,Marron,#5b3a29,Bottine,"elmerio-saga
+elmerio-saga-cocoa",Cuir box calf,,,Gomme,
+eio-marron,UPDATE,Eio,Gold,Cognac,#94622f,Mocassin,"eio-marron
+eio",,,Cuir,,
+dover-marino,UPDATE,Dover,Marino,Bleu marine,#1f2a44,Bottine,"dover-marino
+dover
+dover-gold",,,,Gomme,
+dover,UPDATE,Dover,Noir,Noir,#1c1b1a,Bottine,"dover-marino
+dover
+dover-gold",,,,Gomme,
+dover-gold,UPDATE,Dover,Gold,Cognac,#94622f,Bottine,"dover-marino
+dover
+dover-gold",,,,Gomme,
+dario-nero-1,UPDATE,Dario,Noir,Noir,#1c1b1a,,"dario-nero-1
+dario-azzuro-1",Cuir crust,,,,
+dario-azzuro-1,UPDATE,Dario,Cielo,Bleu ciel,#7c97b8,Basket cuir,"dario-nero-1
+dario-azzuro-1",Cuir crust,,,,
+avaro-nero,UPDATE,Avaro,Noir,Noir,#1c1b1a,Bottine,,Cuir crust,Cousu Goodyear,,Gomme,
+angelo-marrone,UPDATE,Angelo,Cocoa,Marron,#5b3a29,Derby,"angelo-marrone
+angelo",Cuir crust,,,Gomme,
+alvaro,UPDATE,Alvaro,Noir,Noir,#1c1b1a,Derby,,Cuir crust,,,Gomme,
+daz-gold-2,UPDATE,Daz,Gold,Cognac,#94622f,Basket cuir,"daz-cocoa
+daz-marino
+daz-gold
+daz
+daz-gold-2",,Cousu Blake,,,
+braker,UPDATE,Braker,Noir,Noir,#1c1b1a,Bottine,"braker-cocoa
+braker",,,,Gomme,
+carlo-cocao-antique,UPDATE,Carlo Antique,Cocoa,Marron,#5b3a29,Soulier à boucles,"carlo-cocao-antique
+carlo-sombre-antique",Cuir box calf,,,Gomme,
+alessandro-limitless-sombre,UPDATE,Alessandro Limitless,Noir,Noir,#1c1b1a,Richelieu,"alessandro-limitless-imperial
+alessandro-limitless-sombre
+alessandro-limitless-coaco
+alessandro-limitless-marino",Cuir box calf,,Cuir,Gomme,
+alessandro-limitless-coaco,UPDATE,Alessandro Limitless,Cocoa,Marron,#5b3a29,Richelieu,"alessandro-limitless-imperial
+alessandro-limitless-sombre
+alessandro-limitless-coaco
+alessandro-limitless-marino",Cuir box calf,,Cuir,Gomme,
+carlo-sombre-antique,UPDATE,Carlo Antique,Noir,Noir,#1c1b1a,Soulier à boucles,"carlo-cocao-antique
+carlo-sombre-antique",Cuir box calf,,,Gomme,
+alessandro-limitless-marino,UPDATE,Alessandro Limitless,Marino,Bleu marine,#1f2a44,Richelieu,"alessandro-limitless-imperial
+alessandro-limitless-sombre
+alessandro-limitless-coaco
+alessandro-limitless-marino",Cuir box calf,,Cuir,Gomme,
+barlord-gold,UPDATE,Barlord,Gold,Cognac,#94622f,Derby,"barlord-cocoa-1
+barlord-marino
+barlord-cocoa
+barlord-gold
+barlord",,,,Gomme,
+barlord,UPDATE,Barlord,Noir,Noir,#1c1b1a,Derby,"barlord-cocoa-1
+barlord-marino
+barlord-cocoa
+barlord-gold
+barlord",,,,Gomme,
+emilio-nero,UPDATE,Emilio,Noir,Noir,#1c1b1a,Richelieu,,,,,,
+alessio,UPDATE,Alessio,Noir,Noir,#1c1b1a,Bottine,"1816t
+alessio",Cuir crust,Cousu Goodyear,,Gomme,
+eio,UPDATE,Eio,Noir,Noir,#1c1b1a,Mocassin,"eio-marron
+eio",,,Cuir,,
+angelo,UPDATE,Angelo,Noir,Noir,#1c1b1a,Derby,"angelo-marrone
+angelo",Cuir crust,,,Gomme,
+adriano,UPDATE,Adriano,Noir,Noir,#1c1b1a,Richelieu,,,,,,
+edmond-marino,UPDATE,Edmond,Marino,Bleu marine,#1f2a44,Derby,"edmond
+edmond-marino",,,,,
+mallette-gianapro-croco,UPDATE,Mallette Gianapro,Croco,Brun,#3d2b21,Mallette,"mallette-gianapro-croco
+mallette-gianapro-gold
+mallette-gianapro-marron
+mallette-gianapro",Cuir,,Cuir,,"30 x 40 x 10,5 cm"
+mallette-gianapro-gold,UPDATE,Mallette Gianapro,Gold,Cognac,#94622f,Mallette,"mallette-gianapro-croco
+mallette-gianapro-gold
+mallette-gianapro-marron
+mallette-gianapro",Cuir,,Cuir,,"30 x 40 x 10,5 cm"
+mallette-gianapro-marron,UPDATE,Mallette Gianapro,Cocoa,Marron,#5b3a29,Mallette,"mallette-gianapro-croco
+mallette-gianapro-gold
+mallette-gianapro-marron
+mallette-gianapro",Cuir,,Cuir,,"30 x 40 x 10,5 cm"
+mallette-gianapro,UPDATE,Mallette Gianapro,Noir,Noir,#1c1b1a,Mallette,"mallette-gianapro-croco
+mallette-gianapro-gold
+mallette-gianapro-marron
+mallette-gianapro",Cuir,,Cuir,,"30 x 40 x 10,5 cm"
+mallette-daffaire-marino,UPDATE,Mallette D'Affaire,Marino,Bleu marine,#1f2a44,Mallette,"mallette-daffaire-marino
+mallette-daffaire-gold
+mallette-daffaire-marron-fonce
+malette-daffaire-classic-noir",,,,,35 x 45 x 9 cm
+mallette-daffaire-gold,UPDATE,Mallette D'Affaire,Gold,Cognac,#94622f,Mallette,"mallette-daffaire-marino
+mallette-daffaire-gold
+mallette-daffaire-marron-fonce
+malette-daffaire-classic-noir",,,,,35 x 45 x 9 cm
+mallette-daffaire-marron-fonce,UPDATE,Mallette D'Affaire,Cocoa,Marron,#5b3a29,Mallette,"mallette-daffaire-marino
+mallette-daffaire-gold
+mallette-daffaire-marron-fonce
+malette-daffaire-classic-noir",,,,,35 x 45 x 9 cm
+malette-daffaire-classic-noir,UPDATE,Mallette D'Affaire,Classic,Noir,#1c1b1a,Mallette,"mallette-daffaire-marino
+mallette-daffaire-gold
+mallette-daffaire-marron-fonce
+malette-daffaire-classic-noir",,,,,35 x 45 x 9 cm
+fabio-marron,UPDATE,Fabio,Cocoa,Marron,#5b3a29,Mocassin,"108bg
+fabio-bleu
+fabio-marron
+fabio-noir
+fabio-gold",,,,,
+fabio-noir,UPDATE,Fabio,Noir,Noir,#1c1b1a,Mocassin,"108bg
+fabio-bleu
+fabio-marron
+fabio-noir
+fabio-gold",,,,,
+fabio-gold,UPDATE,Fabio,Gold,Cognac,#94622f,Mocassin,"108bg
+fabio-bleu
+fabio-marron
+fabio-noir
+fabio-gold",,,,,
+lorenz,UPDATE,Lorenz,Noir,Noir,#1c1b1a,Mocassin,"lorenz-gold
+lorenz",,,,Gomme,
+pietro-nero,UPDATE,Pietro,Noir,Noir,#1c1b1a,Basket cuir,"pietroblue
+pietro-marrone
+pietro-nero",,,,,
+milo-nero,UPDATE,Milo,Noir,Noir,#1c1b1a,Richelieu,"milo-gold
+milo-cocoa
+milo-nero",Cuir crust,,,Gomme,
+eros-nero,UPDATE,Eros,Noir,Noir,#1c1b1a,,,,,Cuir,,
+maldive-gold,UPDATE,Maldive,Gold,Cognac,#94622f,Mocassin,"hugo-bleu-marine-cuir-graine
+maldive-marino
+maldive-gold
+maldive-cocoa
+maldive-sombre",,,,Gomme,
+monte-cristo-marino,UPDATE,Monte Cristo,Marino,Bleu marine,#1f2a44,Mocassin,"monte-cristo-blanco
+monte-cristo-cocoa
+monte-cristo-cielo
+monte-cristo-marino
+monte-cristo-gold
+monte-cristo",Cuir de veau box brossé,Cousu Blake à la main,Cuir vert émeraude,Gomme,
+monte-cristo-gold,UPDATE,Monte Cristo,Gold,Cognac,#94622f,Mocassin,"monte-cristo-blanco
+monte-cristo-cocoa
+monte-cristo-cielo
+monte-cristo-marino
+monte-cristo-gold
+monte-cristo",Cuir de veau box brossé,Cousu Blake à la main,Cuir vert émeraude,Gomme,
+maldive-cocoa,UPDATE,Maldive,Cocoa,Marron,#5b3a29,Mocassin,"hugo-bleu-marine-cuir-graine
+maldive-marino
+maldive-gold
+maldive-cocoa
+maldive-sombre",,,,Gomme,
+maldive-sombre,UPDATE,Maldive,Noir,Noir,#1c1b1a,Mocassin,"hugo-bleu-marine-cuir-graine
+maldive-marino
+maldive-gold
+maldive-cocoa
+maldive-sombre",,,,Gomme,
+monte-cristo,UPDATE,Monte Cristo,Noir,Noir,#1c1b1a,Mocassin,"monte-cristo-blanco
+monte-cristo-cocoa
+monte-cristo-cielo
+monte-cristo-marino
+monte-cristo-gold
+monte-cristo",Cuir de veau box brossé,Cousu Blake à la main,Cuir vert émeraude,Gomme,

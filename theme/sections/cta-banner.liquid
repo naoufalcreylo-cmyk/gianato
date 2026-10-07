@@ -1,0 +1,22 @@
+{%- comment -%} Centred call to action (end of editorial pages). {%- endcomment -%}
+<section class="section section--alt">
+  <div class="container center reveal">
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--plain">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2 style="margin:1.25rem auto 2rem;max-width:40rem">{{ section.settings.title }}</h2>
+    {%- if section.settings.cta_label != blank -%}<a class="btn" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Appel à l’action",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "L’assurance, cousue main." },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Trouvez la paire qui vous accompagnera longtemps." },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "Découvrir les souliers" },
+    { "type": "url", "id": "cta_url", "label": "Lien" }
+  ],
+  "presets": [{ "name": "Appel à l’action" }]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+<div class="layer drawer" id="sizes" aria-hidden="true" data-layer>
+  <div class="layer__scrim" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="sizes-title">
+    <div class="drawer__head">
+      <h2 class="drawer__title" id="sizes-title">{{ 'sizes.title' | t }}</h2>
+      <button class="icon-btn" type="button" data-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      <div style="overflow-x:auto">{% render 'size-table' %}</div>
+      <ul class="stack" role="list" style="--stack:1.1rem;margin-top:2rem;font-size:var(--fs-md)">
+        <li>{{ 'sizes.advice_1' | t }}</li>
+        <li>{{ 'sizes.advice_2' | t }}</li>
+        <li>{{ 'sizes.advice_3' | t }}</li>
+        <li>{{ 'sizes.advice_4' | t }}</li>
+      </ul>
+      <hr class="stitch" style="margin:2rem 0">
+      <p style="font-size:var(--fs-md)">{{ 'sizes.doubt' | t }}</p>
+      {%- assign msg = 'sizes.whatsapp' | t -%}
+      <a class="link" style="margin-top:1rem" href="{% render 'whatsapp-url', message: msg %}" target="_blank" rel="noopener">{{ 'general.whatsapp_advice' | t }} {% render 'icon', name: 'arrow' %}</a>
+    </div>
+  </div>
+</div>

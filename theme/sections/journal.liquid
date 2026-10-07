@@ -1,0 +1,68 @@
+{%- comment -%}
+  Journal / carnet. Source « blog »: latest articles; when the blog is empty, falls back to the manual blocks
+  (pointing at the existing editorial pages: entretien, pointures, atelier).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign use_blog = false
+  if s.blog != blank and s.blog.articles_count > 0
+    assign use_blog = true
+  endif
+-%}
+<section class="section" aria-labelledby="t-{{ section.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><p class="eyebrow">{{ s.eyebrow }}</p><h2 id="t-{{ section.id }}">{{ s.title }}</h2></div>
+      {%- if use_blog -%}<a class="link" href="{{ s.blog.url }}">{{ 'blog.all' | t }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+    </div>
+    <div class="journal">
+      {%- if use_blog -%}
+        {%- for article in s.blog.articles limit: 3 -%}
+          <article class="story reveal" style="--d:{{ forloop.index0 | times: 90 }}ms">
+            <div class="media zoom-on-hover">{% render 'image', image: article.image, fallback: 'editorial-boots-pair.webp', sizes: '(min-width:1024px) 40vw, 100vw', alt: '' %}</div>
+            <p class="label muted story__kicker">{{ article.published_at | date: format: 'date' }}</p>
+            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks limit: 3 -%}
+          <article class="story reveal" style="--d:{{ forloop.index0 | times: 90 }}ms" {{ block.shopify_attributes }}>
+            <div class="media zoom-on-hover">{% render 'image', image: block.settings.image, fallback: block.settings.fallback, sizes: '(min-width:1024px) 40vw, 100vw', alt: '' %}</div>
+            <p class="label muted story__kicker">{{ block.settings.kicker }}</p>
+            <h3><a href="{{ block.settings.url | default: '#' }}">{{ block.settings.title }}</a></h3>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Journal",
+  "tag": "div",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Le carnet" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Conseils de la Maison" },
+    { "type": "blog", "id": "blog", "label": "Blog (prioritaire s’il contient des articles)" }
+  ],
+  "blocks": [
+    { "type": "story", "name": "Article / page", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "fallback", "label": "Image par défaut (fichier du thème)", "default": "editorial-craft-hand.webp" },
+      { "type": "text", "id": "kicker", "label": "Rubrique", "default": "Entretien" },
+      { "type": "text", "id": "title", "label": "Titre", "default": "Embauchoirs, alternance, cirage : faire durer ses souliers" },
+      { "type": "url", "id": "url", "label": "Lien" }
+    ] }
+  ],
+  "presets": [{
+    "name": "Journal",
+    "blocks": [
+      { "type": "story", "settings": { "kicker": "Entretien", "title": "Embauchoirs, alternance, cirage : faire durer ses souliers", "fallback": "editorial-craft-hand.webp" } },
+      { "type": "story", "settings": { "kicker": "Pointure", "title": "Trouver la juste pointure, du premier coup", "fallback": "editorial-boots-pair.webp" } },
+      { "type": "story", "settings": { "kicker": "Atelier", "title": "L’atelier Lozano et la méthode « un sacchetto »", "fallback": "editorial-life-flatlay.webp" } }
+    ]
+  }]
+}
+{% endschema %}

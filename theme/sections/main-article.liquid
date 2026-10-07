@@ -1,0 +1,28 @@
+{%- comment -%} Journal article with Article JSON-LD. {%- endcomment -%}
+<article>
+  <div class="container container--text page-head">
+    {% render 'breadcrumbs', parent_title: blog.title, parent_url: blog.url, current: article.title %}
+    <p class="eyebrow" style="margin-top:3rem">{{ article.published_at | date: format: 'date' }}</p>
+    <h1>{{ article.title }}</h1>
+  </div>
+  {%- if article.image -%}
+    <div class="container" style="margin-bottom:var(--section)"><div class="media ratio-169">{% render 'image', image: article.image, sizes: '100vw', alt: article.title, eager: true %}</div></div>
+  {%- endif -%}
+  <div class="container container--text" style="padding-bottom:var(--section)"><div class="prose rte">{{ article.content }}</div></div>
+</article>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org", "@type": "Article",
+    "headline": {{ article.title | json }},
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+    "author": { "@type": "Organization", "name": {{ shop.name | json }} },
+    "publisher": { "@type": "Organization", "name": {{ shop.name | json }} },
+    {%- if article.image %}"image": {{ article.image | image_url: width: 1600 | prepend: 'https:' | json }},{% endif %}
+    "mainEntityOfPage": {{ request.origin | append: article.url | json }}
+  }
+</script>
+
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

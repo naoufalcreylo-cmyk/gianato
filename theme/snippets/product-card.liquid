@@ -1,0 +1,64 @@
+{%- comment -%}
+  Product card (mirrors prototype/assets/js/card.js).
+  Params: product, list (analytics list name), index, sizes, eager (bool)
+  Metafields (namespace gianato, see migration/): model, colorway, siblings, swatch.
+{%- endcomment -%}
+{%- liquid
+  assign model = product.metafields.gianato.model.value | default: product.title
+  assign colorway = product.metafields.gianato.colorway.value
+  assign style = product.metafields.gianato.style.value | default: product.type
+  assign img1 = product.media[0].preview_image
+  assign img2 = product.media[1].preview_image
+  assign sizes_attr = sizes | default: '(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, 48vw'
+  assign is_new = false
+  if settings.new_collection != blank
+    for c in product.collections
+      if c.id == settings.new_collection.id
+        assign is_new = true
+      endif
+    endfor
+  endif
+  assign available_count = 0
+  for v in product.variants
+    if v.available
+      assign available_count = available_count | plus: 1
+    endif
+  endfor
+  assign photo1 = false
+  if img1.alt contains 'photo' or img1.src contains '/DSC' or img1.src contains '/CLD'
+    assign photo1 = true
+  endif
+-%}
+<article class="card" data-handle="{{ product.handle }}"
+  data-ga='{"item_id":"{{ product.selected_or_first_available_variant.id }}","item_name":{{ product.title | json | escape }},"item_brand":"GIANATO","item_category":{{ style | json | escape }},"item_variant":{{ colorway | default: '' | json | escape }},"price":{{ product.price | divided_by: 100.0 }},"index":{{ index | default: 0 }},"item_list_name":{{ list | default: '' | json | escape }}}'>
+  <div class="card__media">
+    {%- if product.available == false -%}
+      <span class="card__flag card__flag--muted">{{ 'product.sold_out' | t }}</span>
+    {%- elsif is_new -%}
+      <span class="card__flag">{{ 'product.new' | t }}</span>
+    {%- elsif available_count <= settings.low_stock_threshold and product.variants.size > 2 -%}
+      <span class="card__flag card__flag--muted">{{ 'product.last_sizes' | t }}</span>
+    {%- endif -%}
+    {%- if img1 -%}
+      {%- capture cls -%}card__main{% if photo1 %} is-photo{% endif %}{%- endcapture -%}
+      {% render 'image', image: img1, sizes: sizes_attr, alt: model, class: cls, eager: eager, max: 1200 %}
+    {%- endif -%}
+    {%- if img2 -%}
+      {% render 'image', image: img2, sizes: sizes_attr, alt: '', class: 'card__alt', max: 1200 %}
+    {%- endif -%}
+    {%- if settings.show_quick_add and product.available and product.has_only_default_variant == false -%}
+      <div class="card__quick" role="group" aria-label="{{ 'product.quick_add' | t }}, {{ model | escape }}">
+        <span class="card__quick-label">{{ 'product.quick_add' | t }} · {{ product.options.first }}</span>
+        {%- for v in product.variants -%}
+          <button type="button" data-add-variant="{{ v.id }}" data-list="{{ list | escape }}"{% unless v.available %} disabled{% endunless %} aria-label="{{ 'product.add_size' | t: size: v.title }}">{{ v.title }}</button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="card__body">
+    <h3 class="card__title"><a href="{{ product.url }}">{{ model }}</a></h3>
+    <p class="card__meta">{{ colorway }}{% if colorway != blank and style != blank %} — {% endif %}{{ style }}</p>
+    <p class="card__price">{% render 'price', product: product, show_rate: settings.show_discount_rate_cards %}</p>
+    {% render 'swatches', product: product %}
+  </div>
+</article>

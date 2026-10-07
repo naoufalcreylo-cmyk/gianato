@@ -1,0 +1,17 @@
+{
+  "type": "footer",
+  "name": "Pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "c1": { "type": "menu", "settings": { "title": "La Maison", "menu": "footer-maison" } },
+        "c2": { "type": "menu", "settings": { "title": "Service client", "menu": "footer-service" } },
+        "c3": { "type": "menu", "settings": { "title": "Nos souliers", "menu": "footer-souliers" } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": { "legal_menu": "footer-legal" }
+    }
+  },
+  "order": ["footer"]
+}

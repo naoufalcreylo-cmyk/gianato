@@ -1,0 +1,39 @@
+{%- comment -%} Editorial split (chapter): image + numbered text, optional source note. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="section{% if s.tone != 'none' %} section--{{ s.tone }}{% endif %}{% if s.xl %} section--xl{% endif %}"{% if s.anchor != blank %} id="{{ s.anchor }}"{% endif %}>
+  <div class="container chapter{% if s.flip %} chapter--flip{% endif %}">
+    <div class="chapter__media reveal"><div class="media">{% render 'image', image: s.image, fallback: s.fallback, sizes: '(min-width:1024px) 48vw, 100vw', alt: s.image_alt %}</div></div>
+    <div class="chapter__text reveal">
+      {%- if s.number != blank -%}<span class="chapter__no">{{ s.number }}</span>{%- endif -%}
+      {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      <h2>{{ s.title }}</h2>
+      <div class="prose">{{ s.text }}</div>
+      {%- if s.source != blank -%}<p class="source">{{ s.source }}</p>{%- endif -%}
+      {%- if s.cta_label != blank -%}<a class="link" style="margin-top:2rem" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Récit (image + texte)",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (ex. atelier)" },
+    { "type": "select", "id": "tone", "label": "Fond", "default": "none", "options": [{ "value": "none", "label": "Porcelaine" }, { "value": "alt", "label": "Ivoire" }, { "value": "stone", "label": "Pierre" }] },
+    { "type": "checkbox", "id": "xl", "label": "Grand espacement", "default": true },
+    { "type": "checkbox", "id": "flip", "label": "Image à droite", "default": false },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback", "label": "Image par défaut (fichier du thème)", "default": "editorial-maison-hand.webp" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image" },
+    { "type": "text", "id": "number", "label": "Numéro", "default": "01" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Notre histoire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Une rencontre italo-marocaine" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "source", "label": "Source (mention discrète)" },
+    { "type": "text", "id": "cta_label", "label": "Lien" },
+    { "type": "url", "id": "cta_url", "label": "URL du lien" }
+  ],
+  "presets": [{ "name": "Récit (image + texte)" }]
+}
+{% endschema %}

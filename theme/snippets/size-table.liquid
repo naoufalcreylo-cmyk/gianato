@@ -1,0 +1,6 @@
+{%- comment -%} FR ↔ UK — gianato.ma /pages/guide-des-tailles {%- endcomment -%}
+<table class="size-table">
+  <caption class="visually-hidden">{{ 'sizes.caption' | t }}</caption>
+  <tr><th scope="row">FR</th>{% for s in (38..47) %}<td>{{ s }}</td>{% endfor %}</tr>
+  <tr><th scope="row">UK</th>{% for s in (4..13) %}<td>{{ s }}</td>{% endfor %}</tr>
+</table>

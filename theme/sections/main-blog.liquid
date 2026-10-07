@@ -1,0 +1,28 @@
+{%- comment -%} Journal (blog) — editorial grid. {%- endcomment -%}
+<div class="container page-head">
+  {% render 'breadcrumbs', current: blog.title %}
+  <p class="eyebrow" style="margin-top:3rem">{{ 'blog.journal' | t }}</p>
+  <h1>{{ blog.title }}</h1>
+</div>
+<div class="container" style="padding-bottom:var(--section)">
+  {%- paginate blog.articles by 9 -%}
+    {%- if blog.articles.size == 0 -%}
+      <p class="lede muted">{{ 'blog.empty' | t }}</p>
+    {%- else -%}
+      <div class="journal">
+        {%- for article in blog.articles -%}
+          <article class="story reveal">
+            <div class="media zoom-on-hover">{% render 'image', image: article.image, fallback: 'editorial-boots-pair.webp', sizes: '(min-width:1024px) 40vw, 100vw', alt: '' %}</div>
+            <p class="label muted story__kicker">{{ article.published_at | date: format: 'date' }}</p>
+            <h2 class="h4" style="margin-top:.6rem"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.next -%}<div class="plp-more"><a class="btn btn--ghost" href="{{ paginate.next.url }}">{{ 'blog.more' | t }}</a></div>{%- endif -%}
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{ "name": "Journal", "settings": [] }
+{% endschema %}

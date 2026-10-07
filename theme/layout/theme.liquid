@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+<head>
+  {%- comment -%}
+    Tracking previously hard-coded in the old theme, ported 1:1 and made editable (Thème › Paramètres › Suivi).
+    GA4, Meta, Judge.me, Omnisend… run as apps / web pixels through content_for_header and are untouched.
+  {%- endcomment -%}
+  {%- if settings.gtm_id != blank -%}
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',{{ settings.gtm_id | json }});</script>
+  {%- endif -%}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f3ee">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96, height: 96 }}">
+  {%- else -%}
+    <link rel="icon" type="image/png" href="{{ 'favicon.png' | asset_url }}">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {{ page_title }}
+    {%- if current_tags %} – {{ current_tags | join: ', ' }}{% endif -%}
+    {%- if current_page != 1 %} – {{ 'general.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  {% render 'meta-tags' %}
+
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  {{ 'Newsreader.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'Belleza.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'components.css' | asset_url | stylesheet_tag }}
+  {%- if template.name == 'index' or template.name == 'page' or template.name == 'product' or template.name == 'article' or template.name == 'blog' -%}
+    {{ 'sections.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+  {%- unless template.name == 'index' -%}
+    {{ 'templates.css' | asset_url | stylesheet_tag }}
+  {%- endunless -%}
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+    window.Gianato = {
+      routes: {
+        root: {{ routes.root_url | json }},
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        predictiveSearch: {{ routes.predictive_search_url | json }}
+      },
+      currency: {{ cart.currency.iso_code | json }},
+      moneyFormat: {{ shop.money_format | json }},
+      strings: {
+        cartError: {{ 'cart.error' | t | json }},
+        chooseSize: {{ 'product.choose_size' | t | json }},
+        sizeChosen: {{ 'product.size_chosen' | t | json }},
+        soldOut: {{ 'product.sold_out' | t | json }},
+        addToCart: {{ 'product.add_to_cart' | t | json }}
+      }
+    };
+  </script>
+  <script src="{{ 'analytics.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'cart.js' | asset_url }}" defer></script>
+  <script src="{{ 'search.js' | asset_url }}" defer></script>
+
+  {%- if settings.google_ads_id != blank -%}
+    {% # theme-check-disable RemoteAsset %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.google_ads_id }}"></script>
+    {% # theme-check-enable RemoteAsset %}
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', {{ settings.google_ads_id | json }});</script>
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  {% render 'schema-organization' %}
+</head>
+
+{%- liquid
+  assign hero_page = false
+  if template.name == 'index' and settings.transparent_header
+    assign hero_page = true
+  endif
+  if template.suffix == 'maison' and settings.transparent_header
+    assign hero_page = true
+  endif
+-%}
+<body class="template-{{ template.name }}{% if hero_page %} has-hero{% endif %}">
+  {%- if settings.gtm_id != blank -%}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ settings.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  {%- endif -%}
+  <a class="skip-link" href="#main">{{ 'accessibility.skip_to_content' | t }}</a>
+  {% render 'icon-sprite' %}
+
+  {% sections 'header-group' %}
+
+  <main id="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  {% section 'predictive-search' %}
+  {% section 'cart-drawer' %}
+  {% render 'size-guide-drawer' %}
+
+  {%- if settings.whatsapp_number != blank and template.name != 'product' -%}
+    <aside aria-label="{{ 'help.label' | t }}">
+      <a class="help-fab is-hidden" data-help-fab href="{% render 'whatsapp-url', message: settings.whatsapp_message %}" target="_blank" rel="noopener" aria-label="{{ 'help.button' | t }}">
+        {% render 'icon', name: 'whatsapp' %}<span>{{ 'help.short' | t }}</span>
+      </a>
+    </aside>
+  {%- endif -%}
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  {%- if settings.tiktok_pixel_id != blank -%}
+    <script src="{{ 'tiktok-pixel.js' | asset_url }}" data-id="{{ settings.tiktok_pixel_id | escape }}" defer></script>
+  {%- endif -%}
+</body>
+</html>

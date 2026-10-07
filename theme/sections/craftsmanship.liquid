@@ -1,0 +1,52 @@
+{%- comment -%} Savoir-faire — dark section, four details (blocks). Claims must match product descriptions. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="section section--xl section--dark on-dark" id="savoir-faire" aria-labelledby="t-{{ section.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><p class="eyebrow">{{ s.eyebrow }}</p><h2 id="t-{{ section.id }}">{{ s.title }}</h2>{% if s.text != blank %}<p>{{ s.text }}</p>{% endif %}</div>
+      {%- if s.link_label != blank -%}<a class="link" href="{{ s.link_url }}">{{ s.link_label }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+    </div>
+    <div class="craft-grid" tabindex="0" role="region" aria-label="{{ s.title | escape }}">
+      {%- for block in section.blocks -%}
+        <article class="craft-item{% if block.settings.lining %} craft-item--lining{% endif %} reveal" style="--d:{{ forloop.index0 | times: 90 }}ms" {{ block.shopify_attributes }}>
+          <div class="media">{% render 'image', image: block.settings.image, fallback: block.settings.fallback, sizes: '(min-width:1024px) 23vw, 72vw', alt: '', max: 960 %}</div>
+          <h3><span>0{{ forloop.index }}</span>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Savoir-faire",
+  "tag": "div",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Savoir-faire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Regarder de plus près" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Ce qui fait une paire ne se lit pas sur l’étiquette. Ces détails, nous les nommons." },
+    { "type": "text", "id": "link_label", "label": "Lien", "default": "Le savoir-faire" },
+    { "type": "url", "id": "link_url", "label": "URL du lien" }
+  ],
+  "blocks": [
+    { "type": "detail", "name": "Détail", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image (gros plan)" },
+      { "type": "text", "id": "fallback", "label": "Image par défaut (fichier du thème)", "default": "editorial-craft-grain.webp" },
+      { "type": "text", "id": "title", "label": "Titre", "default": "La matière" },
+      { "type": "textarea", "id": "text", "label": "Texte" },
+      { "type": "checkbox", "id": "lining", "label": "Filet vert doublure", "default": false }
+    ] }
+  ],
+  "presets": [{
+    "name": "Savoir-faire",
+    "blocks": [
+      { "type": "detail", "settings": { "title": "La matière", "fallback": "editorial-craft-grain.webp", "text": "Veau box, box calf pleine fleur, cuir grainé ou daim : chaque fiche indique le cuir employé." } },
+      { "type": "detail", "settings": { "title": "Le cousu Blake", "fallback": "editorial-craft-blake.webp", "text": "Une couture qui relie la tige à la semelle. Quand elle est faite à la main, la fiche du modèle le précise." } },
+      { "type": "detail", "settings": { "title": "La doublure", "fallback": "editorial-craft-lining.webp", "lining": true, "text": "Le cuir vert émeraude du Monte Cristo. Personne ne le voit, sauf celui qui porte la paire." } },
+      { "type": "detail", "settings": { "title": "La semelle", "fallback": "editorial-craft-sole.webp", "text": "Gomme sur la plupart de nos modèles, pour l’adhérence et le confort au quotidien." } }
+    ]
+  }]
+}
+{% endschema %}

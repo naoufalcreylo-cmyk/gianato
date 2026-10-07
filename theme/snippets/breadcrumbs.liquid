@@ -1,0 +1,8 @@
+{%- comment -%} Params: parent_title, parent_url (optional), current {%- endcomment -%}
+<nav aria-label="{{ 'accessibility.breadcrumbs' | t }}">
+  <ol class="crumbs" role="list">
+    <li><a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a></li>
+    {%- if parent_title != blank -%}<li><a href="{{ parent_url }}">{{ parent_title }}</a></li>{%- endif -%}
+    <li aria-current="page">{{ current }}</li>
+  </ol>
+</nav>

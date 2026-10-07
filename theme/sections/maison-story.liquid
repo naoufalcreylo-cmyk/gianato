@@ -1,0 +1,51 @@
+{%- comment -%} La Maison — heritage block with service figures (blocks). Factual copy only (see docs/04-contenus-verifies.md). {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="section section--{{ s.tone }}" aria-labelledby="t-{{ section.id }}">
+  <div class="container maison">
+    <div class="maison__media reveal"><div class="media">{% render 'image', image: s.image, fallback: 'editorial-maison-hand.webp', sizes: '(min-width:1024px) 48vw, 100vw', alt: s.image_alt %}</div></div>
+    <div class="maison__text reveal" style="--d:120ms">
+      <p class="eyebrow">{{ s.eyebrow }}</p>
+      <h2 id="t-{{ section.id }}">{{ s.title }}{% if s.title_em != blank %}<br><em>{{ s.title_em }}</em>{% endif %}</h2>
+      <div class="prose">{{ s.text }}</div>
+      {%- if section.blocks.size > 0 -%}
+        <dl class="figures">
+          {%- for block in section.blocks -%}<div {{ block.shopify_attributes }}><dt>{{ block.settings.value }}</dt><dd>{{ block.settings.label }}</dd></div>{%- endfor -%}
+        </dl>
+      {%- endif -%}
+      {%- if s.cta_label != blank -%}<a class="link" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "La Maison",
+  "tag": "div",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "select", "id": "tone", "label": "Fond", "default": "stone", "options": [{ "value": "stone", "label": "Pierre" }, { "value": "alt", "label": "Ivoire" }] },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Une paire de Monte Cristo cocoa tenue à la main devant un mur de briques" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "La Maison GIANATO" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Deux maisons familiales," },
+    { "type": "text", "id": "title_em", "label": "Titre, ligne en italique", "default": "un même métier." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>GIANATO est né de la rencontre de deux marques familiales : Lozano, chausseur italien, et Richilio, maison marocaine.</p><p>De l’atelier à votre porte, sans intermédiaire : chaque paire est pensée à l’atelier, et la Maison reste à vos côtés bien après l’achat.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Lien", "default": "Découvrir notre histoire" },
+    { "type": "url", "id": "cta_url", "label": "URL du lien" }
+  ],
+  "blocks": [
+    { "type": "figure", "name": "Chiffre", "settings": [
+      { "type": "text", "id": "value", "label": "Valeur", "default": "1 an" },
+      { "type": "text", "id": "label", "label": "Libellé", "default": "de garantie sur chaque paire" }
+    ] }
+  ],
+  "presets": [{
+    "name": "La Maison",
+    "blocks": [
+      { "type": "figure", "settings": { "value": "1 an", "label": "de garantie sur chaque paire" } },
+      { "type": "figure", "settings": { "value": "30 jours", "label": "pour échanger votre pointure" } },
+      { "type": "figure", "settings": { "value": "2 à 5 jours", "label": "de livraison au Maroc" } }
+    ]
+  }]
+}
+{% endschema %}

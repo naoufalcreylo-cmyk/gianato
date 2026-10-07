@@ -1,0 +1,57 @@
+{%- comment -%}
+  Editorial testimonials. Only real customer words (source: gianato.ma homepage). Never invent names or quotes.
+  Press logos as separate blocks.
+{%- endcomment -%}
+<section class="section section--alt" aria-labelledby="t-{{ section.id }}">
+  <div class="container voices">
+    <div class="voices__head reveal"><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2 id="t-{{ section.id }}" class="h3">{{ section.settings.title }}</h2></div>
+    <div class="voices__list">
+      {%- assign n = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'quote' -%}
+          <figure class="voice{% if n > 0 %} voice--small{% endif %} reveal" {{ block.shopify_attributes }}>
+            <blockquote>{{ block.settings.quote }}</blockquote>
+            <figcaption class="label">{{ block.settings.name }}</figcaption>
+          </figure>
+          {%- assign n = n | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- capture press -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'press' and block.settings.logo != blank -%}
+          {{ block.settings.logo | image_url: height: 64 | image_tag: alt: block.settings.name, height: 26, width: nil, loading: 'lazy' }}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if press != blank -%}<div class="press reveal"><span class="label muted">{{ 'home.press' | t }}</span>{{ press }}</div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Témoignages",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Les amis de la Maison" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ils portent GIANATO" }
+  ],
+  "blocks": [
+    { "type": "quote", "name": "Témoignage", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Citation (verbatim client)" },
+      { "type": "text", "id": "name", "label": "Nom" }
+    ] },
+    { "type": "press", "name": "Presse", "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "text", "id": "name", "label": "Nom du titre" }
+    ] }
+  ],
+  "presets": [{
+    "name": "Témoignages",
+    "blocks": [
+      { "type": "quote", "settings": { "quote": "Je suis vraiment étonné de la qualité des chaussures que j’ai prises chez la Maison Gianato. C’est devenu ma marque de chaussures préférée. Je la recommande vivement, sans oublier leur service personnalisé assuré par Mme Ferdaous.", "name": "Driss Roukh" } },
+      { "type": "quote", "settings": { "quote": "C’est magnifique, merci pour la qualité du service.", "name": "Othmane Lamine" } }
+    ]
+  }]
+}
+{% endschema %}

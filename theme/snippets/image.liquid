@@ -1,0 +1,25 @@
+{%- comment -%}
+  Responsive image. Params: image (required unless fallback), fallback (asset filename), sizes, alt, class,
+  eager (bool), max (largest width, default 2000).
+  Without image, renders the bundled editorial asset given as fallback (theme works before the store uploads visuals).
+{%- endcomment -%}
+{%- liquid
+  assign max = max | default: 2000
+  assign alt_text = alt | default: image.alt | escape
+-%}
+{%- if image != blank -%}
+  {%- capture srcset -%}
+    {%- for w in (1..7) -%}
+      {%- case w -%}{%- when 1 -%}{%- assign px = 360 -%}{%- when 2 -%}{%- assign px = 540 -%}{%- when 3 -%}{%- assign px = 720 -%}{%- when 4 -%}{%- assign px = 960 -%}{%- when 5 -%}{%- assign px = 1200 -%}{%- when 6 -%}{%- assign px = 1600 -%}{%- else -%}{%- assign px = 2000 -%}{%- endcase -%}
+      {%- if px <= image.width and px <= max -%}{{ image | image_url: width: px }} {{ px }}w,{%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  <img src="{{ image | image_url: width: 960 }}" srcset="{{ srcset | remove_last: ',' }}" sizes="{{ sizes | default: '100vw' }}"
+    alt="{{ alt_text }}" width="{{ image.width }}" height="{{ image.height }}"
+    {%- if class != blank %} class="{{ class }}"{% endif %}
+    {%- if eager %} fetchpriority="high" decoding="async"{% else %} loading="lazy" decoding="async"{% endif %}>
+{%- elsif fallback != blank -%}
+  <img src="{{ fallback | asset_url }}" alt="{{ alt | escape }}" width="1080" height="1350"
+    {%- if class != blank %} class="{{ class }}"{% endif %}
+    {%- if eager %} fetchpriority="high" decoding="async"{% else %} loading="lazy" decoding="async"{% endif %}>
+{%- endif -%}

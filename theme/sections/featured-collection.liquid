@@ -1,0 +1,55 @@
+{%- comment -%} Featured collection rail (Nouveautés). Option: one colourway per model (gianato.model metafield). {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign list_name = s.title | append: ' — accueil'
+  assign seen = '|'
+  assign shown = 0
+-%}
+<section class="section" aria-labelledby="t-{{ section.id }}">
+  <div class="container" data-rail>
+    <div class="section-head rail-head reveal">
+      <div>
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+        <h2 id="t-{{ section.id }}">{{ s.title }}</h2>
+        {%- if s.text != blank -%}<p>{{ s.text }}</p>{%- endif -%}
+      </div>
+      <div class="rail-head__aside">
+        {%- if s.collection != blank -%}<a class="link" href="{{ s.collection.url }}">{{ s.cta_label }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+        <div class="rail-nav"><button type="button" data-rail-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'arrow-left' %}</button><button type="button" data-rail-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'arrow' %}</button></div>
+      </div>
+    </div>
+    <div class="rail" data-list="{{ list_name | escape }}">
+      {%- if s.collection != blank -%}
+        {%- for product in s.collection.products limit: 48 -%}
+          {%- if shown >= s.limit -%}{%- break -%}{%- endif -%}
+          {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+          {%- assign key = product.metafields.gianato.model.value | default: product.handle | prepend: '|' | append: '|' -%}
+          {%- if s.distinct and seen contains key -%}{%- continue -%}{%- endif -%}
+          {%- assign seen = seen | append: key -%}
+          {% render 'product-card', product: product, list: list_name, index: shown, sizes: '(min-width:1024px) 23vw, (min-width:600px) 42vw, 64vw' %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}<div class="card"><div class="card__media">{{ 'product-1' | placeholder_svg_tag }}</div></div>{%- endfor -%}
+      {%- endif -%}
+    </div>
+    <div class="rail-progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection en vedette",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Nouvelle collection" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les nouveautés" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le Loro arrive en sept cuirs : un mocassin souple sur semelle claire, pour les journées qui commencent au bureau et finissent ailleurs." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Nombre de produits", "min": 3, "max": 12, "step": 1, "default": 6 },
+    { "type": "checkbox", "id": "distinct", "label": "Une seule couleur par modèle", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Lien", "default": "Découvrir la collection" }
+  ],
+  "presets": [{ "name": "Collection en vedette" }]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+{%- comment -%}
+  « Complétez votre style » — accessories shown only under products of the Business collection (merchandising rule,
+  not random): settings.business_collection → settings.complete_collection.
+{%- endcomment -%}
+{%- liquid
+  assign show = false
+  if settings.complete_collection != blank and settings.business_collection != blank
+    for c in product.collections
+      if c.id == settings.business_collection.id
+        assign show = true
+      endif
+    endfor
+  endif
+  assign list_name = section.settings.title
+-%}
+{%- if show -%}
+  <section class="section section--tight-top" aria-labelledby="t-{{ section.id }}">
+    <div class="container" data-rail>
+      <div class="section-head rail-head"><div><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2 id="t-{{ section.id }}" class="h3">{{ section.settings.title }}</h2></div></div>
+      <div class="rail" data-list="{{ list_name | escape }}">
+        {%- assign seen = '|' -%}{%- assign n = 0 -%}
+        {%- for p in settings.complete_collection.products limit: 20 -%}
+          {%- assign key = p.metafields.gianato.model.value | default: p.handle | prepend: '|' | append: '|' -%}
+          {%- if seen contains key or p.available == false -%}{%- continue -%}{%- endif -%}
+          {%- assign seen = seen | append: key -%}
+          {% render 'product-card', product: p, list: list_name, index: n, sizes: '(min-width:1024px) 23vw, 64vw' %}
+          {%- assign n = n | plus: 1 -%}{%- if n >= section.settings.limit -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Complétez votre style",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Maroquinerie" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Complétez votre style" },
+    { "type": "range", "id": "limit", "label": "Nombre de modèles", "min": 1, "max": 4, "step": 1, "default": 2 }
+  ]
+}
+{% endschema %}

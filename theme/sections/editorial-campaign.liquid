@@ -1,0 +1,47 @@
+{%- comment -%} Editorial campaign around one product (default: Monte Cristo, « le vert à l'intérieur »). {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign p = s.product
+-%}
+<section class="section section--alt" aria-labelledby="t-{{ section.id }}">
+  <div class="container campaign">
+    <div class="campaign__main reveal"><div class="media zoom-on-hover">{% render 'image', image: s.image, fallback: 'editorial-lining-black.webp', sizes: '(min-width:1024px) 56vw, 100vw', alt: s.image_alt %}</div></div>
+    <div class="campaign__text reveal" style="--d:120ms">
+      <p class="eyebrow">{% if s.lining_mark %}<span class="lining-mark" aria-hidden="true"></span>{% endif %}{{ s.eyebrow }}</p>
+      <h2 id="t-{{ section.id }}">{{ s.title }}{% if s.title_em != blank %}<br><em>{{ s.title_em }}</em>{% endif %}</h2>
+      <p>{{ s.text }}</p>
+      <div class="campaign__inset"><div class="media">{% render 'image', image: s.image_inset, fallback: 'editorial-pair-steps.webp', sizes: '18vw', alt: s.inset_alt, max: 960 %}</div></div>
+      <div class="campaign__buy">
+        <a class="btn" href="{{ p.url | default: s.cta_url }}">{{ s.cta_label }}</a>
+        {%- if p != blank -%}
+          <div>
+            {% render 'swatches', product: p, max: 8, class: 'campaign__swatches' %}
+            <p class="price" style="margin-top:.6rem">{{ p.price | money_without_trailing_zeros }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Campagne éditoriale",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image principale" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Monte Cristo noir : intérieur en cuir vert émeraude" },
+    { "type": "image_picker", "id": "image_inset", "label": "Image secondaire" },
+    { "type": "text", "id": "inset_alt", "label": "Description de l’image secondaire", "default": "Paire de Monte Cristo noirs posée sur une marche en pierre" },
+    { "type": "checkbox", "id": "lining_mark", "label": "Repère vert doublure", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Monte Cristo" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ce qui ne se voit pas" },
+    { "type": "text", "id": "title_em", "label": "Titre, ligne en italique", "default": "se ressent." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Veau box brossé, cousu Blake à la main, doublé de cuir vert émeraude. Le mocassin de la Maison, en six couleurs." },
+    { "type": "product", "id": "product", "label": "Produit" },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "Découvrir le Monte Cristo" },
+    { "type": "url", "id": "cta_url", "label": "Lien (si aucun produit)" }
+  ],
+  "presets": [{ "name": "Campagne éditoriale" }]
+}
+{% endschema %}

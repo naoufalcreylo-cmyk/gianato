@@ -1,0 +1,72 @@
+{%- comment -%}
+  Storefront filters (Search & Discovery). Param: results (collection or search).
+  « Pointure »/« Taille » render as a size grid; swatch filters (or « Couleur ») show colour dots.
+{%- endcomment -%}
+<aside class="filters drawer drawer--sheet" id="filters" data-filters aria-label="{{ 'collections.filters' | t }}">
+  <div class="layer__scrim" data-filters-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <h2 class="drawer__title">{{ 'collections.filters' | t }}</h2>
+      <button class="icon-btn" type="button" data-filters-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <form class="filters__body" data-facets-form>
+      {%- if results.terms -%}<input type="hidden" name="q" value="{{ results.terms | escape }}"><input type="hidden" name="type" value="product">{%- endif -%}
+      {%- for filter in results.filters -%}
+        {%- liquid
+          assign label_down = filter.label | downcase
+          assign is_size = false
+          if label_down contains 'pointure' or label_down contains 'taille'
+            assign is_size = true
+          endif
+          assign is_color = false
+          if filter.presentation == 'swatch' or label_down contains 'couleur'
+            assign is_color = true
+          endif
+        -%}
+        <details class="filter"{% if forloop.index <= 3 or filter.active_values.size > 0 %} open{% endif %}>
+          <summary>{{ filter.label }}{% render 'icon', name: 'plus' %}</summary>
+          <div class="filter__body">
+            {%- case filter.type -%}
+              {%- when 'price_range' -%}
+                <div class="price-range">
+                  <label class="visually-hidden" for="pmin-{{ forloop.index }}">{{ 'collections.price_min' | t }}</label>
+                  <input id="pmin-{{ forloop.index }}" type="number" inputmode="numeric" name="{{ filter.min_value.param_name }}" placeholder="0"{% if filter.min_value.value %} value="{{ filter.min_value.value | money_without_currency | remove: ',' | remove: ' ' | split: '.' | first }}"{% endif %}>
+                  <span>—</span>
+                  <label class="visually-hidden" for="pmax-{{ forloop.index }}">{{ 'collections.price_max' | t }}</label>
+                  <input id="pmax-{{ forloop.index }}" type="number" inputmode="numeric" name="{{ filter.max_value.param_name }}" placeholder="{{ filter.range_max | money_without_currency | remove: ',' | remove: ' ' | split: '.' | first }}"{% if filter.max_value.value %} value="{{ filter.max_value.value | money_without_currency | remove: ',' | remove: ' ' | split: '.' | first }}"{% endif %}>
+                  <span>{{ cart.currency.symbol | default: 'DH' }}</span>
+                </div>
+              {%- when 'boolean' -%}
+                {%- for v in filter.values -%}
+                  <label class="opt{% if v.count == 0 and v.active == false %} is-empty{% endif %}"><input type="checkbox" name="{{ v.param_name }}" value="{{ v.value }}"{% if v.active %} checked{% endif %}>{{ v.label }}<span class="n">{{ v.count }}</span></label>
+                {%- endfor -%}
+              {%- else -%}
+                {%- if is_size -%}
+                  <div class="size-opts">
+                    {%- for v in filter.values -%}
+                      <label><input type="checkbox" name="{{ v.param_name }}" value="{{ v.value | escape }}"{% if v.active %} checked{% endif %}{% if v.count == 0 and v.active == false %} disabled{% endif %} aria-label="{{ filter.label }} {{ v.label }}"><span>{{ v.label }}</span></label>
+                    {%- endfor -%}
+                  </div>
+                {%- else -%}
+                  {%- for v in filter.values -%}
+                    <label class="opt{% if v.count == 0 and v.active == false %} is-empty{% endif %}">
+                      <input type="checkbox" name="{{ v.param_name }}" value="{{ v.value | escape }}"{% if v.active %} checked{% endif %}{% if v.count == 0 and v.active == false %} disabled{% endif %}>
+                      {%- if is_color -%}
+                        {%- if v.swatch.color -%}<span class="swatch" style="--sw: {{ v.swatch.color }}" aria-hidden="true"></span>
+                        {%- elsif v.swatch.image -%}<span class="swatch" style="--sw: url({{ v.swatch.image | image_url: width: 40 }}) center/cover" aria-hidden="true"></span>{%- endif -%}
+                      {%- endif -%}
+                      {{ v.label }}<span class="n">{{ v.count }}</span>
+                    </label>
+                  {%- endfor -%}
+                {%- endif -%}
+            {%- endcase -%}
+          </div>
+        </details>
+      {%- endfor -%}
+    </form>
+    <div class="drawer__foot">
+      <a class="btn btn--ghost" href="{{ results.url | default: routes.search_url }}{% if results.terms %}?q={{ results.terms | url_encode }}&type=product{% endif %}" data-facet-link>{{ 'collections.clear' | t }}</a>
+      <button class="btn" type="button" data-filters-close>{{ 'collections.show_results' | t: count: results.products_count }}</button>
+    </div>
+  </div>
+</aside>

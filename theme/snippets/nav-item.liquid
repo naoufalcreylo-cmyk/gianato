@@ -1,0 +1,6 @@
+{%- comment -%} Top-level header item. Params: link, index {%- endcomment -%}
+{%- if link.links.size > 0 -%}
+  <button class="nav-link" type="button" aria-expanded="false" aria-controls="mega-{{ index }}" data-mega-trigger="{{ index }}">{{ link.title }}</button>
+{%- else -%}
+  <a class="nav-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+{%- endif -%}

@@ -1,0 +1,108 @@
+{%- comment -%}
+  Cart drawer. Rendered in layout/theme.liquid and refreshed by assets/cart.js through the Section Rendering API
+  after every add / change. Checkout goes to Shopify checkout (CMI, cash on delivery… as configured).
+{%- endcomment -%}
+<div class="layer drawer" id="cart" aria-hidden="true" data-layer data-cart-drawer>
+  <div class="layer__scrim" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="drawer__head">
+      <h2 class="drawer__title" id="cart-title">{{ 'cart.title' | t }}{% if cart.item_count > 0 %}<sup>({{ cart.item_count }})</sup>{% endif %}</h2>
+      <button class="icon-btn" type="button" data-close aria-label="{{ 'cart.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="drawer__body">
+        <div class="empty-state">
+          <p class="h3">{{ 'cart.empty_title' | t }}</p>
+          <p>{{ 'cart.empty_text' | t }}</p>
+          <div class="empty-state__links">
+            {%- for link in linklists[section.settings.empty_menu].links limit: 4 -%}<a class="link" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+          </div>
+        </div>
+      </div>
+      <div class="drawer__foot"><button class="btn btn--ghost btn--block" type="button" data-close>{{ 'cart.continue' | t }}</button></div>
+    {%- else -%}
+      <div class="drawer__body">
+        <ul role="list">
+          {%- for item in cart.items -%}
+            <li class="cart-line" data-key="{{ item.key }}">
+              <a class="media" href="{{ item.url }}" tabindex="-1" aria-hidden="true">{% render 'image', image: item.image, sizes: '104px', alt: '', max: 360 %}</a>
+              <div>
+                <div class="cart-line__top">
+                  <div>
+                    <a class="cart-line__name" href="{{ item.url }}">{{ item.product.metafields.gianato.model.value | default: item.product.title }}</a>
+                    <p class="cart-line__meta">
+                      {{- item.product.metafields.gianato.colorway.value -}}
+                      {%- unless item.product.has_only_default_variant -%}{% if item.product.metafields.gianato.colorway != blank %} · {% endif %}{{ item.product.options.first | remove: ':' }} {{ item.variant.title }}{%- endunless -%}
+                    </p>
+                  </div>
+                  <div class="cart-line__price">
+                    <span class="price">{{ item.final_line_price | money_without_trailing_zeros }}</span>
+                    {%- if settings.show_compare_at and item.variant.compare_at_price > item.variant.price -%}<s class="price price--compare">{{ item.variant.compare_at_price | times: item.quantity | money_without_trailing_zeros }}</s>{%- endif -%}
+                  </div>
+                </div>
+                <div class="cart-line__bottom">
+                  <div class="qty">
+                    <button type="button" data-qty="-1" aria-label="{{ 'cart.decrease' | t: name: item.product.title | escape }}">{% render 'icon', name: 'minus' %}</button>
+                    <input type="number" min="0" max="20" value="{{ item.quantity }}" aria-label="{{ 'cart.quantity' | t: name: item.product.title | escape }}" data-qty-input>
+                    <button type="button" data-qty="1" aria-label="{{ 'cart.increase' | t: name: item.product.title | escape }}">{% render 'icon', name: 'plus' %}</button>
+                  </div>
+                  <button class="cart-line__remove" type="button" data-remove>{{ 'cart.remove' | t }}</button>
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- comment -%} Up to two relevant suggestions: an accessory for business shoes, then the section's collection {%- endcomment -%}
+        {%- liquid
+          assign in_cart = '|'
+          for item in cart.items
+            assign in_cart = in_cart | append: item.product_id | append: '|'
+          endfor
+          assign picks = 0
+        -%}
+        {%- capture suggestions -%}
+          {%- for p in section.settings.suggestions.products limit: 12 -%}
+            {%- assign key = p.id | prepend: '|' | append: '|' -%}
+            {%- if picks >= 2 -%}{%- break -%}{%- endif -%}
+            {%- if p.available -%}
+              {%- unless in_cart contains key -%}
+                <div class="cart-upsell__item">
+                  <div class="media">{% render 'image', image: p.featured_media.preview_image, sizes: '200px', alt: '', max: 540 %}</div>
+                  <p><a href="{{ p.url }}">{{ p.metafields.gianato.model.value | default: p.title }}</a><br><span class="muted">{{ p.price | money_without_trailing_zeros }}</span></p>
+                </div>
+                {%- assign picks = picks | plus: 1 -%}
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if picks > 0 -%}<div class="cart-upsell"><h3>{{ 'cart.complete' | t }}</h3><div class="cart-upsell__list">{{ suggestions }}</div></div>{%- endif -%}
+      </div>
+
+      <div class="drawer__foot">
+        <div class="cart-sum"><span>{{ 'cart.subtotal' | t }}</span><span class="price">{{ cart.total_price | money_without_trailing_zeros }}</span></div>
+        <p class="cart-note">{{ section.settings.note }}</p>
+        <form class="cart-actions" action="{{ routes.cart_url }}" method="post">
+          <button class="btn btn--lg btn--block" type="submit" name="checkout" data-checkout>{{ 'cart.checkout' | t }}</button>
+          <button class="btn btn--ghost btn--block" type="button" data-close>{{ 'cart.continue' | t }}</button>
+        </form>
+        <ul class="cart-assure" role="list">
+          {%- if settings.promise_exchange != blank -%}<li>{% render 'icon', name: 'exchange' %} {{ settings.promise_exchange }}</li>{%- endif -%}
+          <li>{% render 'icon', name: 'lock' %} {{ 'cart.secure' | t }}</li>
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Panier (tiroir)",
+  "settings": [
+    { "type": "text", "id": "note", "label": "Note sous le sous-total", "default": "Livraison offerte partout au Maroc. Paiement à la livraison ou par carte." },
+    { "type": "collection", "id": "suggestions", "label": "Suggestions « Pour compléter »" },
+    { "type": "link_list", "id": "empty_menu", "label": "Liens du panier vide" }
+  ]
+}
+{% endschema %}

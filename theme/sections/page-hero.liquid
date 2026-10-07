@@ -1,0 +1,23 @@
+{%- comment -%} Full-bleed page opening (La Maison). The header turns transparent over it (template suffix « maison »). {%- endcomment -%}
+<section class="page-hero on-media">
+  <div class="media">{% render 'image', image: section.settings.image, fallback: 'editorial-pair-steps.webp', sizes: '100vw', alt: section.settings.image_alt, eager: true %}</div>
+  <div class="page-hero__content"><div class="container">
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h1 class="display">{{ section.settings.title | default: page.title }}{% if section.settings.title_em != blank %}<br><em>{{ section.settings.title_em }}</em>{% endif %}</h1>
+  </div></div>
+</section>
+
+{% schema %}
+{
+  "name": "Ouverture de page",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image (paysage, 2000 px)" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Une paire de Monte Cristo noirs posée sur une marche en pierre" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "La Maison GIANATO" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Deux maisons familiales," },
+    { "type": "text", "id": "title_em", "label": "Titre, ligne en italique", "default": "un même métier." }
+  ],
+  "presets": [{ "name": "Ouverture de page" }]
+}
+{% endschema %}

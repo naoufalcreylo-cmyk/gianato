@@ -1,0 +1,42 @@
+{%- comment -%} Cart page (no-JS fallback and direct /cart visits). {%- endcomment -%}
+<div class="container container--narrow page-head">
+  <h1>{{ 'cart.title' | t }}</h1>
+</div>
+<div class="container container--narrow" style="padding-bottom:var(--section)">
+  {%- if cart.item_count == 0 -%}
+    <div class="empty-state"><p class="h3">{{ 'cart.empty_title' | t }}</p><p>{{ 'cart.empty_text' | t }}</p>
+      <a class="btn" style="margin-top:2rem" href="{{ routes.all_products_collection_url }}">{{ 'cart.continue' | t }}</a></div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      <ul role="list">
+        {%- for item in cart.items -%}
+          <li class="cart-line">
+            <a class="media" href="{{ item.url }}" tabindex="-1" aria-hidden="true">{% render 'image', image: item.image, sizes: '120px', alt: '', max: 360 %}</a>
+            <div>
+              <div class="cart-line__top">
+                <div><a class="cart-line__name" href="{{ item.url }}">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}<p class="cart-line__meta">{{ item.variant.title }}</p>{%- endunless -%}</div>
+                <div class="cart-line__price"><span class="price">{{ item.final_line_price | money_without_trailing_zeros }}</span></div>
+              </div>
+              <div class="cart-line__bottom">
+                <label class="visually-hidden" for="q-{{ forloop.index }}">{{ 'cart.quantity' | t: name: item.product.title | escape }}</label>
+                <input class="input" style="width:5rem" id="q-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+                <a class="cart-line__remove" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="cart-sum" style="margin-top:1rem"><span>{{ 'cart.subtotal' | t }}</span><span class="price">{{ cart.total_price | money_without_trailing_zeros }}</span></div>
+      <p class="cart-note">{{ 'cart.taxes_note' | t }}</p>
+      <div class="cart-actions" style="max-width:26rem;margin-left:auto">
+        <button class="btn btn--lg btn--block" type="submit" name="checkout" data-checkout>{{ 'cart.checkout' | t }}</button>
+        <button class="btn btn--ghost btn--block" type="submit" name="update">{{ 'cart.update' | t }}</button>
+      </div>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Panier", "settings": [] }
+{% endschema %}

@@ -1,0 +1,53 @@
+{%- comment -%} Editorial split + products: sticky image, 3 shoes (one per model) + 1 accessory, occasion links. {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign list_name = s.title | append: ' — accueil'
+  assign seen = '|'
+  assign shown = 0
+-%}
+<section class="section section--xl" aria-labelledby="t-{{ section.id }}">
+  <div class="container edit">
+    <div class="edit__media reveal"><div class="media">{% render 'image', image: s.image, fallback: 'editorial-life-car-2.webp', sizes: '(min-width:1024px) 40vw, 100vw', alt: s.image_alt %}</div></div>
+    <div class="edit__main">
+      <div class="section-head reveal"><div><p class="eyebrow">{{ s.eyebrow }}</p><h2 id="t-{{ section.id }}">{{ s.title }}</h2>{% if s.text != blank %}<p>{{ s.text }}</p>{% endif %}</div></div>
+      <div class="edit__grid" data-list="{{ list_name | escape }}">
+        {%- for product in s.collection.products limit: 40 -%}
+          {%- if shown >= s.count -%}{%- break -%}{%- endif -%}
+          {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+          {%- assign key = product.metafields.gianato.model.value | default: product.handle | prepend: '|' | append: '|' -%}
+          {%- if seen contains key -%}{%- continue -%}{%- endif -%}
+          {%- assign seen = seen | append: key -%}
+          {% render 'product-card', product: product, list: list_name, index: shown, sizes: '(min-width:1024px) 22vw, 48vw' %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endfor -%}
+        {%- for product in s.extra_collection.products limit: 1 -%}
+          {% render 'product-card', product: product, list: list_name, index: shown, sizes: '(min-width:1024px) 22vw, 48vw' %}
+        {%- endfor -%}
+      </div>
+      {%- if s.links != blank -%}
+        <nav class="edit__links" aria-label="{{ s.title | escape }}">
+          {%- for link in linklists[s.links].links -%}<a class="link link--quiet" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        </nav>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Édition par occasion",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Souliers à boucles cognac tenus à la portière d’une voiture ancienne" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "L’édition business" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Le business contemporain" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Réunion, plaidoirie, signature : les souliers et mallettes des jours qui comptent." },
+    { "type": "collection", "id": "collection", "label": "Collection de souliers" },
+    { "type": "range", "id": "count", "label": "Nombre de souliers", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "collection", "id": "extra_collection", "label": "Accessoire (1er produit de la collection)" },
+    { "type": "link_list", "id": "links", "label": "Liens par occasion (menu)" }
+  ],
+  "presets": [{ "name": "Édition par occasion" }]
+}
+{% endschema %}

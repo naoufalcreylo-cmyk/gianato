@@ -1,0 +1,17 @@
+{%- comment -%}
+  Colour siblings: metafield gianato.siblings (list of product references, one product per colourway — the catalogue's
+  existing structure). Params: product, max (default 5), class.
+{%- endcomment -%}
+{%- assign siblings = product.metafields.gianato.siblings.value -%}
+{%- if siblings.size > 1 -%}
+  {%- assign max = max | default: 5 -%}
+  <div class="{{ class | default: 'card__swatches' }}" aria-label="{{ 'product.colors_count' | t: count: siblings.size }}">
+    {%- for s in siblings limit: max -%}
+      {%- assign tone = s.metafields.gianato.swatch.value | default: '#1c1b1a' -%}
+      {%- assign label = s.metafields.gianato.colorway.value | default: s.title -%}
+      <a class="swatch{% if s.id == product.id %} is-current{% endif %}" style="--sw: {{ tone }}" href="{{ s.url }}" title="{{ label | escape }}"
+        aria-label="{{ product.metafields.gianato.model.value | default: product.title | escape }}, {{ label | escape }}"{% if s.id == product.id %} aria-current="true"{% endif %}></a>
+    {%- endfor -%}
+    {%- if siblings.size > max -%}<span class="more">+{{ siblings.size | minus: max }}</span>{%- endif -%}
+  </div>
+{%- endif -%}

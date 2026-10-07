@@ -1,0 +1,18 @@
+{%- comment -%} Params: product (or variant), show_rate (bool). Compare-at price shown discreetly, per theme settings. {%- endcomment -%}
+{%- liquid
+  if variant
+    assign price = variant.price
+    assign compare = variant.compare_at_price
+  else
+    assign price = product.price
+    assign compare = product.compare_at_price_max
+  endif
+-%}
+<span class="price">{{ price | money_without_trailing_zeros }}</span>
+{%- if settings.show_compare_at and compare > price -%}
+  <s class="price price--compare"><span class="visually-hidden">{{ 'product.regular_price' | t }}</span>{{ compare | money_without_trailing_zeros }}</s>
+  {%- if show_rate -%}
+    {%- assign rate = compare | minus: price | times: 100 | divided_by: compare -%}
+    <span class="price-off">−{{ rate }} %</span>
+  {%- endif -%}
+{%- endif -%}

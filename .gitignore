@@ -1,0 +1,11 @@
+node_modules/
+qa/
+research/cdn/
+research/frames/
+research/live/
+research/mc/
+research/sheets/
+research/*.liquid
+research/*.html
+research/jobs*.json
+*.log

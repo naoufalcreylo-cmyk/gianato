@@ -1,0 +1,209 @@
+{
+  "general": {
+    "home": "Accueil",
+    "page": "Page {{ page }}",
+    "close": "Fermer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "discover": "Découvrir",
+    "whatsapp_advice": "Conseil sur WhatsApp"
+  },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu",
+    "breadcrumbs": "Fil d’Ariane"
+  },
+  "header": {
+    "announcements": "Informations de service",
+    "main_nav": "Navigation principale",
+    "menu": "Menu",
+    "open_menu": "Ouvrir le menu",
+    "search": "Rechercher",
+    "account": "Mon compte",
+    "cart": "Panier",
+    "view_all": "Tout voir"
+  },
+  "help": {
+    "label": "Conseil",
+    "button": "Conseil sur WhatsApp",
+    "short": "Un conseil ?"
+  },
+  "home": {
+    "on_the_photo": "Sur la photo :",
+    "press": "Ils en parlent",
+    "services": "Nos services"
+  },
+  "product": {
+    "new": "Nouveau",
+    "sold_out": "Épuisé",
+    "available": "Disponible",
+    "last_sizes": "Dernières pointures",
+    "last_sizes_long": "Dernières pointures disponibles",
+    "regular_price": "Prix initial :",
+    "quick_add": "Ajout rapide",
+    "add_size": "Ajouter la pointure {{ size }} au panier",
+    "add_to_cart": "Ajouter au panier",
+    "order_whatsapp": "Commander sur WhatsApp",
+    "whatsapp_intro": "Bonjour, je souhaite commander :",
+    "size_tbd": "à préciser",
+    "choose_size": "Choisissez votre pointure pour ajouter cette paire au panier.",
+    "size_chosen": "Livraison offerte. Échange sous 30 jours si la pointure ne convient pas.",
+    "size_hint": "Première paire chez nous ? Choisissez votre pointure habituelle.",
+    "color": "Couleur",
+    "colors_count": {
+      "one": "{{ count }} couleur",
+      "other": "{{ count }} couleurs"
+    },
+    "gallery": "Galerie, {{ count }} photos",
+    "view": "vue {{ index }}",
+    "zoom": "Agrandir la photo {{ index }}",
+    "zoom_label": "Zoom",
+    "lining_note": "Doublure en cuir vert émeraude. Le détail que vous seul connaissez.",
+    "assure_delivery": "Livraison offerte",
+    "assure_exchange": "Échange sous 30 jours",
+    "assure_payment": "Paiement à la livraison ou par carte",
+    "assure_advice": "Un conseil ?",
+    "details": "Détails",
+    "materials": "Matières & fabrication",
+    "shipping_returns": "Livraison & retours",
+    "care": "Entretien",
+    "see_conditions": "Conditions d’échange et de retour",
+    "spec_material": "Matière",
+    "spec_construction": "Construction",
+    "spec_lining": "Doublure",
+    "spec_sole": "Semelle",
+    "spec_dimensions": "Dimensions",
+    "spec_style": "Style"
+  },
+  "sizes": {
+    "title": "Guide des pointures",
+    "caption": "Correspondance des pointures FR / UK",
+    "advice_1": "Première paire chez nous ? Optez pour votre pointure habituelle. Sur gianato.ma, les pointures sont toujours indiquées en pointure française.",
+    "advice_2": "La pointure d’une chaussure de ville diffère de celle d’une chaussure de sport.",
+    "advice_3": "Soulier un peu large ? Une semelle intérieure comble l’écart et ajoute du confort.",
+    "advice_4": "Si la pointure ne convient pas, nous organisons une collecte gratuite depuis votre domicile ou votre bureau.",
+    "doubt": "Un doute entre deux pointures ? Nos conseillers vous répondent.",
+    "whatsapp": "Bonjour, j’hésite sur ma pointure."
+  },
+  "collections": {
+    "filters": "Filtres",
+    "styles": "Styles",
+    "sort": "Trier par",
+    "density": "Affichage",
+    "active_filters": "Filtres actifs",
+    "products": "Les modèles",
+    "clear": "Effacer les filtres",
+    "show_results": "Voir les résultats ({{ count }})",
+    "price_min": "Prix minimum",
+    "price_max": "Prix maximum",
+    "load_more": "Voir plus de modèles",
+    "progress": "{{ shown }} sur {{ total }}",
+    "models_count": {
+      "one": "{{ count }} modèle",
+      "other": "{{ count }} modèles"
+    },
+    "empty_title": "Aucun soulier ne correspond à ces critères.",
+    "empty_text": "Retirez un filtre, ou demandez conseil à la Maison.",
+    "all_title": "Toutes les collections"
+  },
+  "search": {
+    "title": "Recherche",
+    "label": "Rechercher un soulier, une couleur, une matière",
+    "placeholder": "Mocassin, Monte Cristo, daim…",
+    "popular": "Recherches fréquentes",
+    "collections": "Collections",
+    "no_collection": "Aucune collection ne correspond.",
+    "suggestions": "Suggestions",
+    "products": "Souliers",
+    "view_all": "Voir tous les résultats",
+    "no_results": "Aucun résultat pour « {{ terms }} »",
+    "no_results_hint": "Essayez un modèle (Monte Cristo, Loro…), un style (mocassin, derby) ou une couleur.",
+    "ask_advisor": "Demander à un conseiller",
+    "whatsapp": "Bonjour, je cherche : {{ terms }}",
+    "results_count": {
+      "one": "{{ count }} résultat",
+      "other": "{{ count }} résultats"
+    }
+  },
+  "cart": {
+    "title": "Votre panier",
+    "close": "Fermer le panier",
+    "empty_title": "Votre panier est vide.",
+    "empty_text": "Commencez par les modèles que nos clients préfèrent.",
+    "continue": "Continuer mes achats",
+    "checkout": "Finaliser ma commande",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "taxes_note": "Livraison offerte au Maroc. Le total est confirmé à l’étape suivante.",
+    "update": "Mettre à jour",
+    "remove": "Retirer",
+    "quantity": "Quantité, {{ name }}",
+    "decrease": "Retirer une paire de {{ name }}",
+    "increase": "Ajouter une paire de {{ name }}",
+    "complete": "Pour compléter",
+    "secure": "Paiement sécurisé CMI · 3D Secure",
+    "error": "Cet article n’a pas pu être ajouté. Merci de réessayer."
+  },
+  "footer": {
+    "email": "Votre adresse e-mail",
+    "subscribe": "S’inscrire",
+    "subscribed": "Merci. Bienvenue parmi les amis de la Maison.",
+    "privacy": "Vos données restent chez GIANATO. Désinscription en un clic.",
+    "follow": "Suivre la Maison",
+    "payments": "Moyens de paiement"
+  },
+  "blog": {
+    "journal": "Le carnet",
+    "all": "Tous les articles",
+    "more": "Articles précédents",
+    "empty": "Les premiers articles arrivent bientôt."
+  },
+  "service": {
+    "topics": "Rubriques"
+  },
+  "contact": {
+    "name": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "message": "Votre message",
+    "send": "Envoyer",
+    "success": "Merci. Nous vous répondons sous 48 heures."
+  },
+  "account": {
+    "eyebrow": "Mon compte",
+    "login": "Connexion",
+    "register": "Créer un compte",
+    "reset": "Réinitialiser le mot de passe",
+    "reset_sent": "Un e-mail de réinitialisation vous a été envoyé.",
+    "activate": "Activer mon compte",
+    "order": "Commande {{ name }}",
+    "addresses": "Mes adresses",
+    "hello": "Bonjour {{ name }}",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "password_confirm": "Confirmer le mot de passe",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "newsletter": "Recevoir la lettre de la Maison",
+    "sign_in": "Se connecter",
+    "forgot": "Mot de passe oublié ?",
+    "create": "Créer un compte",
+    "send": "Envoyer",
+    "save": "Enregistrer",
+    "enter": "Entrer",
+    "orders": "Mes commandes",
+    "no_orders": "Vous n’avez pas encore passé de commande.",
+    "back": "Retour au compte",
+    "logout": "Se déconnecter"
+  },
+  "gift_card": {
+    "title": "Carte cadeau GIANATO",
+    "code": "Code",
+    "expired": "Cette carte cadeau n’est plus active.",
+    "shop": "Choisir mes souliers"
+  },
+  "not_found": {
+    "title": "Cette page n’existe plus.",
+    "text": "Le modèle a peut-être quitté la collection. Les souliers de la Maison, eux, vous attendent.",
+    "cta": "Voir les souliers"
+  }
+}

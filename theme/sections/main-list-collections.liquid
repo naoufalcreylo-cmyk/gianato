@@ -1,0 +1,17 @@
+<div class="container page-head"><h1>{{ 'collections.all_title' | t }}</h1></div>
+<div class="container" style="padding-bottom:var(--section)">
+  <div class="product-grid">
+    {%- for c in collections -%}
+      {%- if c.all_products_count > 0 -%}
+        <article class="tile">
+          <div class="media ratio-34 zoom-on-hover">{% render 'image', image: c.featured_image, sizes: '(min-width:1024px) 24vw, 48vw', alt: '', max: 960 %}</div>
+          <div class="tile__cap"><h2 class="h4"><a href="{{ c.url }}">{{ c.title }}</a></h2><span>{{ 'collections.models_count' | t: count: c.all_products_count }}</span></div>
+        </article>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Liste des collections", "settings": [] }
+{% endschema %}

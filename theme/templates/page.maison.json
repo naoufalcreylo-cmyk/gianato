@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "La Maison GIANATO",
+        "title": "Deux maisons familiales,",
+        "title_em": "un même métier."
+      }
+    },
+    "story": {
+      "type": "editorial-split",
+      "settings": {
+        "number": "01",
+        "eyebrow": "Notre histoire",
+        "title": "Une rencontre italo-marocaine",
+        "fallback": "editorial-maison-hand.webp",
+        "image_alt": "Monte Cristo cocoa tenus à la main",
+        "xl": true,
+        "text": "<p>GIANATO est le fruit de la fusion de deux marques familiales : Lozano, chausseur italien, et Richilio, maison marocaine.</p><p>De cette rencontre est née une Maison de souliers pour homme, en perpétuel mouvement : chaque nouveau modèle, chaque détail de fabrication est pensé pour accompagner le pied de l’homme, du bureau aux jours libres.</p><p>Richelieu, derby, mocassin, bottine : plus qu’une chaussure, un compagnon de marche.</p>",
+        "source": "Source : gianato.ma — « La Maison Gianato », « Héritage »."
+      }
+    },
+    "atelier": {
+      "type": "editorial-split",
+      "settings": {
+        "anchor": "atelier",
+        "tone": "stone",
+        "xl": false,
+        "flip": true,
+        "number": "02",
+        "eyebrow": "L’atelier Lozano",
+        "title": "San Clemente, depuis 1895",
+        "fallback": "editorial-life-flatlay.webp",
+        "image_alt": "Souliers GIANATO en cuir noir, cognac et marine posés sur un parquet",
+        "text": "<p>L’histoire de Lozano commence en 1895, dans un atelier de fabrication de chaussures à San Clemente, dans la province de Rimini, l’un des districts d’excellence de la chaussure italienne.</p><p>Son savoir-faire repose notamment sur la technique traditionnelle « un sacchetto », dite méthode bolognaise : une construction qui réunit la tige, la doublure et la semelle.</p><p>L’atelier Lozano : San Clemente, Italie — Casablanca, Maroc.</p>",
+        "source": "Source : gianato.ma — page « L’Atelier Lozano »."
+      }
+    },
+    "direct": {
+      "type": "editorial-split",
+      "settings": {
+        "number": "03",
+        "eyebrow": "De l’atelier à votre porte",
+        "title": "Sans intermédiaire",
+        "fallback": "editorial-craft-hand.webp",
+        "image_alt": "Une bottine chelsea en cuir grainé tenue à la main",
+        "xl": true,
+        "text": "<p>Le modèle GIANATO va directement de l’atelier au client : pas d’intermédiaire entre ceux qui pensent la paire et ceux qui la portent.</p><p>Et parce qu’une paire se vit longtemps, la Maison reste présente après l’achat : échange de pointure, garantie d’un an contre les défauts de fabrication, conseil par téléphone ou WhatsApp.</p>",
+        "cta_label": "Nos services",
+        "cta_url": "/pages/service-client"
+      }
+    },
+    "craft": {
+      "type": "craftsmanship",
+      "settings": {
+        "eyebrow": "Savoir-faire",
+        "title": "Regarder de plus près",
+        "text": "Ce qui fait une paire ne se lit pas sur l’étiquette. Ces détails, nous les nommons.",
+        "link_label": ""
+      },
+      "blocks": {
+        "detail1": {
+          "type": "detail",
+          "settings": {
+            "title": "La matière",
+            "text": "Veau box, box calf pleine fleur, cuir grainé ou daim : chaque fiche indique le cuir employé.",
+            "lining": false,
+            "fallback": "editorial-craft-grain.webp"
+          }
+        },
+        "detail2": {
+          "type": "detail",
+          "settings": {
+            "title": "Le cousu Blake",
+            "text": "Une couture qui relie la tige à la semelle. Quand elle est faite à la main, la fiche du modèle le précise.",
+            "lining": false,
+            "fallback": "editorial-craft-blake.webp"
+          }
+        },
+        "detail3": {
+          "type": "detail",
+          "settings": {
+            "title": "La doublure",
+            "text": "Le cuir vert émeraude du Monte Cristo. Personne ne le voit, sauf celui qui porte la paire.",
+            "lining": true,
+            "fallback": "editorial-craft-lining.webp"
+          }
+        },
+        "detail4": {
+          "type": "detail",
+          "settings": {
+            "title": "La semelle",
+            "text": "Gomme sur la plupart de nos modèles, pour l’adhérence et le confort au quotidien.",
+            "lining": false,
+            "fallback": "editorial-craft-sole.webp"
+          }
+        }
+      },
+      "block_order": [
+        "detail1",
+        "detail2",
+        "detail3",
+        "detail4"
+      ]
+    },
+    "care": {
+      "type": "care-rules",
+      "settings": {}
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "cta_url": "shopify://collections/meilleures-ventes"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "atelier",
+    "direct",
+    "craft",
+    "care",
+    "cta"
+  ]
+}

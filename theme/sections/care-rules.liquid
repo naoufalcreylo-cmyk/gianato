@@ -1,0 +1,40 @@
+{%- comment -%} Entretien — numbered rules (source: /pages/conseils-dexperts). {%- endcomment -%}
+<section class="section section--xl" id="{{ section.settings.anchor | default: 'entretien' }}" aria-labelledby="t-{{ section.id }}">
+  <div class="container">
+    <div class="section-head reveal"><div><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2 id="t-{{ section.id }}">{{ section.settings.title }}</h2>{% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}</div></div>
+    <ol class="rules" role="list">
+      {%- for block in section.blocks -%}<li class="reveal" {{ block.shopify_attributes }}><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></li>{%- endfor -%}
+    </ol>
+    {%- if section.settings.source != blank -%}<p class="source" style="margin-top:2.5rem">{{ section.settings.source }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Conseils d’entretien",
+  "tag": "div",
+  "max_blocks": 9,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre", "default": "entretien" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Entretien" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Faire durer ses souliers" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Le cuir est une matière vivante : il se patine et s’embellit, à condition d’en prendre soin. Les conseils de la Maison." },
+    { "type": "text", "id": "source", "label": "Source", "default": "Source : gianato.ma — « Conseils d’experts »." }
+  ],
+  "blocks": [{ "type": "rule", "name": "Conseil", "settings": [
+    { "type": "text", "id": "title", "label": "Titre" },
+    { "type": "textarea", "id": "text", "label": "Texte" }
+  ] }],
+  "presets": [{
+    "name": "Conseils d’entretien",
+    "blocks": [
+      { "type": "rule", "settings": { "title": "L’embauchoir, toujours", "text": "En bois, à la bonne pointure, glissé dès que vous vous déchaussez : il absorbe l’humidité, limite les plis de marche et garde la forme du soulier." } },
+      { "type": "rule", "settings": { "title": "L’alternance", "text": "Le cuir a besoin de repos : évitez de porter la même paire deux jours de suite. Entre deux ports, elle reste sur son embauchoir." } },
+      { "type": "rule", "settings": { "title": "Un cirage régulier", "text": "Tous les 4 à 5 ports, une fine couche de cirage à la cire d’abeille, appliquée en mouvements circulaires, puis lustrée à la brosse en crin. Une crème nourrissante toutes les deux semaines." } },
+      { "type": "rule", "settings": { "title": "Les semelles", "text": "Une semelle en cuir se nourrit comme la tige. Un patin en caoutchouc la protège, mais jamais sur un soulier neuf : portez-le une dizaine de jours avant." } },
+      { "type": "rule", "settings": { "title": "Le glaçage", "text": "Cirage et eau, par petites touches circulaires, sur le bout et le contrefort. Léger sur le cuir noir, plus prononcé sur les autres teintes." } },
+      { "type": "rule", "settings": { "title": "Le nettoyage", "text": "Un lait nettoyant incolore retire les impuretés, les traces de pluie et l’excès de cirage. Le cuir retrouve son éclat d’origine." } }
+    ]
+  }]
+}
+{% endschema %}

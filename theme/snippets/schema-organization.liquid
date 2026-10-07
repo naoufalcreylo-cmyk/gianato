@@ -1,0 +1,42 @@
+{%- if request.page_type == 'index' -%}
+  {%- liquid
+    if settings.logo != blank
+      assign logo_url = settings.logo | image_url: width: 600 | prepend: 'https:'
+    else
+      assign logo_url = 'logo-espresso.png' | asset_url | prepend: 'https:'
+    endif
+    assign same_as = ''
+    if settings.instagram != blank
+      assign same_as = settings.instagram
+    endif
+    if settings.facebook != blank
+      assign same_as = same_as | append: '|' | append: settings.facebook
+    endif
+    assign same_as = same_as | split: '|' | compact
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ request.origin | append: routes.root_url | json }},
+      "logo": {{ logo_url | json }},
+      "email": {{ settings.email | json }},
+      "telephone": {{ settings.phone | remove: ' ' | json }},
+      "sameAs": {{ same_as | json }}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ request.origin | append: routes.root_url | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+{%- endif -%}

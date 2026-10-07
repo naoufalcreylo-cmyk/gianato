@@ -1,0 +1,26 @@
+{
+  "type": "header",
+  "name": "En-tête",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "m1": { "type": "message", "settings": { "text": "Livraison offerte partout au Maroc", "link": "" } },
+        "m2": { "type": "message", "settings": { "text": "Échange offert sous 30 jours", "link": "" } },
+        "m3": { "type": "message", "settings": { "text": "Paiement à la livraison ou par carte", "link": "" } }
+      },
+      "block_order": ["m1", "m2", "m3"]
+    },
+    "header": {
+      "type": "header",
+      "settings": { "menu": "main-menu", "right_count": 1 },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "menu_item": "Souliers", "fallback": "editorial-life-rocks.webp", "kicker": "À découvrir", "title": "La nouvelle collection", "text": "Loro, en sept cuirs.", "url": "/collections/nouveautes" } },
+        "f2": { "type": "feature", "settings": { "menu_item": "Occasions", "fallback": "editorial-life-car.webp", "kicker": "À découvrir", "title": "Le business contemporain", "text": "Souliers et mallettes pour les jours qui comptent.", "url": "/collections/classic-professionnel" } },
+        "f3": { "type": "feature", "settings": { "menu_item": "La Maison", "fallback": "editorial-craft-hand.webp", "kicker": "La Maison", "title": "Le vert à l’intérieur", "text": "La doublure émeraude du Monte Cristo.", "url": "/products/monte-cristo" } }
+      },
+      "block_order": ["f1", "f2", "f3"]
+    }
+  },
+  "order": ["announcement", "header"]
+}

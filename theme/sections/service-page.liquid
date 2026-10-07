@@ -1,0 +1,49 @@
+{%- comment -%}
+  Service client page: intro, sticky in-page navigation, one block per topic (livraison, échanges, paiement,
+  garantie, pointures, suivi, contact). Copy pre-filled from gianato.ma pages and garantie blog; keep it in sync with policies.
+{%- endcomment -%}
+<div class="container page-head">
+  {% render 'breadcrumbs', current: page.title %}
+  <p class="eyebrow" style="margin-top:3rem">{{ section.settings.eyebrow }}</p>
+  <h1>{{ section.settings.title }}{% if section.settings.title_em != blank %}<br><em>{{ section.settings.title_em }}</em>{% endif %}</h1>
+  {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+</div>
+<div class="container service-layout" style="padding-bottom:var(--section)">
+  <aside><nav class="service-nav" aria-label="{{ 'service.topics' | t }}">
+    {%- for block in section.blocks -%}<a href="#{{ block.settings.anchor }}">{{ block.settings.title }}</a>{%- endfor -%}
+  </nav></aside>
+  <div>
+    {%- for block in section.blocks -%}
+      <section class="service-block" id="{{ block.settings.anchor }}" aria-labelledby="{{ block.settings.anchor }}-t" {{ block.shopify_attributes }}>
+        <h2 id="{{ block.settings.anchor }}-t">{{ block.settings.title }}</h2>
+        <div class="prose">{{ block.settings.text }}{% if block.settings.size_table %}<div style="overflow-x:auto;margin-top:1.5rem">{% render 'size-table' %}</div>{% endif %}</div>
+      </section>
+    {%- endfor -%}
+    {%- if page.content != blank -%}<section class="service-block"><div class="prose rte">{{ page.content }}</div></section>{%- endif -%}
+  </div>
+</div>
+<script>
+  (() => {
+    const links = [...document.querySelectorAll('.service-nav a')];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('is-active', a.hash === '#' + e.target.id)); }), { rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('.service-block[id]').forEach(b => io.observe(b));
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Page service client",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Service client" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "À votre service," },
+    { "type": "text", "id": "title_em", "label": "Titre, ligne en italique", "default": "avant comme après." },
+    { "type": "textarea", "id": "lede", "label": "Chapeau", "default": "Livraison, échanges, paiement et garantie : tout ce qui accompagne une paire GIANATO, de la commande aux années qui suivent." }
+  ],
+  "blocks": [{ "type": "topic", "name": "Rubrique", "settings": [
+    { "type": "text", "id": "anchor", "label": "Ancre (sans espace)", "default": "livraison" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Livraison" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "checkbox", "id": "size_table", "label": "Afficher le tableau des pointures", "default": false }
+  ] }]
+}
+{% endschema %}

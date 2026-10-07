@@ -1,0 +1,32 @@
+/* GIANATO — outline icon sprite (24px grid, 1.1 stroke). Mirrored in theme/snippets/icon-sprite.liquid */
+(() => {
+  const P = {
+    search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4l5.1 5.1"/>',
+    user: '<circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20.5c1.2-3.7 4-5.6 7.5-5.6s6.3 1.9 7.5 5.6"/>',
+    bag: '<path d="M5.2 8.5h13.6l-.9 12H6.1z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/>',
+    menu: '<path d="M3.5 8.5h17M3.5 15.5h17"/>',
+    close: '<path d="M6 6l12 12M18 6L6 18"/>',
+    arrow: '<path d="M4 12h15.5M14 6.5l5.5 5.5-5.5 5.5"/>',
+    'arrow-left': '<path d="M20 12H4.5M10 6.5L4.5 12l5.5 5.5"/>',
+    plus: '<path d="M12 4.5v15M4.5 12h15"/>',
+    minus: '<path d="M4.5 12h15"/>',
+    chevron: '<path d="M6 9.5l6 6 6-6"/>',
+    truck: '<path d="M2.5 6.5h11v10h-11zM13.5 9.5h4.2l2.8 3.2v3.8h-7"/><circle cx="6.5" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/>',
+    exchange: '<path d="M4 9h15l-3.5-3.5M20 15H5l3.5 3.5"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="10"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/>',
+    seal: '<circle cx="12" cy="9.5" r="5.5"/><path d="M9.2 14.3L8 21l4-2.2 4 2.2-1.2-6.7"/>',
+    phone: '<path d="M6.6 3.8h3l1.5 4-2 1.3a10.5 10.5 0 0 0 5.8 5.8l1.3-2 4 1.5v3a1.8 1.8 0 0 1-2 1.8A16.3 16.3 0 0 1 4.8 5.8a1.8 1.8 0 0 1 1.8-2z"/>',
+    whatsapp: '<path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3.8 20.2l1.4-4.1a8.2 8.2 0 1 1 15-4.4z"/><path d="M9 8.6c.2-.5.6-.6 1-.6l.8 1.8-.6.9c.5 1.1 1.4 2 2.5 2.5l.9-.6 1.8.8c0 .4-.1.8-.6 1-1.9.9-6.6-2.9-5.8-5.8z"/>',
+    instagram: '<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.9" cy="7.1" r=".5"/>',
+    facebook: '<path d="M13.6 20.5v-7.3h2.5l.4-2.9h-2.9V8.5c0-.8.3-1.4 1.4-1.4h1.6V4.6a21 21 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2H8v2.9h2.5v7.3"/>',
+    filter: '<path d="M3.5 7.5h10M18.5 7.5h2M3.5 16.5h2M10.5 16.5h10"/><circle cx="16" cy="7.5" r="2.2"/><circle cx="8" cy="16.5" r="2.2"/>',
+    ruler: '<rect x="2.5" y="8" width="19" height="8"/><path d="M6.5 8v3M10.5 8v4.5M14.5 8v3M18.5 8v4.5"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    mail: '<rect x="3.5" y="5.5" width="17" height="13"/><path d="M3.5 7l8.5 6.2L20.5 7"/>',
+    pin: '<path d="M12 21s6.5-6.1 6.5-11a6.5 6.5 0 0 0-13 0c0 4.9 6.5 11 6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+    zoom: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4l5.1 5.1M10.5 7.5v6M7.5 10.5h6"/>',
+  };
+  const sprite = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">${Object.entries(P).map(([k, v]) => `<symbol id="i-${k}" viewBox="0 0 24 24">${v}</symbol>`).join('')}</svg>`;
+  document.body.insertAdjacentHTML('afterbegin', sprite);
+  window.G.icon = (name, cls = '') => `<svg class="icon${cls ? ' ' + cls : ''}" aria-hidden="true" focusable="false"><use href="#i-${name}"/></svg>`;
+})();

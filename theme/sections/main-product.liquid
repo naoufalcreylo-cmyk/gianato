@@ -1,0 +1,209 @@
+{%- comment -%}
+  Product page (PDP): editorial gallery (≈60 %) + sticky purchase column (≈40 %).
+  Colours = sibling products (metafield gianato.siblings). Sizes = variant option (« Pointure »).
+  Facts (gianato.material / construction / lining / sole) come from the product's own description (see migration/).
+  App blocks (Judge.me stars, COD form…) can be placed in the purchase column.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign mf = product.metafields.gianato
+  assign model = mf.model.value | default: product.title
+  assign colorway = mf.colorway.value
+  assign style = mf.style.value | default: product.type
+  assign current = product.selected_or_first_available_variant
+  if product.selected_variant == nil and product.has_only_default_variant == false
+    assign current = nil
+  endif
+  assign available_count = 0
+  for v in product.variants
+    if v.available
+      assign available_count = available_count | plus: 1
+    endif
+  endfor
+  assign siblings = mf.siblings.value
+  assign parent = collection
+  if parent == nil
+    assign parent = product.collections.first
+  endif
+  assign wa_size = 'product.size_tbd' | t
+-%}
+{%- capture wa_text -%}{{ 'product.whatsapp_intro' | t }}
+• {{ product.title }}
+{{ product.options.first | remove: ':' }} : {{ wa_size }}
+{{ product.price | money_without_trailing_zeros | strip_html }}
+{{ request.origin }}{{ product.url }}{%- endcapture -%}
+<div class="container pdp-top">
+  {%- capture crumb_current -%}{{ model }}{% if colorway != blank %} {{ colorway }}{% endif %}{%- endcapture -%}
+  {% render 'breadcrumbs', parent_title: parent.title, parent_url: parent.url, current: crumb_current %}
+</div>
+
+<div class="container pdp" data-product data-url="{{ product.url }}">
+  <div class="pdp__gallery">
+    <div class="gallery" data-gallery aria-label="{{ 'product.gallery' | t: count: product.media.size }}">
+      {%- for media in product.media -%}
+        {%- assign photo = false -%}
+        {%- if media.preview_image.src contains '/DSC' or media.preview_image.src contains '/CLD' or media.alt contains 'photo' -%}{%- assign photo = true -%}{%- endif -%}
+        <figure class="gallery__item{% if photo %} is-photo{% endif %}" data-index="{{ forloop.index0 }}" data-full="{{ media.preview_image | image_url: width: 2000 }}"{% if media.media_type == 'image' %} role="button" tabindex="0" aria-label="{{ 'product.zoom' | t: index: forloop.index }}"{% endif %}>
+          {%- case media.media_type -%}
+            {%- when 'video', 'external_video' -%}
+              {{ media | media_tag: image_size: '1600x', autoplay: false, loop: true, controls: true, preview_image: media.preview_image }}
+            {%- else -%}
+              {%- capture alt -%}{{ model }} {{ colorway }}{% if forloop.index > 1 %} — {{ 'product.view' | t: index: forloop.index }}{% endif %}{%- endcapture -%}
+              {% render 'image', image: media.preview_image, sizes: '(min-width:1024px) 56vw, 100vw', alt: alt, eager: forloop.first, max: 2000 %}
+          {%- endcase -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+    <span class="gallery__count" aria-hidden="true" data-gallery-count>1 / {{ product.media.size }}</span>
+    <div class="gallery__dots" aria-hidden="true">{%- for media in product.media -%}<span{% if forloop.first %} class="is-active"{% endif %}></span>{%- endfor -%}</div>
+  </div>
+
+  <div class="pdp__buy">
+    <p class="pdp__kicker label"><span>{{ style }}</span>{% if mf.construction != blank %}<span>{{ mf.construction.value }}</span>{% endif %}</p>
+    <h1 class="pdp__title">{{ model }}</h1>
+    {%- if colorway != blank -%}<p class="pdp__cw">{{ colorway }}</p>{%- endif -%}
+    <div class="pdp__price" data-price>{% render 'price', product: product, variant: current, show_rate: settings.show_discount_rate %}</div>
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}<div class="pdp__app">{% render block %}</div>{%- endif -%}
+    {%- endfor -%}
+
+    {%- if s.show_lede and product.description != blank -%}
+      <p class="pdp__lede">{{ mf.lede.value | default: product.description | strip_html | truncatewords: 42 }}</p>
+    {%- endif -%}
+
+    {%- if siblings.size > 1 -%}
+      <div class="pdp__block">
+        <div class="pdp__block-head"><p class="label">{{ 'product.color' | t }}<strong>{{ colorway }}</strong></p><span class="label muted">{{ 'product.colors_count' | t: count: siblings.size }}</span></div>
+        <div class="pdp-swatches">
+          {%- for sib in siblings -%}
+            {%- assign sib_cw = sib.metafields.gianato.colorway.value | default: sib.title -%}
+            <a class="pdp-swatch" href="{{ sib.url }}"{% if sib.id == product.id %} aria-current="true"{% endif %} title="{{ sib_cw | escape }}" aria-label="{{ model | escape }} {{ sib_cw | escape }}{% unless sib.available %} ({{ 'product.sold_out' | t | downcase }}){% endunless %}">
+              {% render 'image', image: sib.featured_media.preview_image, sizes: '56px', alt: '', max: 360 %}
+              <span class="swatch" style="--sw: {{ sib.metafields.gianato.swatch.value | default: '#1c1b1a' }}"></span>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- form 'product', product, class: 'pdp__form', data-product-form: '', novalidate: 'novalidate' -%}
+      <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+      {%- unless product.has_only_default_variant -%}
+        <div data-variant-picker>
+          <script type="application/json" data-variants>{{ product.variants | json }}</script>
+          {%- for option in product.options_with_values -%}
+            <fieldset class="pdp__block" style="border:0;margin-top:2rem;padding:0">
+              <div class="pdp__block-head">
+                <legend class="label" style="float:left;padding:0">{{ option.name | remove: ':' | remove: 'Choisir la ' | capitalize }}<strong data-option-value>{{ option.selected_value }}</strong></legend>
+                {%- if forloop.first -%}<button class="link link--quiet" type="button" data-open-sizes style="font-size:var(--fs-xs)">{% render 'icon', name: 'ruler' %} {{ 'sizes.title' | t }}</button>{%- endif -%}
+              </div>
+              <div class="sizes">
+                {%- for value in option.values -%}
+                  {%- liquid
+                    assign value_available = false
+                    for v in product.variants
+                      case option.position
+                        when 1
+                          if v.option1 == value and v.available
+                            assign value_available = true
+                          endif
+                        when 2
+                          if v.option2 == value and v.available
+                            assign value_available = true
+                          endif
+                        else
+                          if v.option3 == value and v.available
+                            assign value_available = true
+                          endif
+                      endcase
+                    endfor
+                  -%}
+                  <label><input type="radio" name="option{{ option.position }}" value="{{ value | escape }}"{% if current and option.selected_value == value %} checked{% endif %}{% unless value_available %} disabled{% endunless %} aria-label="{{ option.name | escape }} {{ value | escape }}{% unless value_available %}, {{ 'product.sold_out' | t | downcase }}{% endunless %}"><span>{{ value }}</span></label>
+                {%- endfor -%}
+              </div>
+              {%- if forloop.first -%}<p class="size-hint" data-size-hint>{{ 'product.size_hint' | t }}</p>{%- endif -%}
+            </fieldset>
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+
+      {%- if product.available == false -%}
+        <p class="stock stock--out" style="margin-top:1.5rem">{{ 'product.sold_out' | t }}</p>
+      {%- elsif available_count <= settings.low_stock_threshold and product.variants.size > 2 -%}
+        <p class="stock stock--low" style="margin-top:1.5rem">{{ 'product.last_sizes_long' | t }}</p>
+      {%- else -%}
+        <p class="stock" style="margin-top:1.5rem">{{ 'product.available' | t }}</p>
+      {%- endif -%}
+
+      <div class="pdp__actions">
+        <button class="btn btn--lg btn--block" type="submit" name="add" data-add-main{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available -%}{{ 'product.add_to_cart' | t }}{%- else -%}{{ 'product.sold_out' | t }}{%- endif -%}
+        </button>
+        <p class="size-hint is-error" data-form-error hidden></p>
+        {%- if s.show_dynamic_checkout -%}{{ form | payment_button }}{%- endif -%}
+        {%- if settings.show_whatsapp_order and settings.whatsapp_number != blank -%}
+          <a class="btn btn--ghost btn--block" href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}?text={{ wa_text | url_encode }}" target="_blank" rel="noopener" data-wa-product>{% render 'icon', name: 'whatsapp' %} {{ 'product.order_whatsapp' | t }}</a>
+        {%- endif -%}
+      </div>
+    {%- endform -%}
+
+    {%- assign lining = mf.lining.value | downcase -%}
+    {%- if lining contains 'émeraude' -%}<p class="pdp__lining">{{ 'product.lining_note' | t }}</p>{%- endif -%}
+
+    <ul class="pdp__assure" role="list">
+      {%- if settings.promise_delivery != blank -%}<li>{% render 'icon', name: 'truck' %}<div><strong>{{ 'product.assure_delivery' | t }}</strong><span>{{ settings.promise_delivery }}</span></div></li>{%- endif -%}
+      {%- if settings.promise_exchange != blank -%}<li>{% render 'icon', name: 'exchange' %}<div><strong>{{ 'product.assure_exchange' | t }}</strong><span>{{ settings.promise_exchange }}</span></div></li>{%- endif -%}
+      {%- if settings.promise_payment != blank -%}<li>{% render 'icon', name: 'lock' %}<div><strong>{{ 'product.assure_payment' | t }}</strong><span>{{ settings.promise_payment }}</span></div></li>{%- endif -%}
+      {%- if settings.phone != blank -%}<li>{% render 'icon', name: 'phone' %}<div><strong>{{ 'product.assure_advice' | t }}</strong><span><a class="text-link" href="tel:{{ settings.phone | remove: ' ' }}">{{ settings.phone }}</a> · {{ settings.hours | downcase }}</span></div></li>{%- endif -%}
+    </ul>
+
+    <div class="accordion">
+      <details open><summary>{{ 'product.details' | t }}{% render 'icon', name: 'plus' %}</summary><div class="accordion__content rte">{{ product.description }}</div></details>
+      {%- capture specs -%}
+        {%- if mf.material != blank -%}<dt>{{ 'product.spec_material' | t }}</dt><dd>{{ mf.material.value }}</dd>{%- endif -%}
+        {%- if mf.construction != blank -%}<dt>{{ 'product.spec_construction' | t }}</dt><dd>{{ mf.construction.value }}</dd>{%- endif -%}
+        {%- if mf.lining != blank -%}<dt>{{ 'product.spec_lining' | t }}</dt><dd>{{ mf.lining.value }}</dd>{%- endif -%}
+        {%- if mf.sole != blank -%}<dt>{{ 'product.spec_sole' | t }}</dt><dd>{{ mf.sole.value }}</dd>{%- endif -%}
+        {%- if mf.dimensions != blank -%}<dt>{{ 'product.spec_dimensions' | t }}</dt><dd>{{ mf.dimensions.value }}</dd>{%- endif -%}
+        {%- if style != blank -%}<dt>{{ 'product.spec_style' | t }}</dt><dd>{{ style }}</dd>{%- endif -%}
+        {%- if colorway != blank -%}<dt>{{ 'product.color' | t }}</dt><dd>{{ colorway }}{% if mf.color_family != blank %} ({{ mf.color_family.value | downcase }}){% endif %}</dd>{%- endif -%}
+      {%- endcapture -%}
+      {%- if specs != blank -%}<details><summary>{{ 'product.materials' | t }}{% render 'icon', name: 'plus' %}</summary><div class="accordion__content"><dl class="specs">{{ specs }}</dl></div></details>{%- endif -%}
+      <details><summary>{{ 'product.shipping_returns' | t }}{% render 'icon', name: 'plus' %}</summary><div class="accordion__content">{{ s.shipping_text }}{% if settings.service_page != blank %}<p><a class="text-link" href="{{ settings.service_page.url }}">{{ 'product.see_conditions' | t }}</a></p>{% endif %}</div></details>
+      <details><summary>{{ 'product.care' | t }}{% render 'icon', name: 'plus' %}</summary><div class="accordion__content">{{ s.care_text }}</div></details>
+      {%- unless product.has_only_default_variant -%}
+        <details><summary>{{ 'sizes.title' | t }}{% render 'icon', name: 'plus' %}</summary><div class="accordion__content"><div style="overflow-x:auto">{% render 'size-table' %}</div><p>{{ 'sizes.advice_1' | t }}</p></div></details>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+<div class="buybar" data-buybar aria-hidden="true">
+  <div class="buybar__info"><p>{{ model }}{% if colorway != blank %} — {{ colorway }}{% endif %}</p><span class="price" data-buybar-price>{{ product.price | money_without_trailing_zeros }}</span></div>
+  <button class="btn" type="button" data-buybar-add tabindex="-1"{% unless product.available %} disabled{% endunless %}>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</button>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="{{ 'product.zoom_label' | t }}" aria-hidden="true">
+  <div class="lightbox__top"><span data-lb-count></span><button class="icon-btn" type="button" data-lb-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close' %}</button></div>
+  <div class="lightbox__stage" data-lb-stage><img data-lb-img alt="" width="2000" height="2000"></div>
+  <div class="lightbox__nav"><button type="button" data-lb="-1" aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'arrow-left' %}</button><button type="button" data-lb="1" aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'arrow' %}</button></div>
+</div>
+
+<script type="application/json" data-product-ga>{"item_id":"{{ product.selected_or_first_available_variant.id }}","item_name":{{ product.title | json }},"item_brand":"GIANATO","item_category":{{ style | json }},"item_variant":{{ colorway | default: '' | json }},"price":{{ product.price | divided_by: 100.0 }}}</script>
+<script type="application/json" data-recent-handle>{{ product.handle | json }}</script>
+{% render 'schema-product', product: product, collection: parent %}
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "settings": [
+    { "type": "checkbox", "id": "show_lede", "label": "Chapeau (extrait de la description)", "default": true },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Bouton de paiement accéléré", "default": false },
+    { "type": "richtext", "id": "shipping_text", "label": "Livraison & retours", "default": "<p>Livraison standard offerte partout au Maroc, en 2 à 5 jours ouvrés. Livraison express en 24 à 72 h.</p><p>Échange offert sous 30 jours : l’article doit être retourné non porté, avec ses étiquettes et sa boîte d’origine.</p>" },
+    { "type": "richtext", "id": "care_text", "label": "Entretien", "default": "<p>Glissez un embauchoir en bois dès que vous quittez vos souliers : il absorbe l’humidité et garde la forme.</p><p>Alternez vos paires : un soulier en cuir a besoin d’une journée de repos pour sécher.</p>" }
+  ],
+  "blocks": [{ "type": "@app" }]
+}
+{% endschema %}

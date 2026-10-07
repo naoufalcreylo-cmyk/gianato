@@ -1,0 +1,136 @@
+{
+  "sections": {
+    "services": {
+      "type": "service-promise",
+      "settings": {
+        "tight": false
+      },
+      "blocks": {
+        "service1": {
+          "type": "service",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison offerte",
+            "text": "Partout au Maroc, en 2 à 5 jours ouvrés. Express en 24 à 72 h.",
+            "url": "/pages/service-client#livraison"
+          }
+        },
+        "service2": {
+          "type": "service",
+          "settings": {
+            "icon": "exchange",
+            "title": "Échange sous 30 jours",
+            "text": "Pointure à revoir ? Nous organisons la collecte, à domicile ou au bureau.",
+            "url": "/pages/service-client#echanges"
+          }
+        },
+        "service3": {
+          "type": "service",
+          "settings": {
+            "icon": "lock",
+            "title": "Paiement sécurisé",
+            "text": "En espèces à la livraison, ou par carte via CMI, avec 3D Secure.",
+            "url": "/pages/service-client#paiement"
+          }
+        },
+        "service4": {
+          "type": "service",
+          "settings": {
+            "icon": "seal",
+            "title": "Garantie 1 an",
+            "text": "Chaque paire GIANATO est garantie contre les défauts de fabrication.",
+            "url": "/pages/service-client#garantie"
+          }
+        }
+      },
+      "block_order": [
+        "service1",
+        "service2",
+        "service3",
+        "service4"
+      ]
+    },
+    "main": {
+      "type": "service-page",
+      "settings": {},
+      "blocks": {
+        "topic1": {
+          "type": "topic",
+          "settings": {
+            "anchor": "livraison",
+            "title": "Livraison",
+            "text": "<p>Livraison standard <strong>offerte partout au Maroc</strong>, en 2 à 5 jours ouvrés (hors dimanches et jours fériés). Livraison express partout au Maroc en 24 à 72 h.</p><p>Dès l’expédition, vous recevez un e-mail ou un SMS avec, le cas échéant, le numéro de suivi de votre colis.</p><p>En période de soldes, de ventes privées ou de jours fériés, les délais de traitement peuvent être plus longs.</p>",
+            "size_table": false
+          }
+        },
+        "topic2": {
+          "type": "topic",
+          "settings": {
+            "anchor": "echanges",
+            "title": "Échanges & retours",
+            "text": "<p><strong>Échange offert sous 30 jours.</strong> Si la pointure ne convient pas, prévenez-nous : nous organisons la collecte gratuite depuis votre domicile ou votre bureau.</p><ul><li>L’article doit être retourné non porté, avec l’ensemble de ses étiquettes et sa boîte d’origine, protégée par un emballage carton.</li><li>Essayez vos souliers sur une surface propre (tapis, moquette) pour préserver leur état d’origine.</li><li>Pour un remboursement, celui-ci est effectué sur la base du prix facturé ; les frais de retour sont à la charge du client. Si l’intégralité de la commande est retournée, les frais de livraison initiaux sont remboursés.</li></ul><p>Pour demander un échange ou un retour : +212 6 75 57 64 35 (téléphone ou WhatsApp).</p>",
+            "size_table": false
+          }
+        },
+        "topic3": {
+          "type": "topic",
+          "settings": {
+            "anchor": "paiement",
+            "title": "Paiement",
+            "text": "<p><strong>En espèces à la livraison</strong> : choisissez « Paiement à la livraison » lors de la commande, et réglez en dirhams à la réception.</p><p><strong>Par carte bancaire</strong> (Visa, Mastercard, CMI) : le paiement s’effectue sur la plateforme sécurisée du Centre Monétique Interbancaire. GIANATO n’a jamais accès à vos coordonnées bancaires, chiffrées (SSL) et protégées par 3D Secure.</p>",
+            "size_table": false
+          }
+        },
+        "topic4": {
+          "type": "topic",
+          "settings": {
+            "anchor": "garantie",
+            "title": "Garantie",
+            "text": "<p>Chaque paire GIANATO est <strong>garantie un an</strong> contre les vices de fabrication, à compter de la date d’achat, dans le cadre d’une utilisation normale.</p><p>Une paire présentant un défaut de fabrication constaté par notre service après-vente est réparée gratuitement ou, à défaut, remplacée. La facture d’achat est nécessaire. Sont exclus : l’usure, le vieillissement et les dommages liés à une utilisation inadaptée.</p>",
+            "size_table": false
+          }
+        },
+        "topic5": {
+          "type": "topic",
+          "settings": {
+            "anchor": "pointures",
+            "title": "Guide des pointures",
+            "text": "<p>Sur gianato.ma, les pointures sont toujours indiquées en pointure française.</p><ul><li>Première paire chez nous ? Optez pour votre pointure habituelle. Sur gianato.ma, les pointures sont toujours indiquées en pointure française.</li><li>La pointure d’une chaussure de ville diffère de celle d’une chaussure de sport.</li><li>Soulier un peu large ? Une semelle intérieure comble l’écart et ajoute du confort.</li><li>Si la pointure ne convient pas, nous organisons une collecte gratuite depuis votre domicile ou votre bureau.</li></ul>",
+            "size_table": true
+          }
+        },
+        "topic6": {
+          "type": "topic",
+          "settings": {
+            "anchor": "suivi",
+            "title": "Suivre ma commande",
+            "text": "<p>Suivez votre colis grâce au numéro reçu par e-mail ou SMS, ou contactez le service suivi au +212 6 75 57 64 35, par téléphone ou WhatsApp.</p>",
+            "size_table": false
+          }
+        },
+        "topic7": {
+          "type": "topic",
+          "settings": {
+            "anchor": "contact",
+            "title": "Nous contacter",
+            "text": "<p>Une question sur un modèle, une pointure, une commande ? Nous répondons généralement sous 48 heures.</p><ul><li>Service client : +212 6 75 07 53 70</li><li>Service après-vente et WhatsApp : +212 6 75 57 64 35</li><li>E-mail : contact@gianato.ma</li><li>Du lundi au samedi, 9 h – 12 h et 14 h – 18 h</li></ul>",
+            "size_table": false
+          }
+        }
+      },
+      "block_order": [
+        "topic1",
+        "topic2",
+        "topic3",
+        "topic4",
+        "topic5",
+        "topic6",
+        "topic7"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "services"
+  ]
+}

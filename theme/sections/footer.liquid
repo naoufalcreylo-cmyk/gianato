@@ -1,0 +1,82 @@
+{%- comment -%} Footer: newsletter (Shopify customer form → Omnisend/Shopify Email), brand, menus, social, legal, payments {%- endcomment -%}
+<footer class="footer on-dark">
+  <div class="container">
+    {%- if section.settings.show_newsletter -%}
+      <div class="footer__news">
+        <div><h2>{{ section.settings.news_title }}</h2><p>{{ section.settings.news_text }}</p></div>
+        {%- form 'customer', class: 'footer__form', id: 'footer-newsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="field">
+            <input id="nl-email" type="email" name="contact[email]" placeholder=" " autocomplete="email" required>
+            <label for="nl-email">{{ 'footer.email' | t }}</label>
+          </div>
+          <button class="btn btn--light" type="submit">{{ 'footer.subscribe' | t }}</button>
+  <p class="footer__form-note" aria-live="polite">
+          {%- if form.posted_successfully? -%}{{ 'footer.subscribed' | t }}{%- elsif form.errors -%}{{ form.errors | default_errors }}{%- else -%}{{ 'footer.privacy' | t }}{%- endif -%}
+        </p>
+        {%- endform -%}
+
+      </div>
+    {%- endif -%}
+    <div class="footer__main">
+      <div class="footer__brand">
+        <img src="{{ 'logo-ivory.png' | asset_url }}" alt="{{ shop.name }}" width="1400" height="335" loading="lazy">
+        <p>{{ section.settings.tagline }}</p>
+        <div class="footer__contact">
+          {%- if settings.phone != blank -%}<a href="tel:{{ settings.phone | remove: ' ' }}">{{ settings.phone }}</a>{%- endif -%}
+          {%- if settings.email != blank -%}<a href="mailto:{{ settings.email }}">{{ settings.email }}</a>{%- endif -%}
+          {%- if settings.hours != blank -%}<span>{{ settings.hours }}</span>{%- endif -%}
+        </div>
+      </div>
+      {%- for block in section.blocks -%}
+        {%- assign menu = linklists[block.settings.menu] -%}
+        <nav class="footer__col" aria-label="{{ block.settings.title | default: menu.title | escape }}" {{ block.shopify_attributes }}>
+          <h2>{{ block.settings.title | default: menu.title }}</h2>
+          <ul role="list">{%- for link in menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}</ul>
+        </nav>
+      {%- endfor -%}
+      <div class="footer__social">
+        <h2 class="label" style="color:var(--ivory);margin-bottom:1rem">{{ 'footer.follow' | t }}</h2>
+        <ul role="list">
+          {%- if settings.instagram != blank -%}<li><a class="icon-btn" href="{{ settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a></li>{%- endif -%}
+          {%- if settings.facebook != blank -%}<li><a class="icon-btn" href="{{ settings.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a></li>{%- endif -%}
+          {%- if settings.whatsapp_number != blank -%}<li><a class="icon-btn" href="{% render 'whatsapp-url' %}" target="_blank" rel="noopener" aria-label="WhatsApp">{% render 'icon', name: 'whatsapp' %}</a></li>{%- endif -%}
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }} — {{ section.settings.copyright }}</span>
+      <ul role="list">{%- for link in linklists[section.settings.legal_menu].links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}</ul>
+      <div class="footer__pay" aria-label="{{ 'footer.payments' | t }}">
+        {%- assign methods = section.settings.payments | split: ',' -%}
+        {%- for m in methods -%}<span>{{ m | strip }}</span>{%- endfor -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "checkbox", "id": "show_newsletter", "label": "Lettre de la Maison", "default": true },
+    { "type": "text", "id": "news_title", "label": "Titre", "default": "Rejoignez les amis de la Maison" },
+    { "type": "textarea", "id": "news_text", "label": "Texte", "default": "Nouveautés, accès anticipé aux fins de saison et conseils d’entretien. Une lettre, rarement." },
+    { "type": "text", "id": "tagline", "label": "Signature", "default": "Maison de souliers. L’assurance, cousue main." },
+    { "type": "text", "id": "copyright", "label": "Mention", "default": "Maison de souliers, Maroc" },
+    { "type": "link_list", "id": "legal_menu", "label": "Menu légal" },
+    { "type": "text", "id": "payments", "label": "Moyens de paiement (séparés par des virgules)", "default": "CMI, Visa, Mastercard, Espèces à la livraison" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Colonne de liens",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ]
+}
+{% endschema %}

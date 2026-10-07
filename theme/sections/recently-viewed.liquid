@@ -1,0 +1,36 @@
+{%- comment -%}
+  « Récemment consultés » — handles stored by assets/product.js; each card is fetched from
+  /products/<handle>?view=card (templates/product.card.liquid). Hidden until at least one card loads.
+{%- endcomment -%}
+<section class="section section--tight-top" data-recently-viewed hidden aria-labelledby="t-{{ section.id }}">
+  <div class="container" data-rail>
+    <div class="section-head rail-head"><div><h2 id="t-{{ section.id }}" class="h3">{{ section.settings.title }}</h2></div></div>
+    <div class="rail" data-list="{{ section.settings.title | escape }}"></div>
+  </div>
+</section>
+<script>
+  (() => {
+    const el = document.querySelector('[data-recently-viewed]');
+    let handles = []; try { handles = JSON.parse(localStorage.getItem('gianato.recent.v1') || '[]'); } catch (e) {}
+    const current = {{ product.handle | json }};
+    handles = handles.filter(h => h !== current).slice(0, {{ section.settings.limit }});
+    if (!handles.length) return;
+    Promise.all(handles.map(h => fetch(`{{ routes.root_url | remove_last: '/' }}/products/${encodeURIComponent(h)}?view=card`).then(r => (r.ok ? r.text() : '')).catch(() => '')))
+      .then(cards => {
+        const html = cards.filter(c => c.includes('class="card"')).join('');
+        if (!html) return;
+        el.querySelector('.rail').innerHTML = html; el.hidden = false; window.GianatoUI?.enhance(el);
+      });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Récemment consultés",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Récemment consultés" },
+    { "type": "range", "id": "limit", "label": "Nombre de produits", "min": 2, "max": 10, "step": 1, "default": 8 }
+  ]
+}
+{% endschema %}

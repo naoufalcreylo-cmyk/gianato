@@ -1,0 +1,58 @@
+{%- comment -%} Iconic categories — staggered editorial mosaic (5 tiles, different proportions). {%- endcomment -%}
+<section class="section section--tight-top" aria-labelledby="t-{{ section.id }}">
+  <div class="container mosaic">
+    <div class="mosaic__intro reveal">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 id="t-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    {%- for block in section.blocks limit: 5 -%}
+      {%- assign c = block.settings.collection -%}
+      <article class="tile tile--{{ forloop.index }} reveal" style="--d:{{ forloop.index0 | modulo: 3 | times: 90 }}ms" {{ block.shopify_attributes }}>
+        <div class="media zoom-on-hover">
+          {%- if forloop.first -%}{%- assign sz = '(min-width:1024px) 55vw, 100vw' -%}{%- else -%}{%- assign sz = '(min-width:1024px) 30vw, 50vw' -%}{%- endif -%}
+          {% render 'image', image: block.settings.image, fallback: block.settings.fallback, sizes: sz, alt: '' %}
+        </div>
+        <div class="tile__cap">
+          <h3><a href="{{ c.url | default: '#' }}">{{ block.settings.title | default: c.title }}</a></h3>
+          {%- if c != blank -%}<span>{{ 'collections.models_count' | t: count: c.all_products_count }}</span>{%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Catégories iconiques",
+  "tag": "div",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Les essentiels" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Un soulier pour chaque allure" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Mocassins souples, souliers à lacets, bottines et baskets en cuir : cinq façons d’être bien chaussé." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Catégorie",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Titre (facultatif)" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Image par défaut (fichier du thème)", "default": "editorial-life-rocks.webp" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Catégories iconiques",
+    "blocks": [
+      { "type": "tile", "settings": { "title": "Mocassins", "fallback": "editorial-loafers-blue.webp" } },
+      { "type": "tile", "settings": { "title": "Richelieu & Derby", "fallback": "editorial-life-terrace.webp" } },
+      { "type": "tile", "settings": { "title": "Bottes & bottines", "fallback": "editorial-life-boot.webp" } },
+      { "type": "tile", "settings": { "title": "Baskets cuir", "fallback": "editorial-life-sneakers.webp" } },
+      { "type": "tile", "settings": { "title": "Chaussures à boucles", "fallback": "editorial-life-car.webp" } }
+    ]
+  }]
+}
+{% endschema %}

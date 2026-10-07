@@ -1,0 +1,62 @@
+{%- comment -%} Luxury Hero — editorial diptych (desktop), single portrait image (mobile). {%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="hero on-media" aria-label="{{ shop.name }}">
+  <div class="hero__media">
+    <div class="media">
+      <picture>
+        {%- if s.image_mobile != blank -%}<source media="(max-width: 767px)" srcset="{{ s.image_mobile | image_url: width: 828 }} 828w, {{ s.image_mobile | image_url: width: 1200 }} 1200w" sizes="100vw">
+        {%- elsif s.image_left == blank -%}<source media="(max-width: 767px)" srcset="{{ 'editorial-hero-mosaic-m.webp' | asset_url }}">{%- endif -%}
+        {% render 'image', image: s.image_left, fallback: 'editorial-hero-mosaic.webp', sizes: '(max-width: 767px) 100vw, 50vw', alt: s.alt_left, eager: true %}
+      </picture>
+    </div>
+    <div class="media hero__desk">{% render 'image', image: s.image_right, fallback: 'editorial-hero-loafer.webp', sizes: '50vw', alt: s.alt_right %}</div>
+  </div>
+  <div class="hero__content">
+    <div class="container hero__inner">
+      <div class="hero__text">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+        <h1 class="display">{{ s.title }}{% if s.title_em != blank %}<br><em>{{ s.title_em }}</em>{% endif %}</h1>
+      </div>
+      <div class="hero__side">
+        {%- if s.text != blank -%}<p>{{ s.text }}</p>{%- endif -%}
+        <div class="hero__actions">
+          {%- if s.cta_label != blank -%}<a class="btn btn--light" href="{{ s.cta_url | default: routes.all_products_collection_url }}">{{ s.cta_label }}</a>{%- endif -%}
+          {%- if s.cta2_label != blank -%}<a class="link" href="{{ s.cta2_url }}">{{ s.cta2_label }}</a>{%- endif -%}
+        </div>
+        {%- if s.caption_product != blank -%}
+          <p class="hero__caption">{{ 'home.on_the_photo' | t }} <a href="{{ s.caption_product.url }}">{{ s.caption_product.title | capitalize }}</a>{% if s.caption_text != blank %}, {{ s.caption_text }}{% endif %}.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <span class="hero__scroll" aria-hidden="true"></span>
+</section>
+
+{% schema %}
+{
+  "name": "Ouverture éditoriale",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image_left", "label": "Image gauche (portrait 4:5, 1600 px)" },
+    { "type": "text", "id": "alt_left", "label": "Description de l’image gauche", "default": "Bottines en cuir noir portées sur un sol en mosaïque" },
+    { "type": "image_picker", "id": "image_right", "label": "Image droite (portrait 4:5, 1600 px)" },
+    { "type": "text", "id": "alt_right", "label": "Description de l’image droite", "default": "Mocassins Monte Cristo cognac, doublure en cuir vert émeraude" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image mobile (portrait 9:16)" },
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Maison de souliers" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "L’assurance," },
+    { "type": "text", "id": "title_em", "label": "Titre, ligne en italique", "default": "cousue main." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Richelieu, derby, mocassins et bottines en cuir, pensés pour accompagner chaque journée." },
+    { "type": "text", "id": "cta_label", "label": "Bouton principal", "default": "Découvrir la collection" },
+    { "type": "url", "id": "cta_url", "label": "Lien du bouton principal" },
+    { "type": "text", "id": "cta2_label", "label": "Lien secondaire", "default": "La Maison" },
+    { "type": "url", "id": "cta2_url", "label": "Lien secondaire (URL)" },
+    { "type": "product", "id": "caption_product", "label": "Produit sur la photo" },
+    { "type": "text", "id": "caption_text", "label": "Légende", "default": "doublure cuir vert émeraude" }
+  ],
+  "presets": [{ "name": "Ouverture éditoriale" }]
+}
+{% endschema %}

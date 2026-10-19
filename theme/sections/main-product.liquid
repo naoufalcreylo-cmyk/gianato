@@ -38,13 +38,7 @@
       endif
     endfor
   endif
-  assign wa_size = 'product.size_tbd' | t
 -%}
-{%- capture wa_text -%}{{ 'product.whatsapp_intro' | t }}
-• {{ product.title }}
-{{ product.options.first | remove: ':' }} : {{ wa_size }}
-{{ product.price | money_without_trailing_zeros | strip_html }}
-{{ request.origin }}{{ product.url }}{%- endcapture -%}
 <div class="container pdp-top">
   {%- capture crumb_current -%}{{ model }}{% if colorway != blank %} {{ colorway }}{% endif %}{%- endcapture -%}
   {% render 'breadcrumbs', parent_title: parent.title, parent_url: parent.url, current: crumb_current %}
@@ -155,8 +149,8 @@
         </button>
         <p class="size-hint is-error" data-form-error hidden></p>
         {%- if s.show_dynamic_checkout -%}{{ form | payment_button }}{%- endif -%}
-        {%- if settings.show_whatsapp_order and settings.whatsapp_number != blank -%}
-          <a class="btn btn--ghost btn--block" href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}?text={{ wa_text | url_encode }}" target="_blank" rel="noopener" data-wa-product>{% render 'icon', name: 'whatsapp' %} {{ 'product.order_whatsapp' | t }}</a>
+        {%- if settings.show_buy_now and product.available -%}
+          <button class="btn btn--ghost btn--block btn--lg" type="submit" name="return_to" value="/checkout" formaction="{{ routes.cart_add_url }}?return_to=/checkout" data-buy-now>{{ 'product.buy_now' | t }}</button>
         {%- endif -%}
       </div>
     {%- endform -%}

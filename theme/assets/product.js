@@ -34,7 +34,6 @@
       history.replaceState(null, '', `${root.dataset.url}?variant=${v.id}`);
       if (hint) { hint.classList.remove('is-error'); hint.textContent = G.strings.sizeChosen; }
       $('[data-form-error]').hidden = true;
-      $$('[data-wa-product]').forEach(a => { const u = new URL(a.href); u.searchParams.set('text', u.searchParams.get('text').replace(/^(.*?) : .*$/m, `$1 : ${chosen.join(' / ')}`)); a.href = u.toString(); });
     });
     // Require a size before adding (cart.js listens to the same submit and checks defaultPrevented)
     form.addEventListener('submit', e => {

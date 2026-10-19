@@ -39,7 +39,8 @@
       { "type": "text", "id": "promise_exchange", "label": "Échange", "default": "Échange offert sous 30 jours, collecte à domicile ou au bureau." },
       { "type": "text", "id": "promise_payment", "label": "Paiement", "default": "En espèces à la livraison, ou par carte via CMI." },
       { "type": "text", "id": "promise_warranty", "label": "Garantie", "default": "Garantie 1 an contre les défauts de fabrication." },
-      { "type": "page", "id": "service_page", "label": "Page « Service client »" },
+      { "type": "page", "id": "maison_page", "label": "Page « La Maison »", "info": "Modèle de page : page.maison. Vide : page Atelier Lozano affichée avec le modèle Maison." },
+      { "type": "page", "id": "service_page", "label": "Page « Service client »", "info": "Modèle de page : page.service. Vide : page Contact affichée avec le modèle Service." },
       { "type": "page", "id": "size_page", "label": "Page « Guide des pointures »" }
     ]
   },
@@ -58,7 +59,7 @@
     "name": "Fiche produit",
     "settings": [
       { "type": "checkbox", "id": "show_quick_add", "label": "Ajout rapide par pointure au survol des cartes (bureau)", "default": true },
-      { "type": "checkbox", "id": "show_whatsapp_order", "label": "Bouton « Commander sur WhatsApp »", "default": true },
+      { "type": "checkbox", "id": "show_buy_now", "label": "Bouton « Acheter maintenant » (vers le paiement)", "default": true },
       { "type": "range", "id": "low_stock_threshold", "label": "« Dernières pointures » à partir de (pointures restantes)", "min": 1, "max": 4, "step": 1, "default": 2 },
       { "type": "collection", "id": "complete_collection", "label": "Complétez votre style : collection d’accessoires", "info": "Proposée sous les souliers de la collection Business." },
       { "type": "collection", "id": "business_collection", "label": "Collection Business" }

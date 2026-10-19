@@ -27,7 +27,11 @@ Puis importer avec **Matrixify** : `migration/products-metafields.csv` (160 lign
 Activer : Disponibilité · Prix · Pointure (option de variante) · **Couleur** (métachamp gianato.color_family) · Style (gianato.style ou type de produit) · Matière (gianato.material).
 Harmoniser au préalable le nom d’option « Choisir la pointure : » / « Taille » → « Pointure » (voir `migration/rapport-donnees.md`).
 
-## 4. Menus (Boutique en ligne › Navigation)
+## 4. Menus
+
+**Par défaut, le thème affiche directement les menus de la maquette** (en-tête, méga-menus, menu mobile, colonnes du pied de page, mentions légales), générés depuis `prototype/data/site.js` par `tools/gen-nav.js` → `snippets/nav-maison.liquid`. Aucun menu Shopify n’est nécessaire. Pour reprendre la main dans l’admin : En-tête › *Source du menu* = « Menu Shopify », Pied de page › *Colonnes de liens* = « Menus Shopify ». Pages « La Maison » et « Service client » : tant qu’elles ne sont pas créées (réglages du thème), les liens ouvrent `/pages/cordonnerie?view=maison` et `/pages/contact?view=service`.
+
+### Menus Shopify (facultatif — Boutique en ligne › Navigation)
 - `main-menu` — 3 niveaux. Niveau 2 = titres de colonnes ; un lien de niveau 2 **sans** enfants devient un lien discret (ex. « Fin de collection »).
   - **Souliers** (`/collections/meilleures-ventes`) › *Les styles* (mocassin, richelieu, derby, bottines, sneaker, boucles) › *Les collections* (nouveautes, meilleures-ventes, richelieu-derby, chaussures-sans-lacets, chaussures-a-laces, chaussures-grandes-pointures) › *Fin de collection* (destockage)
   - **Nouveautés** (`/collections/nouveautes`)
@@ -48,7 +52,7 @@ Harmoniser au préalable le nom d’option « Choisir la pointure : » / « Tail
 - **Service client** : téléphones, WhatsApp, horaires, réseaux — préremplis avec les données de gianato.ma.
 - **Promesses de service** : textes uniques réutilisés partout (fiche, panier, pages).
 - **Prix & promotions** : prix barré (oui), taux sur fiche (oui), taux sur cartes (non) ; collection « Nouveautés » pour l’étiquette *Nouveau*.
-- **Fiche produit** : ajout rapide, bouton WhatsApp, seuil « Dernières pointures », collections Business / Accessoires pour « Complétez votre style ».
+- **Fiche produit** : ajout rapide, bouton « Acheter maintenant » (ajoute la pointure choisie et ouvre directement le paiement Shopify), seuil « Dernières pointures », collections Business / Accessoires pour « Complétez votre style ».
 - **Format monétaire** (Paramètres › Général › Devise) : recommandé `{{amount_no_decimals_with_space_separator}} DH`.
 
 ## 7. Suivi — à vérifier avant publication

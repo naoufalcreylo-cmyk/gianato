@@ -35,7 +35,6 @@
     const sib = G.siblings(p); const sized = p.sizes.some(s => s.s);
     const avail = p.sizes.filter(s => s.a);
     const stock = !p.available ? ['stock stock--out', 'Épuisé'] : G.lowStock(p) ? ['stock stock--low', 'Dernières pointures disponibles'] : ['stock', 'Disponible'];
-    const waText = `Bonjour, je souhaite commander :\n• ${p.title}\nPointure : à préciser\nPrix : ${G.money(p.price)}\n${S.shop.url}/products/${p.h}`;
     return `
       <p class="pdp__kicker label"><span>${esc(G.styleLabel(p) || p.type)}</span>${p.facts.construction ? `<span>${esc(p.facts.construction)}</span>` : ''}</p>
       <h1 class="pdp__title">${esc(p.model)}</h1>
@@ -55,7 +54,7 @@
         <p class="${stock[0]}" style="margin-top:1.5rem">${stock[1]}</p>
         <div class="pdp__actions">
           <button class="btn btn--lg btn--block" type="submit" data-add${p.available ? '' : ' disabled'}>${p.available ? 'Ajouter au panier' : 'Épuisé'}</button>
-          <a class="btn btn--ghost btn--block" href="${G.wa(waText)}" target="_blank" rel="noopener" data-wa>${icon('whatsapp')} Commander sur WhatsApp</a>
+          ${p.available ? '<button class="btn btn--ghost btn--block btn--lg" type="submit" data-buy-now>Acheter maintenant</button>' : ''}
         </div>
       </form>
       ${p.facts.lining && /émeraude/.test(p.facts.lining) ? '<p class="pdp__lining">Doublure en cuir vert émeraude. Le détail que vous seul connaissez.</p>' : ''}
@@ -142,12 +141,17 @@
       const r = e.target.closest('input[name="id"]'); if (!r) return;
       $('[data-size-label]').textContent = r.dataset.size; hint.classList.remove('is-error');
       hint.textContent = 'Livraison offerte. Échange sous 30 jours si la pointure ne convient pas.';
-      const wa = $('[data-wa]'); const u = new URL(wa.href); u.searchParams.set('text', u.searchParams.get('text').replace(/Pointure : .*/, `Pointure : ${r.dataset.size}`)); wa.href = u.toString();
     });
     form.addEventListener('submit', e => {
       e.preventDefault();
       const r = $('input[name="id"]:checked', form) || $('input[type="hidden"][name="id"]', form);
       if (!r) { hint.textContent = 'Choisissez votre pointure pour ajouter cette paire au panier.'; hint.classList.add('is-error'); $('.sizes input:not(:disabled)', form)?.focus(); return; }
+      if (e.submitter?.hasAttribute('data-buy-now')) {
+        // « Acheter maintenant » : straight to checkout on gianato.ma (real cart permalink)
+        G.cart.add(p.h, +r.value, 1);
+        G.track('begin_checkout', { value: G.cart.total(), items: G.cart.lines().map(l => G.item(G.product(l.h), { item_id: String(l.id), quantity: l.q })) });
+        location.href = G.cart.checkoutUrl(); return;
+      }
       G.addToCart(p, +r.value, 1, 'product_page');
     });
 

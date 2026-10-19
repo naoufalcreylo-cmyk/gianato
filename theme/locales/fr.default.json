@@ -72,7 +72,8 @@
     "spec_lining": "Doublure",
     "spec_sole": "Semelle",
     "spec_dimensions": "Dimensions",
-    "spec_style": "Style"
+    "spec_style": "Style",
+    "buy_now": "Acheter maintenant"
   },
   "sizes": {
     "title": "Guide des pointures",

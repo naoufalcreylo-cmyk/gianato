@@ -40,7 +40,7 @@
     if (cart?.item_count) A()?.track('view_cart', { value: cart.total_price / 100, items: cart.items.map(gaFromLine) });
   }
 
-  async function add(items, listName, errorEl) {
+  async function add(items, listName, errorEl, { buyNow = false } = {}) {
     if (busy) return; busy = true;
     try {
       const res = await fetch(`${M.routes.cartAdd}.js`, {
@@ -54,6 +54,8 @@
       const added = data.items || [data];
       A()?.track('add_to_cart', { value: added.reduce((s, l) => s + l.final_line_price / 100, 0), items: added.map(l => ({ ...gaFromLine(l), item_list_name: listName })) });
       if (errorEl) errorEl.hidden = true;
+      // « Acheter maintenant » : straight to Shopify checkout (CMI, paiement à la livraison…)
+      if (buyNow) { A()?.track('begin_checkout', { value: cart.total_price / 100, items: cart.items.map(gaFromLine) }); location.href = `${M.routes.root || '/'}checkout`; return; }
       open();
     } catch (err) {
       if (errorEl) { errorEl.textContent = err.message; errorEl.hidden = false; } else UI()?.toast(err.message);
@@ -80,7 +82,8 @@
     const form = e.target.closest('[data-product-form]'); if (!form) return;
     e.preventDefault();
     const fd = new FormData(form);
-    add([{ id: +fd.get('id'), quantity: Math.max(1, +fd.get('quantity') || 1) }], 'product_page', form.querySelector('[data-form-error]'));
+    const buyNow = !!e.submitter?.hasAttribute('data-buy-now');
+    add([{ id: +fd.get('id'), quantity: Math.max(1, +fd.get('quantity') || 1) }], 'product_page', form.querySelector('[data-form-error]'), { buyNow });
   });
 
   document.addEventListener('click', e => {

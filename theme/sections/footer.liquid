@@ -28,6 +28,7 @@
           {%- if settings.hours != blank -%}<span>{{ settings.hours }}</span>{%- endif -%}
         </div>
       </div>
+      {%- if section.settings.nav_source != 'shopify' or section.blocks.size == 0 -%}{% render 'nav-maison', part: 'footer' %}{%- else -%}
       {%- for block in section.blocks -%}
         {%- assign menu = linklists[block.settings.menu] -%}
         <nav class="footer__col" aria-label="{{ block.settings.title | default: menu.title | escape }}" {{ block.shopify_attributes }}>
@@ -35,6 +36,7 @@
           <ul role="list">{%- for link in menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}</ul>
         </nav>
       {%- endfor -%}
+      {%- endif -%}
       <div class="footer__social">
         <h2 class="label" style="color:var(--ivory);margin-bottom:1rem">{{ 'footer.follow' | t }}</h2>
         <ul role="list">
@@ -46,7 +48,7 @@
     </div>
     <div class="footer__bottom">
       <span>© {{ 'now' | date: '%Y' }} {{ shop.name }} — {{ section.settings.copyright }}</span>
-      <ul role="list">{%- for link in linklists[section.settings.legal_menu].links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}</ul>
+      <ul role="list">{%- if section.settings.legal_menu != blank and linklists[section.settings.legal_menu].links.size > 0 -%}{%- for link in linklists[section.settings.legal_menu].links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}{%- else -%}{% render 'nav-maison', part: 'legal' %}{%- endif -%}</ul>
       <div class="footer__pay" aria-label="{{ 'footer.payments' | t }}">
         {%- assign methods = section.settings.payments | split: ',' -%}
         {%- for m in methods -%}<span>{{ m | strip }}</span>{%- endfor -%}
@@ -65,6 +67,7 @@
     { "type": "textarea", "id": "news_text", "label": "Texte", "default": "Nouveautés, accès anticipé aux fins de saison et conseils d’entretien. Une lettre, rarement." },
     { "type": "text", "id": "tagline", "label": "Signature", "default": "Maison de souliers. L’assurance, cousue main." },
     { "type": "text", "id": "copyright", "label": "Mention", "default": "Maison de souliers, Maroc" },
+    { "type": "select", "id": "nav_source", "label": "Colonnes de liens", "default": "maison", "options": [{ "value": "maison", "label": "Colonnes Maison intégrées (maquette)" }, { "value": "shopify", "label": "Menus Shopify (blocs ci-dessous)" }] },
     { "type": "link_list", "id": "legal_menu", "label": "Menu légal" },
     { "type": "text", "id": "payments", "label": "Moyens de paiement (séparés par des virgules)", "default": "CMI, Visa, Mastercard, Espèces à la livraison" }
   ],

@@ -6,6 +6,10 @@
   Blocks « Mise en avant » attach a visual to a top-level item (matched by its title).
 {%- endcomment -%}
 {%- liquid
+  assign builtin = true
+  if section.settings.nav_source == 'shopify' and section.settings.menu != blank
+    assign builtin = false
+  endif
   assign menu = linklists[section.settings.menu]
   assign right_count = section.settings.right_count
   assign split_at = menu.links.size | minus: right_count
@@ -34,17 +38,21 @@
       <button class="icon-btn header__search-m" type="button" aria-label="{{ 'header.search' | t }}" data-open-search>{% render 'icon', name: 'search' %}</button>
       <nav aria-label="{{ 'header.main_nav' | t }}">
         <ul class="header__nav" role="list">
+          {%- if builtin -%}{% render 'nav-maison', part: 'left' %}{%- else -%}
           {%- for link in menu.links -%}
             {%- if forloop.index0 < split_at -%}<li>{% render 'nav-item', link: link, index: forloop.index %}</li>{%- endif -%}
           {%- endfor -%}
+          {%- endif -%}
         </ul>
       </nav>
     </div>
     {{ logo }}
     <div class="header__tools">
+      {%- if builtin -%}{% render 'nav-maison', part: 'right' %}{%- else -%}
       {%- for link in menu.links -%}
         {%- if forloop.index0 >= split_at -%}<span class="header__end hide-m">{% render 'nav-item', link: link, index: forloop.index %}</span>{%- endif -%}
       {%- endfor -%}
+      {%- endif -%}
       <button class="icon-btn hide-m" type="button" aria-label="{{ 'header.search' | t }}" data-open-search>{% render 'icon', name: 'search' %}</button>
       {%- if shop.customer_accounts_enabled -%}
         <a class="icon-btn hide-m" href="{{ routes.account_url }}" aria-label="{{ 'header.account' | t }}">{% render 'icon', name: 'user' %}</a>
@@ -53,6 +61,7 @@
     </div>
   </div>
 
+  {%- if builtin -%}{% render 'nav-maison', part: 'megas', blocks: section.blocks %}{%- else -%}
   {%- for link in menu.links -%}
     {%- if link.links.size > 0 -%}
       {%- assign feature = nil -%}
@@ -89,6 +98,7 @@
       </div>
     {%- endif -%}
   {%- endfor -%}
+  {%- endif -%}
 </header>
 <div class="mega-scrim" data-mega-scrim></div>
 
@@ -102,6 +112,7 @@
     </div>
     <div class="drawer__body">
       <ul class="mnav__list" role="list">
+        {%- if builtin -%}{% render 'nav-maison', part: 'mobile' %}{%- else -%}
         {%- for link in menu.links -%}
           {%- if link.links.size > 0 -%}
             <li><details><summary>{{ link.title }}{% render 'icon', name: 'plus' %}</summary>
@@ -119,6 +130,7 @@
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {%- endif -%}
         {%- endfor -%}
+        {%- endif -%}
       </ul>
       <div class="mnav__aux">
         {%- if shop.customer_accounts_enabled -%}<a href="{{ routes.account_url }}">{% render 'icon', name: 'user' %} {{ 'header.account' | t }}</a>{%- endif -%}
@@ -136,7 +148,8 @@
   "class": "section-header",
   "max_blocks": 6,
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "select", "id": "nav_source", "label": "Source du menu", "default": "maison", "options": [{ "value": "maison", "label": "Menu Maison intégré (maquette)" }, { "value": "shopify", "label": "Menu Shopify (Navigation)" }], "info": "Le menu intégré reprend la maquette : Souliers, Nouveautés, Occasions, Maroquinerie, La Maison." },
+    { "type": "link_list", "id": "menu", "label": "Menu Shopify", "default": "main-menu" },
     { "type": "range", "id": "right_count", "label": "Liens placés à droite du logotype", "min": 0, "max": 3, "step": 1, "default": 1, "info": "Les derniers liens du menu (ex. « La Maison »)." }
   ],
   "blocks": [

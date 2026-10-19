@@ -26,7 +26,7 @@
           {%- if s.cta2_label != blank -%}<a class="link" href="{{ s.cta2_url }}">{{ s.cta2_label }}</a>{%- endif -%}
         </div>
         {%- if s.caption_product != blank -%}
-          <p class="hero__caption">{{ 'home.on_the_photo' | t }} <a href="{{ s.caption_product.url }}">{{ s.caption_product.title | capitalize }}</a>{% if s.caption_text != blank %}, {{ s.caption_text }}{% endif %}.</p>
+          <p class="hero__caption">{{ 'home.on_the_photo' | t }} <a href="{{ s.caption_product.url }}">{{ s.caption_product.metafields.gianato.model.value | default: s.caption_product.title | capitalize }}{% if s.caption_product.metafields.gianato.colorway != blank %} {{ s.caption_product.metafields.gianato.colorway.value }}{% endif %}</a>{% if s.caption_text != blank %}, {{ s.caption_text }}{% endif %}.</p>
         {%- endif -%}
       </div>
     </div>

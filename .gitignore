@@ -9,3 +9,6 @@ research/*.liquid
 research/*.html
 research/jobs*.json
 *.log
+
+.vercel
+research/store-theme/

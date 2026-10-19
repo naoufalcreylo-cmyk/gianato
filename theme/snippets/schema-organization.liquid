@@ -13,6 +13,7 @@
       assign same_as = same_as | append: '|' | append: settings.facebook
     endif
     assign same_as = same_as | split: '|' | compact
+    assign search_target = request.origin | append: routes.search_url | append: '?q=' | append: '{search_term_string}'
   -%}
   <script type="application/ld+json">
     {
@@ -34,7 +35,7 @@
       "url": {{ request.origin | append: routes.root_url | json }},
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }},
+        "target": {{ search_target | json }},
         "query-input": "required name=search_term_string"
       }
     }

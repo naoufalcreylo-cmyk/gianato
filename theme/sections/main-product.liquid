@@ -21,9 +21,22 @@
     endif
   endfor
   assign siblings = mf.siblings.value
+  # Breadcrumb parent: the collection the visitor came from, else the first « style » collection (never a promo one)
   assign parent = collection
   if parent == nil
-    assign parent = product.collections.first
+    assign preferred = s.breadcrumb_collections | split: ','
+    for handle in preferred
+      assign h = handle | strip
+      for c in product.collections
+        if c.handle == h
+          assign parent = c
+          break
+        endif
+      endfor
+      if parent
+        break
+      endif
+    endfor
   endif
   assign wa_size = 'product.size_tbd' | t
 -%}
@@ -200,6 +213,7 @@
   "name": "Fiche produit",
   "settings": [
     { "type": "checkbox", "id": "show_lede", "label": "Chapeau (extrait de la description)", "default": true },
+    { "type": "text", "id": "breadcrumb_collections", "label": "Fil d’Ariane : collections prioritaires (handles)", "default": "mocassin,richelieu,derby,bottines,sneaker,boucles,essential-business" },
     { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Bouton de paiement accéléré", "default": false },
     { "type": "richtext", "id": "shipping_text", "label": "Livraison & retours", "default": "<p>Livraison standard offerte partout au Maroc, en 2 à 5 jours ouvrés. Livraison express en 24 à 72 h.</p><p>Échange offert sous 30 jours : l’article doit être retourné non porté, avec ses étiquettes et sa boîte d’origine.</p>" },
     { "type": "richtext", "id": "care_text", "label": "Entretien", "default": "<p>Glissez un embauchoir en bois dès que vous quittez vos souliers : il absorbe l’humidité et garde la forme.</p><p>Alternez vos paires : un soulier en cuir a besoin d’une journée de repos pour sécher.</p>" }

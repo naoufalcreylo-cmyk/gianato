@@ -209,3 +209,6 @@
 /* 404 / empty */
 .not-found { min-height: 60vh; display: grid; place-items: center; text-align: center; padding-block: var(--section); }
 .not-found p { margin: 1.25rem auto 2rem; max-width: 30rem; color: var(--muted); }
+/* Shopify sort labels can be long (« Date, de la plus récente à la plus ancienne ») */
+.toolbar .select { max-width: 16rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+@media (max-width: 767px) { .toolbar .select { max-width: 48vw; } }

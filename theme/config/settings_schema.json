@@ -13,7 +13,7 @@
       { "type": "paragraph", "content": "Logotype GIANATO (Brand Book 2026). Laisser vide pour utiliser les fichiers livrés avec le thème : espresso sur fond clair, ivoire sur image." },
       { "type": "image_picker", "id": "logo", "label": "Logotype espresso (fond clair)" },
       { "type": "image_picker", "id": "logo_inverse", "label": "Logotype ivoire (sur image / fond sombre)" },
-      { "type": "range", "id": "logo_width", "label": "Largeur du logotype (bureau)", "min": 110, "max": 220, "step": 5, "unit": "px", "default": 168 },
+      { "type": "range", "id": "logo_width", "label": "Largeur du logotype (bureau)", "min": 110, "max": 220, "step": 5, "unit": "px", "default": 170 },
       { "type": "image_picker", "id": "favicon", "label": "Favicon (monogramme, 96 × 96 px)" },
       { "type": "checkbox", "id": "transparent_header", "label": "En-tête transparent sur l’image d’ouverture (accueil, La Maison)", "default": true }
     ]

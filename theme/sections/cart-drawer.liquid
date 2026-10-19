@@ -81,10 +81,11 @@
       </div>
 
       <div class="drawer__foot">
+        <script type="application/json" data-cart-ga>{"value":{{ cart.total_price | divided_by: 100.0 }},"items":[{%- for item in cart.items -%}{"item_id":"{{ item.variant_id }}","item_name":{{ item.product.title | json }},"item_variant":{{ item.variant.title | json }},"price":{{ item.final_price | divided_by: 100.0 }},"quantity":{{ item.quantity }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]}</script>
         <div class="cart-sum"><span>{{ 'cart.subtotal' | t }}</span><span class="price">{{ cart.total_price | money_without_trailing_zeros }}</span></div>
         <p class="cart-note">{{ section.settings.note }}</p>
         <form class="cart-actions" action="{{ routes.cart_url }}" method="post">
-          <button class="btn btn--lg btn--block" type="submit" name="checkout" data-checkout>{{ 'cart.checkout' | t }}</button>
+          <button class="btn btn--lg btn--block" type="button" data-checkout>{{ 'cart.checkout' | t }}</button>
           <button class="btn btn--ghost btn--block" type="button" data-close>{{ 'cart.continue' | t }}</button>
         </form>
         <ul class="cart-assure" role="list">

@@ -30,7 +30,8 @@
       <div class="cart-sum" style="margin-top:1rem"><span>{{ 'cart.subtotal' | t }}</span><span class="price">{{ cart.total_price | money_without_trailing_zeros }}</span></div>
       <p class="cart-note">{{ 'cart.taxes_note' | t }}</p>
       <div class="cart-actions" style="max-width:26rem;margin-left:auto">
-        <button class="btn btn--lg btn--block" type="submit" name="checkout" data-checkout>{{ 'cart.checkout' | t }}</button>
+        <button class="btn btn--lg btn--block" type="button" data-checkout data-checkout-form>{{ 'cart.checkout' | t }}</button>
+        <noscript><button class="btn btn--lg btn--block" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button></noscript>
         <button class="btn btn--ghost btn--block" type="submit" name="update">{{ 'cart.update' | t }}</button>
       </div>
     </form>

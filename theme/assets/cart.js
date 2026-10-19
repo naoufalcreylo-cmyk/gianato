@@ -112,8 +112,18 @@
       if (step) change(line.dataset.key, Math.max(0, cur + +step.dataset.qty));
       if (t.closest('[data-remove]')) change(line.dataset.key, 0);
     }
-    if (t.closest('[data-checkout]')) {
-      getCart().then(c => A()?.track('begin_checkout', { value: c.total_price / 100, items: c.items.map(gaFromLine) })).catch(() => {});
+    const co = t.closest('[data-checkout]');
+    if (co) {
+      // « Finaliser ma commande » goes straight to Shopify checkout. The button is deliberately not
+      // name="checkout" / href="/checkout": third-party opt-in popups hook those and block the click.
+      e.preventDefault();
+      if (co.getAttribute('aria-busy') === 'true') return;
+      co.setAttribute('aria-busy', 'true'); co.dataset.label = co.textContent; co.textContent = M.strings.redirecting;
+      try { const ga = JSON.parse(document.querySelector('[data-cart-ga]')?.textContent || 'null'); if (ga?.items?.length) A()?.track('begin_checkout', ga); } catch { /* never block checkout */ }
+      if (co.hasAttribute('data-checkout-form')) {
+        const form = co.closest('form'); const input = document.createElement('input');
+        input.type = 'hidden'; input.name = 'checkout'; input.value = '1'; form.append(input); form.submit();
+      } else location.href = `${M.routes.root || '/'}checkout`;
     }
   });
   document.addEventListener('change', e => {
@@ -122,7 +132,7 @@
   });
   // Keep drawer in sync when the cart changes in another tab
   addEventListener('pageshow', e => {
-    document.querySelectorAll('[data-buy-now][aria-busy]').forEach(b => { b.removeAttribute('aria-busy'); b.disabled = false; if (b.dataset.label) b.textContent = b.dataset.label; });
+    document.querySelectorAll('[data-buy-now][aria-busy], [data-checkout][aria-busy]').forEach(b => { b.removeAttribute('aria-busy'); b.disabled = false; if (b.dataset.label) b.textContent = b.dataset.label; });
     if (e.persisted) refresh();
   });
 

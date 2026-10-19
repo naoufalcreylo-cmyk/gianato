@@ -21,7 +21,7 @@ const url = h => {
 const left = S.nav.filter(n => !n.end), right = S.nav.filter(n => n.end);
 const item = n => n.mega
   ? `<button class="nav-link" type="button" aria-expanded="false" aria-controls="mega-${n.mega}" data-mega-trigger="${n.mega}">${esc(n.title)}</button>`
-  : `<a class="nav-link" href="${url(n.href)}">${esc(n.title)}</a>`;
+  : `<a class="nav-link${n.sale ? ' nav-link--sale' : ''}" href="${url(n.href)}">${esc(n.title)}</a>`;
 
 const mega = n => {
   const m = S.mega[n.mega];
@@ -47,7 +47,7 @@ ${m.columns.map(c => `      <div class="mega__col"><h3>${esc(c.title)}</h3><ul r
 };
 
 const mobile = S.nav.map(n => n.mega ? `<li><details><summary>${esc(n.title)}{% render 'icon', name: 'plus' %}</summary><div class="mnav__sub">${S.mega[n.mega].columns.map(c => `<div><h3>${esc(c.title)}</h3><ul role="list">${c.links.map(([t, h]) => `<li><a href="${url(h)}">${esc(t)}</a></li>`).join('')}</ul></div>`).join('')}${S.mega[n.mega].quiet ? `<a class="muted" href="${url(S.mega[n.mega].quiet[1])}" style="font-size:var(--fs-sm)">${esc(S.mega[n.mega].quiet[0])}</a>` : ''}</div></details></li>`
-  : `<li><a href="${url(n.href)}">${esc(n.title)}</a></li>`).join('\n');
+  : `<li><a href="${url(n.href)}"${n.sale ? ' class="is-sale"' : ''}>${esc(n.title)}</a></li>`).join('\n');
 
 const footer = S.footer.map(c => `<nav class="footer__col" aria-label="${esc(c.title)}"><h2>${esc(c.title)}</h2><ul role="list">${c.links.map(([t, h]) => `<li><a href="${url(h)}">${esc(t)}</a></li>`).join('')}</ul></nav>`).join('\n');
 const legal = S.legal.map(([t, h]) => `<li><a href="${url(h)}">${esc(t)}</a></li>`).join('');

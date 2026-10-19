@@ -326,3 +326,7 @@ a.swatch::before { content: ''; position: absolute; inset: -.6rem -.25rem; }  /*
 /* Shopify customer form: the confirmation note lives inside the form */
 .footer__form { flex-wrap: wrap; }
 .footer__form .footer__form-note { flex-basis: 100%; order: 3; margin: .25rem 0 0; }
+/* « Soldes » in the navigation: a rare oxblood accent (ivory over the hero image) */
+.nav-link--sale { color: var(--oxblood); }
+.has-hero .header.is-transparent .nav-link--sale { color: inherit; }
+.mnav__list a.is-sale { color: var(--oxblood); }

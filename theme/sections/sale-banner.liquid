@@ -1,0 +1,45 @@
+{%- comment -%}
+  Seasonal sale banner (« Soldes d'automne »). Sober by design (Brand Book): espresso band, brass hairline,
+  no red, no countdown. Switch it off at the end of the season with « Afficher la bannière ».
+  The rate must reflect real prices of the linked collection.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign target = s.collection.url | default: s.url
+-%}
+{%- if s.enabled -%}
+  <section class="sale-banner on-dark" aria-labelledby="t-{{ section.id }}">
+    <div class="container sale-banner__inner">
+      <div class="sale-banner__media"><div class="media">{% render 'image', image: s.image, fallback: 'editorial-life-teal.webp', sizes: '(min-width:600px) 33vw, 100vw', alt: s.image_alt, max: 1200 %}</div></div>
+      <div class="sale-banner__text">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+        <h2 id="t-{{ section.id }}"><a class="sale-banner__cover" href="{{ target }}">{{ s.title }}</a></h2>
+        {%- if s.rate != blank -%}<p class="sale-banner__rate">{{ s.rate }}</p>{%- endif -%}
+        <div class="sale-banner__foot">
+          {%- if s.text != blank -%}<p>{{ s.text }}</p>{%- endif -%}
+          {%- if s.cta_label != blank -%}<a class="btn btn--light" href="{{ target }}">{{ s.cta_label }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bannière soldes",
+  "tag": "div",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Afficher la bannière", "default": true, "info": "À désactiver à la fin de la période de soldes." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Homme en manteau laçant des bottines chelsea en cuir" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Fin de saison" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Soldes d’automne" },
+    { "type": "text", "id": "rate", "label": "Taux (doit correspondre aux prix réels)", "default": "Jusqu’à −60 %" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Sur une sélection de souliers, dans la limite des pointures disponibles." },
+    { "type": "collection", "id": "collection", "label": "Collection des soldes" },
+    { "type": "url", "id": "url", "label": "Lien (si aucune collection)" },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "Découvrir les soldes" }
+  ],
+  "presets": [{ "name": "Bannière soldes" }]
+}
+{% endschema %}

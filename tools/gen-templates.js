@@ -25,6 +25,7 @@ const tileImg = ['editorial-loafers-blue.webp', ...S.categories.tiles.slice(1).m
 write('index.json', {
   sections: {
     hero: { type: 'hero-diptych', settings: { eyebrow: S.hero.eyebrow, title: ht1, title_em: ht2, text: S.hero.text, cta_label: S.hero.cta[0], cta_url: pageUrl(S.hero.cta[1]), cta2_label: S.hero.cta2[0], cta2_url: pageUrl(S.hero.cta2[1]), caption_product: 'monte-cristo-gold', caption_text: 'doublure cuir vert émeraude' } },
+    ...(S.sale ? { sale: { type: 'sale-banner', settings: { enabled: !!S.sale.enabled, eyebrow: S.sale.eyebrow, title: S.sale.title, rate: S.sale.rate, text: S.sale.text, collection: S.sale.cta[1].split('c=')[1], cta_label: S.sale.cta[0] } } } : {}),
     new_in: { type: 'featured-collection', settings: { eyebrow: S.newIn.eyebrow, title: S.newIn.title, text: S.newIn.text, collection: S.newIn.collection, limit: S.newIn.limit, distinct: true, cta_label: 'Découvrir la collection' } },
     essentials: { type: 'category-mosaic', settings: { eyebrow: S.categories.eyebrow, title: S.categories.title, text: 'Mocassins souples, souliers à lacets, bottines et baskets en cuir : cinq façons d’être bien chaussé.' },
       ...blocks(S.categories.tiles, 'tile', (t, i) => ({ collection: t.c, title: t.title, fallback: tileImg[i] })) },
@@ -42,7 +43,7 @@ write('index.json', {
     services: { type: 'service-promise', settings: { tight: true },
       ...blocks(S.services, 'service', s => ({ icon: s.icon, title: s.title, text: s.text, url: `/pages/service-client#${s.id}` })) },
   },
-  order: ['hero', 'new_in', 'essentials', 'campaign', 'signatures', 'maison', 'craft', 'occasion', 'voices', 'journal', 'services'],
+  order: ['hero', ...(S.sale ? ['sale'] : []), 'new_in', 'essentials', 'campaign', 'signatures', 'maison', 'craft', 'occasion', 'voices', 'journal', 'services'],
 });
 
 /* ---------- Commerce templates ---------- */

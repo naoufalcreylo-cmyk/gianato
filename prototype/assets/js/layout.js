@@ -24,7 +24,7 @@
 
   const navItem = n => n.mega
     ? `<button class="nav-link" type="button" aria-expanded="false" aria-controls="mega-${n.mega}" data-mega-trigger="${n.mega}">${esc(n.title)}</button>`
-    : `<a class="nav-link" href="${n.href}">${esc(n.title)}</a>`;
+    : `<a class="nav-link${n.sale ? ' nav-link--sale' : ''}" href="${n.href}">${esc(n.title)}</a>`;
   const header = () => `
     <a class="skip-link" href="#main">Aller au contenu</a>
     <div class="announce" role="region" aria-label="Informations de service">
@@ -69,7 +69,7 @@
             ${S.nav.map(n => n.mega ? `<li><details><summary>${esc(n.title)}${icon('plus')}</summary>
                 <div class="mnav__sub">${S.mega[n.mega].columns.map(c => `<div><h3>${esc(c.title)}</h3><ul role="list">${c.links.map(([t, h]) => `<li><a href="${/\.html/.test(h) ? h : G.curl(h)}">${esc(t)}</a></li>`).join('')}</ul></div>`).join('')}
                 ${S.mega[n.mega].quiet ? `<a class="muted" href="${G.curl(S.mega[n.mega].quiet[1])}" style="font-size:var(--fs-sm)">${esc(S.mega[n.mega].quiet[0])}</a>` : ''}</div>
-              </details></li>` : `<li><a href="${n.href}">${esc(n.title)}</a></li>`).join('')}
+              </details></li>` : `<li><a href="${n.href}"${n.sale ? ' class="is-sale"' : ''}>${esc(n.title)}</a></li>`).join('')}
           </ul>
           <div class="mnav__aux">
             <a href="${S.shop.url}/account">${icon('user')} Mon compte</a>

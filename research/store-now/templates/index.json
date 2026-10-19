@@ -1,0 +1,363 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-diptych",
+      "settings": {
+        "eyebrow": "Maison de souliers",
+        "title": "L’assurance,",
+        "title_em": "cousue main.",
+        "text": "Richelieu, derby, mocassins et bottines en cuir, pensés pour accompagner chaque journée.",
+        "cta_label": "Découvrir la collection",
+        "cta_url": "shopify://collections/nouveautes",
+        "cta2_label": "La Maison",
+        "cta2_url": "/pages/la-maison",
+        "caption_product": "monte-cristo-gold",
+        "caption_text": "doublure cuir vert émeraude"
+      }
+    },
+    "new_in": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Nouvelle collection",
+        "title": "Les nouveautés",
+        "text": "Le Loro arrive en sept cuirs : un mocassin souple sur semelle claire, pour les journées qui commencent au bureau et finissent ailleurs.",
+        "collection": "nouveautes",
+        "limit": 6,
+        "distinct": true,
+        "cta_label": "Découvrir la collection"
+      }
+    },
+    "essentials": {
+      "type": "category-mosaic",
+      "settings": {
+        "eyebrow": "Les essentiels",
+        "title": "Un soulier pour chaque allure",
+        "text": "Mocassins souples, souliers à lacets, bottines et baskets en cuir : cinq façons d’être bien chaussé."
+      },
+      "blocks": {
+        "tile1": {
+          "type": "tile",
+          "settings": {
+            "collection": "mocassin",
+            "title": "Mocassins",
+            "fallback": "editorial-loafers-blue.webp"
+          }
+        },
+        "tile2": {
+          "type": "tile",
+          "settings": {
+            "collection": "richelieu-derby",
+            "title": "Richelieu & Derby",
+            "fallback": "editorial-life-terrace.webp"
+          }
+        },
+        "tile3": {
+          "type": "tile",
+          "settings": {
+            "collection": "bottines",
+            "title": "Bottes & bottines",
+            "fallback": "editorial-life-boot.webp"
+          }
+        },
+        "tile4": {
+          "type": "tile",
+          "settings": {
+            "collection": "sneaker",
+            "title": "Baskets cuir",
+            "fallback": "editorial-life-sneakers.webp"
+          }
+        },
+        "tile5": {
+          "type": "tile",
+          "settings": {
+            "collection": "boucles",
+            "title": "Chaussures à boucles",
+            "fallback": "editorial-life-car.webp"
+          }
+        }
+      },
+      "block_order": [
+        "tile1",
+        "tile2",
+        "tile3",
+        "tile4",
+        "tile5"
+      ]
+    },
+    "campaign": {
+      "type": "editorial-campaign",
+      "settings": {
+        "eyebrow": "Monte Cristo",
+        "title": "Ce qui ne se voit pas",
+        "title_em": "se ressent.",
+        "text": "Veau box brossé, cousu Blake à la main, doublé de cuir vert émeraude. Le mocassin de la Maison, en six couleurs.",
+        "product": "monte-cristo",
+        "cta_label": "Découvrir le Monte Cristo",
+        "lining_mark": true
+      }
+    },
+    "signatures": {
+      "type": "signatures",
+      "settings": {
+        "eyebrow": "Les signatures",
+        "title": "Les modèles qui font la Maison",
+        "text": "Quatre souliers que nos clients choisissent, et reviennent choisir.",
+        "products": [
+          "monte-cristo",
+          "carlo-sombre-antique",
+          "alessio",
+          "antique-ritchie"
+        ],
+        "collection": "meilleures-ventes",
+        "cta_label": "Toutes les signatures"
+      }
+    },
+    "maison": {
+      "type": "maison-story",
+      "settings": {
+        "tone": "stone",
+        "eyebrow": "La Maison GIANATO",
+        "title": "Deux maisons familiales,",
+        "title_em": "un même métier.",
+        "text": "<p>GIANATO est né de la rencontre de deux marques familiales : Lozano, chausseur italien, et Richilio, maison marocaine.</p><p>De l’atelier à votre porte, sans intermédiaire : chaque paire est pensée à l’atelier, et la Maison reste à vos côtés bien après l’achat.</p>",
+        "cta_label": "Découvrir notre histoire",
+        "cta_url": "/pages/la-maison"
+      },
+      "blocks": {
+        "figure1": {
+          "type": "figure",
+          "settings": {
+            "value": "1 an",
+            "label": "de garantie sur chaque paire"
+          }
+        },
+        "figure2": {
+          "type": "figure",
+          "settings": {
+            "value": "30 jours",
+            "label": "pour échanger votre pointure"
+          }
+        },
+        "figure3": {
+          "type": "figure",
+          "settings": {
+            "value": "2 à 5 jours",
+            "label": "de livraison au Maroc"
+          }
+        }
+      },
+      "block_order": [
+        "figure1",
+        "figure2",
+        "figure3"
+      ]
+    },
+    "craft": {
+      "type": "craftsmanship",
+      "settings": {
+        "eyebrow": "Savoir-faire",
+        "title": "Regarder de plus près",
+        "text": "Ce qui fait une paire ne se lit pas sur l’étiquette. Ces détails, nous les nommons.",
+        "link_label": "Le savoir-faire",
+        "link_url": "/pages/la-maison#savoir-faire"
+      },
+      "blocks": {
+        "detail1": {
+          "type": "detail",
+          "settings": {
+            "title": "La matière",
+            "text": "Veau box, box calf pleine fleur, cuir grainé ou daim : chaque fiche indique le cuir employé.",
+            "lining": false,
+            "fallback": "editorial-craft-grain.webp"
+          }
+        },
+        "detail2": {
+          "type": "detail",
+          "settings": {
+            "title": "Le cousu Blake",
+            "text": "Une couture qui relie la tige à la semelle. Quand elle est faite à la main, la fiche du modèle le précise.",
+            "lining": false,
+            "fallback": "editorial-craft-blake.webp"
+          }
+        },
+        "detail3": {
+          "type": "detail",
+          "settings": {
+            "title": "La doublure",
+            "text": "Le cuir vert émeraude du Monte Cristo. Personne ne le voit, sauf celui qui porte la paire.",
+            "lining": true,
+            "fallback": "editorial-craft-lining.webp"
+          }
+        },
+        "detail4": {
+          "type": "detail",
+          "settings": {
+            "title": "La semelle",
+            "text": "Gomme sur la plupart de nos modèles, pour l’adhérence et le confort au quotidien.",
+            "lining": false,
+            "fallback": "editorial-craft-sole.webp"
+          }
+        }
+      },
+      "block_order": [
+        "detail1",
+        "detail2",
+        "detail3",
+        "detail4"
+      ]
+    },
+    "occasion": {
+      "type": "occasion-edit",
+      "settings": {
+        "eyebrow": "L’édition business",
+        "title": "Le business contemporain",
+        "text": "Réunion, plaidoirie, signature : les souliers et mallettes des jours qui comptent.",
+        "collection": "classic-professionnel",
+        "extra_collection": "essential-business",
+        "count": 3,
+        "links": "occasions"
+      }
+    },
+    "voices": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "Les amis de la Maison",
+        "title": "Ils portent GIANATO"
+      },
+      "blocks": {
+        "quote1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Je suis vraiment étonné de la qualité des chaussures que j’ai prises chez la Maison Gianato. C’est devenu ma marque de chaussures préférée. Je la recommande vivement, sans oublier leur service personnalisé assuré par Mme Ferdaous.",
+            "name": "Driss Roukh"
+          }
+        },
+        "quote2": {
+          "type": "quote",
+          "settings": {
+            "quote": "C’est magnifique, merci pour la qualité du service.",
+            "name": "Othmane Lamine"
+          }
+        }
+      },
+      "block_order": [
+        "quote1",
+        "quote2"
+      ]
+    },
+    "journal": {
+      "type": "journal",
+      "settings": {
+        "eyebrow": "Le carnet",
+        "title": "Conseils de la Maison",
+        "blog": "comment-choisir-des-souliers-pour-homme-adaptes-a-son-style"
+      },
+      "blocks": {
+        "story1": {
+          "type": "story",
+          "settings": {
+            "kicker": "Entretien",
+            "title": "Embauchoirs, alternance, cirage : faire durer ses souliers",
+            "url": "/pages/la-maison#entretien",
+            "fallback": "editorial-craft-hand.webp"
+          }
+        },
+        "story2": {
+          "type": "story",
+          "settings": {
+            "kicker": "Pointure",
+            "title": "Trouver la juste pointure, du premier coup",
+            "url": "/pages/service-client#pointures",
+            "fallback": "editorial-boots-pair.webp"
+          }
+        },
+        "story3": {
+          "type": "story",
+          "settings": {
+            "kicker": "Atelier",
+            "title": "L’atelier Lozano et la méthode « un sacchetto »",
+            "url": "/pages/la-maison#atelier",
+            "fallback": "editorial-life-flatlay.webp"
+          }
+        }
+      },
+      "block_order": [
+        "story1",
+        "story2",
+        "story3"
+      ]
+    },
+    "services": {
+      "type": "service-promise",
+      "settings": {
+        "tight": true
+      },
+      "blocks": {
+        "service1": {
+          "type": "service",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison offerte",
+            "text": "Partout au Maroc, en 2 à 5 jours ouvrés. Express en 24 à 72 h.",
+            "url": "/pages/service-client#livraison"
+          }
+        },
+        "service2": {
+          "type": "service",
+          "settings": {
+            "icon": "exchange",
+            "title": "Échange sous 30 jours",
+            "text": "Pointure à revoir ? Nous organisons la collecte, à domicile ou au bureau.",
+            "url": "/pages/service-client#echanges"
+          }
+        },
+        "service3": {
+          "type": "service",
+          "settings": {
+            "icon": "lock",
+            "title": "Paiement sécurisé",
+            "text": "En espèces à la livraison, ou par carte via CMI, avec 3D Secure.",
+            "url": "/pages/service-client#paiement"
+          }
+        },
+        "service4": {
+          "type": "service",
+          "settings": {
+            "icon": "seal",
+            "title": "Garantie 1 an",
+            "text": "Chaque paire GIANATO est garantie contre les défauts de fabrication.",
+            "url": "/pages/service-client#garantie"
+          }
+        }
+      },
+      "block_order": [
+        "service1",
+        "service2",
+        "service3",
+        "service4"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "new_in",
+    "essentials",
+    "campaign",
+    "signatures",
+    "maison",
+    "craft",
+    "occasion",
+    "voices",
+    "journal",
+    "services"
+  ]
+}

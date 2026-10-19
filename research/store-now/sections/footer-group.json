@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "c1": { "type": "menu", "settings": { "title": "La Maison", "menu": "footer-maison" } },
+        "c2": { "type": "menu", "settings": { "title": "Service client", "menu": "footer-service" } },
+        "c3": { "type": "menu", "settings": { "title": "Nos souliers", "menu": "footer-souliers" } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": { "legal_menu": "footer-legal" }
+    }
+  },
+  "order": ["footer"]
+}

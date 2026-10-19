@@ -23,6 +23,19 @@
       <span class="hero__scroll" aria-hidden="true"></span>
     </section>`; };
 
+  const saleBanner = () => { const s = S.sale; if (!s || !s.enabled) return ''; return `
+    <section class="sale-banner on-dark" aria-labelledby="sale-title">
+      <div class="container sale-banner__inner">
+        <div class="sale-banner__media"><div class="media">${img(s.image, { sizes: '(min-width:600px) 33vw, 100vw', alt: 'Homme en manteau laçant des bottines chelsea en cuir', max: 960 })}</div></div>
+        <div class="sale-banner__text">
+          <p class="eyebrow">${esc(s.eyebrow)}</p>
+          <h2 id="sale-title"><a class="sale-banner__cover" href="${s.cta[1]}">${esc(s.title)}</a></h2>
+          <p class="sale-banner__rate">${esc(s.rate)}</p>
+          <div class="sale-banner__foot"><p>${esc(s.text)}</p><a class="btn btn--light" href="${s.cta[1]}">${esc(s.cta[0])}</a></div>
+        </div>
+      </div>
+    </section>`; };
+
   const newIn = () => { const s = S.newIn; const ps = distinct(G.colProducts(s.collection), s.limit); return `
     <section class="section" aria-labelledby="new-title">
       <div class="container" data-rail>
@@ -158,7 +171,7 @@
 
   G.ready.then(() => {
     document.body.classList.add('has-hero');
-    G.$('#main').innerHTML = hero() + newIn() + essentials() + campaign() + signatures() + maison() + craft() + occasion() + voices() + journal() + services();
+    G.$('#main').innerHTML = hero() + saleBanner() + newIn() + essentials() + campaign() + signatures() + maison() + craft() + occasion() + voices() + journal() + services();
     G.mount();
   });
 })();

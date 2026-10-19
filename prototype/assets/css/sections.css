@@ -252,3 +252,32 @@
 .service-block .prose li + li { margin-top: .4rem; }
 .notice { margin-top: 1.5rem; padding: 1rem 1.25rem; border-left: 2px solid var(--brass); background: var(--bg-alt); font-size: var(--fs-md); }
 @media (max-width: 1023px) { .service-layout > aside { display: none; } .service-layout > div { grid-column: 1 / -1; } }
+
+/* ---------- Seasonal sale banner (« Soldes d'automne ») — sober: espresso, brass hairline, no red, no countdown ---------- */
+.sale-banner { background: var(--espresso); color: var(--on-inverse); }
+.sale-banner__inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: center; padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+.sale-banner__media { grid-column: 1 / span 4; }
+.sale-banner__media .media { aspect-ratio: 4 / 3; background: #3a2b23; }
+.sale-banner__media img { object-position: 50% 88%; } /* keep the boots in frame */
+.sale-banner__text { grid-column: 6 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 1.25rem 2.5rem; }
+.sale-banner__text .eyebrow { grid-column: 1 / -1; color: var(--brass); }
+.sale-banner__text .eyebrow::before { background: var(--brass); }
+.sale-banner h2 { color: var(--ivory); font-size: var(--fs-h2); }
+.sale-banner__rate { font: 300 italic clamp(1.75rem, 1.2rem + 2vw, 3rem)/1 var(--font-serif); color: var(--ivory); white-space: nowrap; padding-bottom: .35rem; }
+.sale-banner__foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(168, 145, 95, .45); }
+.sale-banner__foot p { color: var(--on-inverse-muted); font-size: var(--fs-md); max-width: 30rem; }
+.sale-banner a.sale-banner__cover::after { content: ''; position: absolute; inset: 0; }
+.sale-banner { position: relative; }
+.sale-banner .btn { position: relative; z-index: 1; }
+@media (max-width: 1023px) {
+  .sale-banner__media { grid-column: 1 / span 5; }
+  .sale-banner__text { grid-column: 6 / -1; grid-template-columns: 1fr; }
+  .sale-banner__rate { padding: 0; }
+}
+@media (max-width: 599px) {
+  .sale-banner__inner { grid-template-columns: 1fr; padding-block: 0 2rem; }
+  .sale-banner__media { grid-column: 1; margin-inline: calc(var(--gutter) * -1); }
+  .sale-banner__media .media { aspect-ratio: 16 / 10; }
+  .sale-banner__text { grid-column: 1; }
+  .sale-banner__foot .btn { width: 100%; }
+}

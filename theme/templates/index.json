@@ -15,6 +15,18 @@
         "caption_text": "doublure cuir vert émeraude"
       }
     },
+    "sale": {
+      "type": "sale-banner",
+      "settings": {
+        "enabled": true,
+        "eyebrow": "Fin de saison",
+        "title": "Soldes d’automne",
+        "rate": "Jusqu’à −60 %",
+        "text": "Sur une sélection de souliers, dans la limite des pointures disponibles.",
+        "collection": "soldes-automne",
+        "cta_label": "Découvrir les soldes"
+      }
+    },
     "new_in": {
       "type": "featured-collection",
       "settings": {
@@ -340,6 +352,7 @@
   },
   "order": [
     "hero",
+    "sale",
     "new_in",
     "essentials",
     "campaign",

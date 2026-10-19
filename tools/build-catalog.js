@@ -49,6 +49,8 @@ const COLLECTIONS = {
   'essential-business': { title: 'Essential Business', intro: 'L’essentiel du vestiaire professionnel, en quelques paires.' },
   'chaussures-ville-confortables': { title: 'Ville confortables', intro: 'Des souliers de ville pensés pour être portés toute la journée.' },
   destockage: { title: 'Fin de collection', intro: 'Les dernières paires de séries précédentes, dans les pointures restantes.' },
+  soldes: { title: 'Soldes', intro: 'Une sélection de souliers à prix de fin de saison, dans la limite des pointures disponibles.' },
+  'soldes-automne': { title: 'Soldes d’automne', intro: 'Fin de saison : une sélection de souliers, dans la limite des pointures disponibles.' },
 };
 const members = {}; for (const h of Object.keys(COLLECTIONS)) members[h] = colOf(h);
 const inCol = (h, c) => members[c].includes(h);

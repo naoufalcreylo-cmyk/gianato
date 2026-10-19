@@ -26,6 +26,7 @@ window.GIANATO_SITE = {
     { title: 'Nouveautés', href: 'collection.html?c=nouveautes' },
     { title: 'Occasions', mega: 'occasions' },
     { title: 'Maroquinerie', href: 'collection.html?c=essential-business' },
+    { title: 'Soldes', href: 'collection.html?c=soldes', sale: true, end: true },   // live collection « soldes » (146 produits)
     { title: 'La Maison', mega: 'maison', end: true },   // right side of the header, beside the tools
   ],
   mega: {
@@ -65,6 +66,17 @@ window.GIANATO_SITE = {
   },
 
   /* Home */
+  /* Seasonal sale banner (homepage, under the hero). Rates computed on live data 2026-10-19:
+     146 produits en promotion, remises de 10 % à 60 % (60 % sur quelques pointures) → « jusqu'à −60 % sur une sélection ». */
+  sale: {
+    enabled: true,
+    eyebrow: 'Fin de saison',
+    title: 'Soldes d’automne',
+    rate: 'Jusqu’à −60 %',
+    text: 'Sur une sélection de souliers, dans la limite des pointures disponibles.',
+    cta: ['Découvrir les soldes', 'collection.html?c=soldes-automne'],
+    image: 'img:life-teal',
+  },
   hero: {
     eyebrow: 'Maison de souliers',
     title: 'L’assurance,<br><em>cousue main.</em>',     // brand signature
@@ -161,6 +173,7 @@ window.GIANATO_SITE = {
 
   /* Collection page heroes (editorial image per key collection) */
   collectionImages: {
+    soldes: 'img:life-teal', 'soldes-automne': 'img:life-teal',
     mocassin: 'img:life-rocks', richelieu: 'img:life-terrace', derby: 'img:life-terrace', 'richelieu-derby': 'img:life-terrace', bottines: 'img:life-boot',
     sneaker: 'img:life-sneakers', boucles: 'img:life-car', 'classic-professionnel': 'img:life-car-2', 'chaussures-ville': 'img:life-brick',
     'esprit-libre': 'img:life-rocks-2', nouveautes: 'img:life-chair', 'meilleures-ventes': 'cdn:https://cdn.shopify.com/s/files/1/0241/5532/4468/products/DSC09596.jpg',

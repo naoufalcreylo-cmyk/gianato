@@ -114,7 +114,7 @@
           {%- for option in product.options_with_values -%}
             <fieldset class="pdp__block" style="border:0;margin-top:2rem;padding:0">
               <div class="pdp__block-head">
-                <legend class="label" style="float:left;padding:0">{{ option.name | remove: ':' | remove: 'Choisir la ' | capitalize }}<strong data-option-value>{{ option.selected_value }}</strong></legend>
+                <legend class="label" style="float:left;padding:0">{{ option.name | remove: ':' | remove: 'Choisir la ' | capitalize }}<strong data-option-value>{% if current %}{{ option.selected_value }}{% endif %}</strong></legend>
                 {%- if forloop.first -%}<button class="link link--quiet" type="button" data-open-sizes style="font-size:var(--fs-xs)">{% render 'icon', name: 'ruler' %} {{ 'sizes.title' | t }}</button>{%- endif -%}
               </div>
               <div class="sizes">

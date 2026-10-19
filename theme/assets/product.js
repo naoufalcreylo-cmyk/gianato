@@ -40,7 +40,15 @@
       if ($('[data-variant-input]', form).value) return;
       e.preventDefault(); e.stopImmediatePropagation();
       if (hint) { hint.textContent = G.strings.chooseSize; hint.classList.add('is-error'); }
-      $('.sizes input:not(:disabled)', form)?.focus();
+      // Make the refusal obvious: bring the sizes into view and flag them
+      const grid = $('.sizes', form);
+      if (grid) {
+        grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        grid.classList.remove('is-error'); void grid.offsetWidth; grid.classList.add('is-error');
+        setTimeout(() => grid.classList.remove('is-error'), 2400);
+      }
+      try { navigator.vibrate?.(60); } catch { /* not supported */ }
+      setTimeout(() => $('.sizes input:not(:disabled)', form)?.focus({ preventScroll: true }), 450);
     }, true);
   }
 

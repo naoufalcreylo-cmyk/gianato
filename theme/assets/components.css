@@ -4,7 +4,7 @@
    ========================================================================== */
 
 /* ---------- Announcement bar ---------- */
-.announce { position: relative; z-index: 31; height: var(--announce-h); background: var(--espresso); color: var(--ivory); font: 400 var(--fs-xs)/1 var(--font-sans); letter-spacing: var(--track-label); text-transform: uppercase; }
+.announce { position: relative; z-index: 1; height: var(--announce-h); background: var(--espresso); color: var(--ivory); font: 400 var(--fs-xs)/1 var(--font-sans); letter-spacing: var(--track-label); text-transform: uppercase; }
 .announce__track { position: relative; height: 100%; display: grid; place-items: center; overflow: hidden; }
 .announce__item { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: .6rem; padding-inline: 2.5rem; text-align: center; opacity: 0; transform: translateY(6px); transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease); pointer-events: none; }
 .announce__item.is-active { opacity: 1; transform: none; pointer-events: auto; }
@@ -330,3 +330,6 @@ a.swatch::before { content: ''; position: absolute; inset: -.6rem -.25rem; }  /*
 .nav-link--sale { color: var(--oxblood); }
 .has-hero .header.is-transparent .nav-link--sale { color: inherit; }
 .mnav__list a.is-sale { color: var(--oxblood); }
+/* Open layers (mobile menu, cart, search, size guide) always cover the announcement bar:
+   the header section's stacking context is lifted above everything while a layer is open. */
+html.is-locked .section-header { z-index: 80; }

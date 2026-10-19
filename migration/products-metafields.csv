@@ -168,10 +168,8 @@ city-cocoa,UPDATE,City,Cocoa,Marron,#5b3a29,Basket cuir,"city-cocoa-copy
 city-marino
 city-cocoa
 city",,,Cuir,Gomme,
-urban,UPDATE,Urban,Noir,Noir,#1c1b1a,Bottine,"urban
-urban-classic",,,,,
-urban-classic,UPDATE,Urban,Classic,Noir,#1c1b1a,Derby,"urban
-urban-classic",,,,,
+urban,UPDATE,Urban,Noir,Noir,#1c1b1a,Bottine,,,,,,
+urban-classic,UPDATE,Urban Classic,Noir,Noir,#1c1b1a,Derby,,,,,,
 braker-cocoa,UPDATE,Braker,Cocoa,Marron,#5b3a29,Bottine,"braker-cocoa
 braker",,,,Gomme,
 carly-marino,UPDATE,Carly,Marino,Bleu marine,#1f2a44,Basket cuir,"carly-cocoa

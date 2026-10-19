@@ -14,4 +14,7 @@
     {%- endfor -%}
     {%- if siblings.size > max -%}<span class="more">+{{ siblings.size | minus: max }}</span>{%- endif -%}
   </div>
+{%- else -%}
+  {%- comment -%} No metafield yet → built-in colour map {%- endcomment -%}
+  {% render 'color-siblings', product: product, mode: 'card', max: max, class: class %}
 {%- endif -%}

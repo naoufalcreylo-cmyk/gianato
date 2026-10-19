@@ -212,3 +212,6 @@
 /* Shopify sort labels can be long (« Date, de la plus récente à la plus ancienne ») */
 .toolbar .select { max-width: 16rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 @media (max-width: 767px) { .toolbar .select { max-width: 48vw; } }
+/* Colour thumbnails: up to 7 colourways on one row (max in the catalogue) */
+.pdp-swatches { flex-wrap: nowrap; }
+.pdp-swatch { flex: 0 1 calc((100% - 3rem) / 7); width: auto; min-width: 2.6rem; max-width: 3.5rem; }

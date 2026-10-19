@@ -42,7 +42,8 @@
           <span class="sig__no">N° {{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
           <div class="media">{% render 'image', image: packshot, sizes: '(min-width:1024px) 40vw, 80vw', alt: p.title, max: 1600 %}</div>
           <div class="sig__body">
-            <h3><a href="{{ p.url }}">{{ mf.model.value | default: p.title }}</a></h3>
+            {%- capture sig_model -%}{%- if mf.model != blank -%}{{ mf.model.value }}{%- else -%}{% render 'color-siblings', product: p, mode: 'model' %}{%- endif -%}{%- endcapture -%}
+            <h3><a href="{{ p.url }}">{{ sig_model | strip | default: p.title }}</a></h3>
             <p class="sig__facts">{{ facts | default: p.type }}</p>
             <div class="sig__aside">
               {% render 'swatches', product: p, max: 6 %}

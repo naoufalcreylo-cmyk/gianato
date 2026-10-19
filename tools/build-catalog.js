@@ -22,7 +22,12 @@ const BASE = { Noir: '#1c1b1a', Marron: '#5b3a29', Bleu: '#1f2a44', 'Bleu marine
 function splitTitle(title) {
   const words = title.trim().split(/\s+/);
   const cw = [];
-  while (words.length > 1 && COLORWAYS[words.at(-1).toUpperCase()]) cw.unshift(words.pop().toUpperCase());
+  while (words.length > 1 && COLORWAYS[words.at(-1).toUpperCase()]) {
+    const w = words.at(-1).toUpperCase();
+    // « Classic » is a colourway only for the attaché cases (URBAN CLASSIC is its own model)
+    if (w === 'CLASSIC' && !/^MALLETTE/i.test(words[0])) break;
+    cw.unshift(words.pop().toUpperCase());
+  }
   return { model: words.join(' '), cw };
 }
 const cap = s => s.toLowerCase().replace(/(^|[\s'-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase()).replace(/\bD'a/g, "d'A");

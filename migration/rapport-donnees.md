@@ -1,6 +1,6 @@
 # Rapport données catalogue — GIANATO
 
-Source : exports publics gianato.ma (2026-10-07). 160 produits, 67 modèles (familles de couleurs).
+Source : exports publics gianato.ma (2026-10-19). 160 produits, 68 modèles (familles de couleurs).
 
 | Indicateur | Valeur |
 |---|---|
@@ -10,7 +10,7 @@ Source : exports publics gianato.ma (2026-10-07). 160 produits, 67 modèles (fam
 | « Cousu Blake » mentionné | 17 |
 | Doublure mentionnée | 34 |
 | Semelle mentionnée | 87 |
-| Modèles à plusieurs couleurs | 43 |
+| Modèles à plusieurs couleurs | 42 |
 
 ## À corriger dans l'administration Shopify
 - **Prix barrés permanents** : 152 produits sur 160 affichent un prix comparé. Le thème les affiche avec retenue, mais le Brand Book recommande de supprimer les prix comparés hors périodes de soldes.

@@ -7,8 +7,18 @@
 {%- liquid
   assign s = section.settings
   assign mf = product.metafields.gianato
-  assign model = mf.model.value | default: product.title
+  assign model = mf.model.value
   assign colorway = mf.colorway.value
+  if model == blank
+    capture model
+      render 'color-siblings', product: product, mode: 'model'
+    endcapture
+    capture colorway
+      render 'color-siblings', product: product, mode: 'colorway'
+    endcapture
+    assign model = model | strip | default: product.title
+    assign colorway = colorway | strip
+  endif
   assign style = mf.style.value | default: product.type
   assign current = product.selected_or_first_available_variant
   if product.selected_variant == nil and product.has_only_default_variant == false
@@ -92,6 +102,8 @@
           {%- endfor -%}
         </div>
       </div>
+    {%- else -%}
+      {% render 'color-siblings', product: product, mode: 'pdp' %}
     {%- endif -%}
 
     {%- form 'product', product, class: 'pdp__form', data-product-form: '', novalidate: 'novalidate' -%}

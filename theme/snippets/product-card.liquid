@@ -4,8 +4,18 @@
   Metafields (namespace gianato, see migration/): model, colorway, siblings, swatch.
 {%- endcomment -%}
 {%- liquid
-  assign model = product.metafields.gianato.model.value | default: product.title
+  assign model = product.metafields.gianato.model.value
   assign colorway = product.metafields.gianato.colorway.value
+  if model == blank
+    capture model
+      render 'color-siblings', product: product, mode: 'model'
+    endcapture
+    capture colorway
+      render 'color-siblings', product: product, mode: 'colorway'
+    endcapture
+    assign model = model | strip | default: product.title
+    assign colorway = colorway | strip
+  endif
   assign style = product.metafields.gianato.style.value | default: product.type
   assign img1 = product.media[0].preview_image
   assign img2 = product.media[1].preview_image

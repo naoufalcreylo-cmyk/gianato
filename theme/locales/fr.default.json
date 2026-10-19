@@ -73,7 +73,8 @@
     "spec_sole": "Semelle",
     "spec_dimensions": "Dimensions",
     "spec_style": "Style",
-    "buy_now": "Acheter maintenant"
+    "buy_now": "Acheter maintenant",
+    "redirecting": "Redirection vers le paiement…"
   },
   "sizes": {
     "title": "Guide des pointures",

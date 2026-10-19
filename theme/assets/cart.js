@@ -83,6 +83,18 @@
     e.preventDefault();
     const fd = new FormData(form);
     const buyNow = !!e.submitter?.hasAttribute('data-buy-now');
+    if (buyNow) {
+      // « Acheter maintenant » : instant feedback, then one hop through Shopify's cart permalink
+      // (/cart/<variant>:<qty> opens checkout for this pair — same behaviour as Shopify's « Buy it now »).
+      const btn = e.submitter; const id = +fd.get('id'); const qty = Math.max(1, +fd.get('quantity') || 1);
+      btn.setAttribute('aria-busy', 'true'); btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = M.strings.redirecting;
+      try {
+        const item = JSON.parse(document.querySelector('[data-product-ga]')?.textContent || 'null');
+        if (item) A()?.track('begin_checkout', { value: item.price * qty, items: [{ ...item, item_id: String(id), quantity: qty }] });
+      } catch { /* analytics must never block checkout */ }
+      location.href = `${M.routes.root || '/'}cart/${id}:${qty}`;
+      return;
+    }
     add([{ id: +fd.get('id'), quantity: Math.max(1, +fd.get('quantity') || 1) }], 'product_page', form.querySelector('[data-form-error]'), { buyNow });
   });
 
@@ -109,7 +121,10 @@
     if (input) change(input.closest('.cart-line').dataset.key, Math.max(0, +input.value || 0));
   });
   // Keep drawer in sync when the cart changes in another tab
-  addEventListener('pageshow', e => { if (e.persisted) refresh(); });
+  addEventListener('pageshow', e => {
+    document.querySelectorAll('[data-buy-now][aria-busy]').forEach(b => { b.removeAttribute('aria-busy'); b.disabled = false; if (b.dataset.label) b.textContent = b.dataset.label; });
+    if (e.persisted) refresh();
+  });
 
   window.GianatoCart = { open, add, change, refresh };
 })();

@@ -258,7 +258,7 @@
 .sale-banner__inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: center; padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
 .sale-banner__media { grid-column: 1 / span 4; }
 .sale-banner__media .media { aspect-ratio: 4 / 3; background: #3a2b23; }
-.sale-banner__media img { object-position: 50% 88%; } /* keep the boots in frame */
+.sale-banner__media img { object-position: 50% 50%; }
 .sale-banner__text { grid-column: 6 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 1.25rem 2.5rem; }
 .sale-banner__text .eyebrow { grid-column: 1 / -1; color: var(--brass); }
 .sale-banner__text .eyebrow::before { background: var(--brass); }
@@ -277,7 +277,6 @@
 @media (max-width: 599px) {
   .sale-banner__inner { grid-template-columns: 1fr; padding-block: 0 2rem; }
   .sale-banner__media { grid-column: 1; margin-inline: calc(var(--gutter) * -1); }
-  .sale-banner__media .media { aspect-ratio: 16 / 10; }
   .sale-banner__text { grid-column: 1; }
   .sale-banner__foot .btn { width: 100%; }
 }

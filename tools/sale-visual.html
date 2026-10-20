@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<style>
+  /* Sale visual — composed from real Gianato packshots, cut out (studio background keyed, natural shadow kept).
+     Rendered by tools/sale-visual.js. Designed to stay legible at ~400 px wide (banner) and full width on mobile. */
+  @font-face { font-family: 'Newsreader'; src: url('../prototype/assets/fonts/Newsreader-Italic.woff2'); font-style: italic; font-weight: 300 400; }
+  @font-face { font-family: 'Belleza'; src: url('../prototype/assets/fonts/Belleza.woff2'); }
+  html, body { margin: 0; }
+  .canvas { position: relative; width: 1600px; height: 1200px; overflow: hidden;
+    background: radial-gradient(110% 85% at 28% 18%, #efe7da 0%, #e0d4c2 48%, #cbb89b 100%); }
+  .floor { position: absolute; left: 0; right: 0; top: 52%; bottom: 0; background: linear-gradient(180deg, rgba(110, 80, 50, 0) 0%, rgba(110, 80, 50, .10) 38%, rgba(110, 80, 50, .16) 100%); }
+  .word { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); font: italic 300 470px/0.9 'Newsreader', serif; letter-spacing: -.035em; color: #2b1f19; opacity: .13; white-space: nowrap; }
+  .logo { position: absolute; left: 50%; bottom: 70px; width: 300px; margin-left: -150px; opacity: .92; }
+  .logo-rule { position: absolute; left: 50%; bottom: 152px; width: 90px; height: 2px; margin-left: -45px; background: #a8915f; }
+  canvas.shoe { position: absolute; }
+  #boot   { left: 110px;  top: 455px; width: 640px; }
+  #loafer { left: 870px;  top: 545px; width: 640px; }
+  #derby  { left: 450px;  top: 640px; width: 700px; }
+</style></head>
+<body>
+  <div class="canvas">
+    <div class="floor"></div>
+    <div class="word">Soldes</div>
+    <canvas class="shoe" id="boot" data-src="../research/sale/braker-cocoa-2.png"></canvas>
+    <canvas class="shoe" id="loafer" data-src="../research/sale/monte-cristo-cocoa-2.png"></canvas>
+    <canvas class="shoe" id="derby" data-src="../research/sale/paolo-cammello-0.png"></canvas>
+    <div class="logo-rule"></div>
+    <img class="logo" src="../prototype/assets/img/logo-espresso.png" alt="">
+  </div>
+<script>
+  // Key out the near-white studio background (estimated from the corners), keep shoe + soft shadow, crop to content.
+  async function cutout(cv) {
+    const img = new Image(); img.src = cv.dataset.src; await img.decode();
+    const W = img.naturalWidth, H = img.naturalHeight;
+    const t = document.createElement('canvas'); t.width = W; t.height = H; const x = t.getContext('2d'); x.drawImage(img, 0, 0);
+    const d = x.getImageData(0, 0, W, H); const p = d.data;
+    const corner = (cx, cy) => { const i = (cy * W + cx) * 4; return [p[i], p[i + 1], p[i + 2]]; };
+    const cs = [corner(5, 5), corner(W - 6, 5), corner(5, H - 6), corner(W - 6, H - 6)];
+    const bg = [0, 1, 2].map(k => cs.reduce((s, c) => s + c[k], 0) / 4);
+    let minX = W, minY = H, maxX = 0, maxY = 0;
+    for (let i = 0; i < p.length; i += 4) {
+      const dist = Math.max(bg[0] - p[i], bg[1] - p[i + 1], bg[2] - p[i + 2], 0); // darker than the background = subject or shadow
+      let a = Math.min(1, Math.max(0, (dist - 4) / 34));
+      if (a > 0) {
+        // un-premultiply against the background so edges/shadows stay clean
+        for (let k = 0; k < 3; k++) p[i + k] = Math.max(0, Math.min(255, (p[i + k] - bg[k] * (1 - a)) / a));
+        if (a > .5) { const n = i / 4, px = n % W, py = (n / W) | 0; if (px < minX) minX = px; if (px > maxX) maxX = px; if (py < minY) minY = py; if (py > maxY) maxY = py; }
+      }
+      p[i + 3] = Math.round(a * 255);
+    }
+    x.putImageData(d, 0, 0);
+    const pad = 40; minX = Math.max(0, minX - pad); minY = Math.max(0, minY - pad); maxX = Math.min(W - 1, maxX + pad); maxY = Math.min(H - 1, maxY + pad);
+    cv.width = maxX - minX; cv.height = maxY - minY;
+    cv.getContext('2d').drawImage(t, minX, minY, cv.width, cv.height, 0, 0, cv.width, cv.height);
+  }
+  window.ready = Promise.all([...document.querySelectorAll('canvas.shoe')].map(cutout));
+</script>
+</body></html>

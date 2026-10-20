@@ -26,7 +26,7 @@
   const saleBanner = () => { const s = S.sale; if (!s || !s.enabled) return ''; return `
     <section class="sale-banner on-dark" aria-labelledby="sale-title">
       <div class="container sale-banner__inner">
-        <div class="sale-banner__media"><div class="media">${img(s.image, { sizes: '(min-width:600px) 33vw, 100vw', alt: 'Paire de bottines chelsea en cuir, noire et marron', max: 960 })}</div></div>
+        <div class="sale-banner__media"><div class="media">${img(s.image, { sizes: '(min-width:600px) 33vw, 100vw', alt: 'Soldes GIANATO : bottine chelsea, derby brogue cognac et mocassin en cuir', max: 1600 })}</div></div>
         <div class="sale-banner__text">
           <p class="eyebrow">${esc(s.eyebrow)}</p>
           <h2 id="sale-title"><a class="sale-banner__cover" href="${s.cta[1]}">${esc(s.title)}</a></h2>

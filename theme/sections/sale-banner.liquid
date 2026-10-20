@@ -10,7 +10,7 @@
 {%- if s.enabled -%}
   <section class="sale-banner on-dark" aria-labelledby="t-{{ section.id }}">
     <div class="container sale-banner__inner">
-      <div class="sale-banner__media"><div class="media">{% render 'image', image: s.image, fallback: 'editorial-boots-pair.webp', sizes: '(min-width:600px) 33vw, 100vw', alt: s.image_alt, max: 1200 %}</div></div>
+      <div class="sale-banner__media"><div class="media">{% render 'image', image: s.image, fallback: 'editorial-sale-autumn.webp', sizes: '(min-width:600px) 33vw, 100vw', alt: s.image_alt, max: 1200 %}</div></div>
       <div class="sale-banner__text">
         {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
         <h2 id="t-{{ section.id }}"><a class="sale-banner__cover" href="{{ target }}">{{ s.title }}</a></h2>
@@ -31,7 +31,7 @@
   "settings": [
     { "type": "checkbox", "id": "enabled", "label": "Afficher la bannière", "default": true, "info": "À désactiver à la fin de la période de soldes." },
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Paire de bottines chelsea en cuir, noire et marron" },
+    { "type": "text", "id": "image_alt", "label": "Description de l’image", "default": "Soldes GIANATO : bottine chelsea, derby brogue cognac et mocassin en cuir" },
     { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Fin de saison" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Soldes d’automne" },
     { "type": "text", "id": "rate", "label": "Taux (doit correspondre aux prix réels)", "default": "Jusqu’à −60 %" },

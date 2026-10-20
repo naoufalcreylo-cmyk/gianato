@@ -75,7 +75,7 @@ window.GIANATO_SITE = {
     rate: 'Jusqu’à −60 %',
     text: 'Sur une sélection de souliers, dans la limite des pointures disponibles.',
     cta: ['Découvrir les soldes', 'collection.html?c=soldes-automne'],
-    image: 'img:life-teal',
+    image: 'img:boots-pair',
   },
   hero: {
     eyebrow: 'Maison de souliers',
@@ -173,7 +173,7 @@ window.GIANATO_SITE = {
 
   /* Collection page heroes (editorial image per key collection) */
   collectionImages: {
-    soldes: 'img:life-teal', 'soldes-automne': 'img:life-teal',
+    soldes: 'img:boots-pair', 'soldes-automne': 'img:boots-pair',
     mocassin: 'img:life-rocks', richelieu: 'img:life-terrace', derby: 'img:life-terrace', 'richelieu-derby': 'img:life-terrace', bottines: 'img:life-boot',
     sneaker: 'img:life-sneakers', boucles: 'img:life-car', 'classic-professionnel': 'img:life-car-2', 'chaussures-ville': 'img:life-brick',
     'esprit-libre': 'img:life-rocks-2', nouveautes: 'img:life-chair', 'meilleures-ventes': 'cdn:https://cdn.shopify.com/s/files/1/0241/5532/4468/products/DSC09596.jpg',

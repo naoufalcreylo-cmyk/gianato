@@ -15,6 +15,7 @@
     lastFocus = document.activeElement;
     el.classList.add('is-open'); el.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('is-locked');
+    document.documentElement.dataset.layer = el.id;
     $$(`[aria-controls="${el.id}"]`).forEach(b => b.setAttribute('aria-expanded', 'true'));
     setTimeout(() => (focusSel ? $(focusSel, el) : focusables(el)[0])?.focus(), 60);
   }
@@ -22,6 +23,7 @@
     if (!el || !el.classList.contains('is-open')) return;
     el.classList.remove('is-open'); el.setAttribute('aria-hidden', 'true');
     if (!$('[data-layer].is-open')) document.documentElement.classList.remove('is-locked');
+    const still = $$('[data-layer].is-open').pop(); if (still) document.documentElement.dataset.layer = still.id; else delete document.documentElement.dataset.layer;
     $$(`[aria-controls="${el.id}"]`).forEach(b => b.setAttribute('aria-expanded', 'false'));
     lastFocus?.focus?.();
   }

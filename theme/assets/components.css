@@ -330,6 +330,6 @@ a.swatch::before { content: ''; position: absolute; inset: -.6rem -.25rem; }  /*
 .nav-link--sale { color: var(--oxblood); }
 .has-hero .header.is-transparent .nav-link--sale { color: inherit; }
 .mnav__list a.is-sale { color: var(--oxblood); }
-/* Open layers (mobile menu, cart, search, size guide) always cover the announcement bar:
-   the header section's stacking context is lifted above everything while a layer is open. */
-html.is-locked .section-header { z-index: 80; }
+/* The mobile menu lives inside the header section: lift that section above the announcement bar
+   only while the menu itself is open (other layers — search, cart — must stay above the header). */
+html[data-layer="mnav"] .section-header { z-index: 80; }

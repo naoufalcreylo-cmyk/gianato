@@ -333,3 +333,9 @@ a.swatch::before { content: ''; position: absolute; inset: -.6rem -.25rem; }  /*
 /* The mobile menu lives inside the header section: lift that section above the announcement bar
    only while the menu itself is open (other layers — search, cart — must stay above the header). */
 html[data-layer="mnav"] .section-header { z-index: 80; }
+/* « Voir plus » tile at the end of a product rail */
+.card--more { display: grid; aspect-ratio: 7 / 8; background: var(--bg-alt); border: 1px solid var(--line); place-items: center; text-align: center; transition: background var(--t) var(--ease), color var(--t) var(--ease); }
+.card--more__inner { display: grid; justify-items: center; gap: 1rem; padding: 1.5rem; }
+.card--more .h4 { max-width: 10ch; }
+.card--more:hover { background: var(--espresso); color: var(--ivory); }
+.card--more:hover .h4 { color: var(--ivory); }

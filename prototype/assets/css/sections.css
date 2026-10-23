@@ -280,3 +280,25 @@
   .sale-banner__text { grid-column: 1; }
   .sale-banner__foot .btn { width: 100%; }
 }
+
+/* ---------- Product spotlight (« Le Marly ») ---------- */
+.spotlight__inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: center; }
+.spotlight__media { grid-column: 1 / span 7; display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+.spotlight__media--pair { grid-template-columns: 1fr 1fr; }
+.spotlight__media--pair .spotlight__img:nth-child(2) { margin-top: clamp(2rem, 6vw, 6rem); }
+.spotlight__img { aspect-ratio: 7 / 8; display: block; }
+.spotlight__text { grid-column: 9 / -1; }
+.spotlight__text .eyebrow { margin-bottom: 1.25rem; }
+.spotlight__text h2 { margin-bottom: 1.5rem; }
+.spotlight__copy { color: var(--text); max-width: 30rem; }
+.spotlight__specs { margin-top: 1.75rem; }
+.spotlight__buy { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.75rem; }
+.spotlight__buy .card__swatches { margin: 0; }
+.spotlight__price { display: flex; align-items: baseline; gap: .6rem; }
+.spotlight__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-top: 1.75rem; }
+@media (max-width: 1023px) {
+  .spotlight__media, .spotlight__text { grid-column: 1 / -1; }
+  .spotlight__media--pair { gap: .75rem; }
+  .spotlight__text { padding-top: .5rem; }
+  .spotlight__actions .btn { flex: 1 1 100%; }
+}

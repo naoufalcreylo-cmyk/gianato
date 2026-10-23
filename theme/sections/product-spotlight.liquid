@@ -1,0 +1,81 @@
+{%- comment -%}
+  Product spotlight — one model told as a short story (e.g. Marly): two photos (main colour + second colour),
+  copy, colour links, price, CTA. Uses the products' own images, so it updates with the catalogue.
+  Copy must only state what the product description says.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign p = s.product
+  assign p2 = s.product_2
+  assign i1 = s.photo_1 | minus: 1
+  assign i2 = s.photo_2 | minus: 1
+-%}
+{%- if p != blank -%}
+  {%- liquid
+    assign media1 = p.media[i1].preview_image | default: p.featured_media.preview_image
+    if p2 != blank
+      assign media2 = p2.media[i2].preview_image | default: p2.featured_media.preview_image
+    endif
+    capture model
+      if p.metafields.gianato.model != blank
+        echo p.metafields.gianato.model.value
+      else
+        render 'color-siblings', product: p, mode: 'model'
+      endif
+    endcapture
+    assign model = model | strip | default: p.title
+  -%}
+  <section class="section section--alt spotlight" aria-labelledby="t-{{ section.id }}">
+    <div class="container spotlight__inner">
+      <div class="spotlight__media reveal{% if p2 != blank %} spotlight__media--pair{% endif %}">
+        <a class="media spotlight__img" href="{{ p.url }}" tabindex="-1" aria-hidden="true">{% render 'image', image: media1, sizes: '(min-width:1024px) 30vw, 50vw', alt: '', max: 1400, class: 'pack' %}</a>
+        {%- if p2 != blank -%}
+          <a class="media spotlight__img" href="{{ p2.url }}" tabindex="-1" aria-hidden="true">{% render 'image', image: media2, sizes: '(min-width:1024px) 30vw, 50vw', alt: '', max: 1400, class: 'pack' %}</a>
+        {%- endif -%}
+      </div>
+      <div class="spotlight__text reveal" style="--d:120ms">
+        {%- if s.eyebrow != blank -%}<p class="eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+        <h2 id="t-{{ section.id }}">{{ s.title | default: model }}{% if s.title_em != blank %}<br><em>{{ s.title_em }}</em>{% endif %}</h2>
+        {%- if s.text != blank -%}<div class="prose spotlight__copy">{{ s.text }}</div>{%- endif -%}
+        {%- if s.facts != blank -%}
+          <dl class="specs spotlight__specs">
+            {%- assign lines = s.facts | newline_to_br | split: '<br />' -%}
+            {%- for line in lines -%}
+              {%- assign parts = line | strip | split: ':' -%}
+              {%- if parts.size > 1 -%}<dt>{{ parts[0] | strip }}</dt><dd>{{ line | strip | remove_first: parts[0] | remove_first: ':' | strip }}</dd>{%- endif -%}
+            {%- endfor -%}
+          </dl>
+        {%- endif -%}
+        <div class="spotlight__buy">
+          {% render 'swatches', product: p, max: 8 %}
+          <p class="spotlight__price">{% render 'price', product: p %}</p>
+        </div>
+        <div class="spotlight__actions">
+          <a class="btn" href="{{ p.url }}">{{ s.cta_label | default: 'Découvrir' }}</a>
+          {%- if p2 != blank and s.cta2_label != blank -%}<a class="link" href="{{ p2.url }}">{{ s.cta2_label }} {% render 'icon', name: 'arrow' %}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Modèle à la une",
+  "tag": "div",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produit principal" },
+    { "type": "range", "id": "photo_1", "label": "Photo du produit principal (n°)", "min": 1, "max": 8, "step": 1, "default": 3 },
+    { "type": "product", "id": "product_2", "label": "Deuxième couleur (facultatif)" },
+    { "type": "range", "id": "photo_2", "label": "Photo de la deuxième couleur (n°)", "min": 1, "max": 8, "step": 1, "default": 2 },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Le Marly" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Du bureau au week-end," },
+    { "type": "text", "id": "title_em", "label": "Titre, ligne en italique", "default": "sans changer de paire." },
+    { "type": "richtext", "id": "text", "label": "Texte (uniquement des faits de la fiche produit)" },
+    { "type": "textarea", "id": "facts", "label": "Points clés (une ligne « Libellé : valeur »)" },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "Découvrir le Marly" },
+    { "type": "text", "id": "cta2_label", "label": "Lien vers la deuxième couleur" }
+  ],
+  "presets": [{ "name": "Modèle à la une" }]
+}
+{% endschema %}

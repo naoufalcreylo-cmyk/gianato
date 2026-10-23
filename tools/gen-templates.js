@@ -22,7 +22,8 @@ const [ht1, ht2] = split(S.hero.title);
 const [ct1, ct2] = split(S.campaign.title);
 const [mt1, mt2] = split(S.maison.title);
 const tileImg = ['editorial-loafers-blue.webp', ...S.categories.tiles.slice(1).map(t => asset(t.img))];
-write('index.json', {
+// INDEX_IS_LIVE: since 2026-10-23 the homepage is edited on the live store (Theme Editor) — only regenerate with --index
+if (process.argv.includes('--index')) write('index.json', {
   sections: {
     hero: { type: 'hero-diptych', settings: { eyebrow: S.hero.eyebrow, title: ht1, title_em: ht2, text: S.hero.text, cta_label: S.hero.cta[0], cta_url: pageUrl(S.hero.cta[1]), cta2_label: S.hero.cta2[0], cta2_url: pageUrl(S.hero.cta2[1]), caption_product: 'monte-cristo-gold', caption_text: 'doublure cuir vert émeraude' } },
     ...(S.sale ? { sale: { type: 'sale-banner', settings: { enabled: !!S.sale.enabled, eyebrow: S.sale.eyebrow, title: S.sale.title, rate: S.sale.rate, text: S.sale.text, collection: S.sale.cta[1].split('c=')[1], cta_label: S.sale.cta[0] } } } : {}),

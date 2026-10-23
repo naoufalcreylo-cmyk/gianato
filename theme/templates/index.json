@@ -3,6 +3,8 @@
     "hero": {
       "type": "hero-diptych",
       "settings": {
+        "alt_left": "Bottines en cuir noir portées sur un sol en mosaïque",
+        "alt_right": "Mocassins Monte Cristo cognac, doublure en cuir vert émeraude",
         "eyebrow": "Maison de souliers",
         "title": "L’assurance,",
         "title_em": "cousue main.",
@@ -19,33 +21,36 @@
       "type": "sale-banner",
       "settings": {
         "enabled": true,
+        "image": "shopify://shop_images/9daa76c8-a99f-4a29-b1b4-61bf1b5af530.png",
+        "image_alt": "Soldes GIANATO : bottine chelsea, derby brogue cognac et mocassin en cuir",
         "eyebrow": "Fin de saison",
         "title": "Soldes d’automne",
         "rate": "Jusqu’à −60 %",
         "text": "Sur une sélection de souliers, dans la limite des pointures disponibles.",
         "collection": "soldes-automne",
+        "url": "",
         "cta_label": "Découvrir les soldes"
       }
     },
-    "new_in": {
+    "business": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Nouvelle collection",
-        "title": "Les nouveautés",
-        "text": "Le Loro arrive en sept cuirs : un mocassin souple sur semelle claire, pour les journées qui commencent au bureau et finissent ailleurs.",
-        "collection": "nouveautes",
-        "limit": 6,
+        "eyebrow": "La sélection business",
+        "title": "Souliers business",
+        "text": "Les modèles que nos clients choisissent pour le bureau, du mocassin au richelieu.",
+        "collection": "meilleures-ventes",
+        "within": "classic-professionnel",
+        "exclude": "bottines",
+        "min_sizes": 0,
+        "limit": 8,
         "distinct": true,
-        "cta_label": "Découvrir la collection"
+        "cta_label": "Voir toute la collection",
+        "more_tile": true,
+        "more_label": "Voir tous les souliers business"
       }
     },
     "essentials": {
       "type": "category-mosaic",
-      "settings": {
-        "eyebrow": "Les essentiels",
-        "title": "Un soulier pour chaque allure",
-        "text": "Mocassins souples, souliers à lacets, bottines et baskets en cuir : cinq façons d’être bien chaussé."
-      },
       "blocks": {
         "tile1": {
           "type": "tile",
@@ -94,47 +99,62 @@
         "tile3",
         "tile4",
         "tile5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Les essentiels",
+        "title": "Un soulier pour chaque allure",
+        "text": "Mocassins souples, souliers à lacets, bottines et baskets en cuir : cinq façons d’être bien chaussé."
+      }
+    },
+    "bottines": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Saison froide",
+        "title": "Bottes & bottines",
+        "text": "Chelsea, boucles et lacets : une sélection de bottines disponibles dans le plus grand nombre de pointures.",
+        "collection": "meilleures-ventes",
+        "within": "bottines",
+        "min_sizes": 3,
+        "limit": 8,
+        "distinct": true,
+        "cta_label": "Voir toutes les bottines",
+        "more_tile": true,
+        "more_label": "Voir toutes les bottines"
+      }
+    },
+    "marly": {
+      "type": "product-spotlight",
+      "settings": {
+        "product": "marly",
+        "photo_1": 3,
+        "product_2": "marly-coco",
+        "photo_2": 2,
+        "eyebrow": "Le Marly",
+        "title": "Du bureau au week-end,",
+        "title_em": "sans changer de paire.",
+        "text": "<p>Un cuir grainé, résistant et souple, monté sur une semelle crantée en gomme, légère et adhérente. Le Marly se porte aussi bien avec un pantalon casual qu’avec une tenue plus habillée.</p>",
+        "facts": "Matière : Cuir grainé, résistant et souple\nSemelle : Gomme crantée, légère et adhérente\nCouleurs : Noir, Cocoa",
+        "cta_label": "Découvrir le Marly",
+        "cta2_label": "Voir en Cocoa"
+      }
     },
     "campaign": {
       "type": "editorial-campaign",
       "settings": {
+        "image_alt": "Monte Cristo noir : intérieur en cuir vert émeraude",
+        "inset_alt": "Paire de Monte Cristo noirs posée sur une marche en pierre",
+        "lining_mark": true,
         "eyebrow": "Monte Cristo",
         "title": "Ce qui ne se voit pas",
         "title_em": "se ressent.",
         "text": "Veau box brossé, cousu Blake à la main, doublé de cuir vert émeraude. Le mocassin de la Maison, en six couleurs.",
         "product": "monte-cristo",
         "cta_label": "Découvrir le Monte Cristo",
-        "lining_mark": true
-      }
-    },
-    "signatures": {
-      "type": "signatures",
-      "settings": {
-        "eyebrow": "Les signatures",
-        "title": "Les modèles qui font la Maison",
-        "text": "Quatre souliers que nos clients choisissent, et reviennent choisir.",
-        "products": [
-          "monte-cristo",
-          "carlo-sombre-antique",
-          "alessio",
-          "antique-ritchie"
-        ],
-        "collection": "meilleures-ventes",
-        "cta_label": "Toutes les signatures"
+        "cta_url": ""
       }
     },
     "maison": {
       "type": "maison-story",
-      "settings": {
-        "tone": "stone",
-        "eyebrow": "La Maison GIANATO",
-        "title": "Deux maisons familiales,",
-        "title_em": "un même métier.",
-        "text": "<p>GIANATO est né de la rencontre de deux marques familiales : Lozano, chausseur italien, et Richilio, maison marocaine.</p><p>De l’atelier à votre porte, sans intermédiaire : chaque paire est pensée à l’atelier, et la Maison reste à vos côtés bien après l’achat.</p>",
-        "cta_label": "Découvrir notre histoire",
-        "cta_url": "/pages/la-maison"
-      },
       "blocks": {
         "figure1": {
           "type": "figure",
@@ -162,148 +182,20 @@
         "figure1",
         "figure2",
         "figure3"
-      ]
-    },
-    "craft": {
-      "type": "craftsmanship",
+      ],
       "settings": {
-        "eyebrow": "Savoir-faire",
-        "title": "Regarder de plus près",
-        "text": "Ce qui fait une paire ne se lit pas sur l’étiquette. Ces détails, nous les nommons.",
-        "link_label": "Le savoir-faire",
-        "link_url": "/pages/la-maison#savoir-faire"
-      },
-      "blocks": {
-        "detail1": {
-          "type": "detail",
-          "settings": {
-            "title": "La matière",
-            "text": "Veau box, box calf pleine fleur, cuir grainé ou daim : chaque fiche indique le cuir employé.",
-            "lining": false,
-            "fallback": "editorial-craft-grain.webp"
-          }
-        },
-        "detail2": {
-          "type": "detail",
-          "settings": {
-            "title": "Le cousu Blake",
-            "text": "Une couture qui relie la tige à la semelle. Quand elle est faite à la main, la fiche du modèle le précise.",
-            "lining": false,
-            "fallback": "editorial-craft-blake.webp"
-          }
-        },
-        "detail3": {
-          "type": "detail",
-          "settings": {
-            "title": "La doublure",
-            "text": "Le cuir vert émeraude du Monte Cristo. Personne ne le voit, sauf celui qui porte la paire.",
-            "lining": true,
-            "fallback": "editorial-craft-lining.webp"
-          }
-        },
-        "detail4": {
-          "type": "detail",
-          "settings": {
-            "title": "La semelle",
-            "text": "Gomme sur la plupart de nos modèles, pour l’adhérence et le confort au quotidien.",
-            "lining": false,
-            "fallback": "editorial-craft-sole.webp"
-          }
-        }
-      },
-      "block_order": [
-        "detail1",
-        "detail2",
-        "detail3",
-        "detail4"
-      ]
-    },
-    "occasion": {
-      "type": "occasion-edit",
-      "settings": {
-        "eyebrow": "L’édition business",
-        "title": "Le business contemporain",
-        "text": "Réunion, plaidoirie, signature : les souliers et mallettes des jours qui comptent.",
-        "collection": "classic-professionnel",
-        "extra_collection": "essential-business",
-        "count": 3,
-        "links": "occasions"
+        "tone": "stone",
+        "image_alt": "Une paire de Monte Cristo cocoa tenue à la main devant un mur de briques",
+        "eyebrow": "La Maison GIANATO",
+        "title": "Deux maisons familiales,",
+        "title_em": "un même métier.",
+        "text": "<p>GIANATO est né de la rencontre de deux marques familiales : Lozano, chausseur italien, et Richilio, maison marocaine.</p><p>De l’atelier à votre porte, sans intermédiaire : chaque paire est pensée à l’atelier, et la Maison reste à vos côtés bien après l’achat.</p>",
+        "cta_label": "Découvrir notre histoire",
+        "cta_url": "/pages/la-maison"
       }
-    },
-    "voices": {
-      "type": "testimonials",
-      "settings": {
-        "eyebrow": "Les amis de la Maison",
-        "title": "Ils portent GIANATO"
-      },
-      "blocks": {
-        "quote1": {
-          "type": "quote",
-          "settings": {
-            "quote": "Je suis vraiment étonné de la qualité des chaussures que j’ai prises chez la Maison Gianato. C’est devenu ma marque de chaussures préférée. Je la recommande vivement, sans oublier leur service personnalisé assuré par Mme Ferdaous.",
-            "name": "Driss Roukh"
-          }
-        },
-        "quote2": {
-          "type": "quote",
-          "settings": {
-            "quote": "C’est magnifique, merci pour la qualité du service.",
-            "name": "Othmane Lamine"
-          }
-        }
-      },
-      "block_order": [
-        "quote1",
-        "quote2"
-      ]
-    },
-    "journal": {
-      "type": "journal",
-      "settings": {
-        "eyebrow": "Le carnet",
-        "title": "Conseils de la Maison",
-        "blog": "comment-choisir-des-souliers-pour-homme-adaptes-a-son-style"
-      },
-      "blocks": {
-        "story1": {
-          "type": "story",
-          "settings": {
-            "kicker": "Entretien",
-            "title": "Embauchoirs, alternance, cirage : faire durer ses souliers",
-            "url": "/pages/la-maison#entretien",
-            "fallback": "editorial-craft-hand.webp"
-          }
-        },
-        "story2": {
-          "type": "story",
-          "settings": {
-            "kicker": "Pointure",
-            "title": "Trouver la juste pointure, du premier coup",
-            "url": "/pages/service-client#pointures",
-            "fallback": "editorial-boots-pair.webp"
-          }
-        },
-        "story3": {
-          "type": "story",
-          "settings": {
-            "kicker": "Atelier",
-            "title": "L’atelier Lozano et la méthode « un sacchetto »",
-            "url": "/pages/la-maison#atelier",
-            "fallback": "editorial-life-flatlay.webp"
-          }
-        }
-      },
-      "block_order": [
-        "story1",
-        "story2",
-        "story3"
-      ]
     },
     "services": {
       "type": "service-promise",
-      "settings": {
-        "tight": true
-      },
       "blocks": {
         "service1": {
           "type": "service",
@@ -347,21 +239,21 @@
         "service2",
         "service3",
         "service4"
-      ]
+      ],
+      "settings": {
+        "tight": true
+      }
     }
   },
   "order": [
     "hero",
     "sale",
-    "new_in",
+    "business",
     "essentials",
+    "bottines",
+    "marly",
     "campaign",
-    "signatures",
     "maison",
-    "craft",
-    "occasion",
-    "voices",
-    "journal",
     "services"
   ]
 }

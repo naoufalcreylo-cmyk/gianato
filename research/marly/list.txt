@@ -1,8 +1,0 @@
-marly-coco-0 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-28.png 1400x1608
-marly-coco-1 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-25.png 1400x1608
-marly-coco-2 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-26.png 1400x1608
-marly-coco-3 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-27.png 1400x1608
-marly-0 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-32.png 1400x1608
-marly-1 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-30.png 1400x1608
-marly-2 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-29.png 1400x1608
-marly-3 https://cdn.shopify.com/s/files/1/0241/5532/4468/files/gianato-4Artboard-31.png 1400x1608

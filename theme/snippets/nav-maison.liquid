@@ -21,6 +21,7 @@
 <li><a class="nav-link" href="{{ routes.collections_url }}/essential-business">Maroquinerie</a></li>
   {%- when 'right' -%}
 <span class="header__end hide-m"><a class="nav-link nav-link--sale" href="{{ routes.collections_url }}/soldes">Soldes</a></span>
+<span class="header__end hide-m"><a class="nav-link" href="{{ routes.collections_url }}/destockage">Fin de collection</a></span>
 <span class="header__end hide-m"><button class="nav-link" type="button" aria-expanded="false" aria-controls="mega-maison" data-mega-trigger="maison">La Maison</button></span>
   {%- when 'megas' -%}
 <div class="mega" id="mega-souliers" data-mega="souliers" aria-hidden="true">
@@ -89,6 +90,7 @@
 <li><details><summary>Occasions{% render 'icon', name: 'plus' %}</summary><div class="mnav__sub"><div><h3>Par occasion</h3><ul role="list"><li><a href="{{ routes.collections_url }}/classic-professionnel">Business</a></li><li><a href="{{ routes.collections_url }}/chaussures-ville">Ville</a></li><li><a href="{{ routes.collections_url }}/esprit-libre">Détente</a></li><li><a href="{{ routes.collections_url }}/selection-marriage">Sélection mariage</a></li><li><a href="{{ routes.collections_url }}/confort">Ultra confort</a></li></ul></div><div><h3>Pour le bureau</h3><ul role="list"><li><a href="{{ routes.collections_url }}/chaussures-ville-confortables">Ville confortables</a></li><li><a href="{{ routes.collections_url }}/essential-business">Essential Business</a></li></ul></div></div></details></li>
 <li><a href="{{ routes.collections_url }}/essential-business">Maroquinerie</a></li>
 <li><a href="{{ routes.collections_url }}/soldes" class="is-sale">Soldes</a></li>
+<li><a href="{{ routes.collections_url }}/destockage">Fin de collection</a></li>
 <li><details><summary>La Maison{% render 'icon', name: 'plus' %}</summary><div class="mnav__sub"><div><h3>La Maison</h3><ul role="list"><li><a href="{{ maison_url }}">Notre histoire</a></li><li><a href="{{ maison_url }}#savoir-faire">Le savoir-faire</a></li><li><a href="{{ maison_url }}#entretien">L’entretien</a></li></ul></div><div><h3>Services</h3><ul role="list"><li><a href="{{ service_url }}#pointures">Guide des pointures</a></li><li><a href="{{ service_url }}#livraison">Livraison</a></li><li><a href="{{ service_url }}#echanges">Échanges &amp; retours</a></li><li><a href="{{ service_url }}#paiement">Paiement</a></li><li><a href="{{ service_url }}#garantie">Garantie</a></li><li><a href="{{ service_url }}#contact">Nous contacter</a></li></ul></div></div></details></li>
   {%- when 'footer' -%}
 <nav class="footer__col" aria-label="La Maison"><h2>La Maison</h2><ul role="list"><li><a href="{{ maison_url }}">Notre histoire</a></li><li><a href="{{ maison_url }}#savoir-faire">Savoir-faire</a></li><li><a href="{{ maison_url }}#atelier">L’atelier</a></li><li><a href="{{ maison_url }}#entretien">Entretien</a></li></ul></nav>

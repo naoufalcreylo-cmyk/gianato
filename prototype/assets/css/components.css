@@ -339,3 +339,11 @@ html[data-layer="mnav"] .section-header { z-index: 80; }
 .card--more .h4 { max-width: 10ch; }
 .card--more:hover { background: var(--espresso); color: var(--ivory); }
 .card--more:hover .h4 { color: var(--ivory); }
+/* Medium desktops (7 menu items): tighter tracking and gaps so the logo stays centred with air around it */
+@media (min-width: 1180px) and (max-width: 1499px) {
+  .nav-link { letter-spacing: .1em; font-size: .75rem; }
+  .header__nav { gap: clamp(.9rem, -.6rem + 2vw, 1.75rem); }
+  .header__end { margin-right: clamp(.6rem, -.4rem + 1.4vw, 1.25rem); }
+  .header__tools { gap: 0; }
+  .header__logo img { width: clamp(7.5rem, 3rem + 6vw, 9.5rem); }
+}

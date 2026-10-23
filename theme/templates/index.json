@@ -243,6 +243,103 @@
       "settings": {
         "tight": true
       }
+    },
+    "craft": {
+      "type": "craftsmanship",
+      "blocks": {
+        "detail1": {
+          "type": "detail",
+          "settings": {
+            "fallback": "editorial-craft-grain.webp",
+            "title": "La matière",
+            "text": "Veau box, box calf pleine fleur, cuir grainé ou daim : chaque fiche indique le cuir employé.",
+            "lining": false
+          }
+        },
+        "detail2": {
+          "type": "detail",
+          "settings": {
+            "fallback": "editorial-craft-blake.webp",
+            "title": "Le cousu Blake",
+            "text": "Une couture qui relie la tige à la semelle. Quand elle est faite à la main, la fiche du modèle le précise.",
+            "lining": false
+          }
+        },
+        "detail3": {
+          "type": "detail",
+          "settings": {
+            "fallback": "editorial-craft-lining.webp",
+            "title": "La doublure",
+            "text": "Le cuir vert émeraude du Monte Cristo. Personne ne le voit, sauf celui qui porte la paire.",
+            "lining": true
+          }
+        },
+        "detail4": {
+          "type": "detail",
+          "settings": {
+            "fallback": "editorial-craft-sole.webp",
+            "title": "La semelle",
+            "text": "Gomme sur la plupart de nos modèles, pour l’adhérence et le confort au quotidien.",
+            "lining": false
+          }
+        }
+      },
+      "block_order": [
+        "detail1",
+        "detail2",
+        "detail3",
+        "detail4"
+      ],
+      "settings": {
+        "eyebrow": "Savoir-faire",
+        "title": "Regarder de plus près",
+        "text": "Ce qui fait une paire ne se lit pas sur l’étiquette. Ces détails, nous les nommons.",
+        "link_label": "Le savoir-faire",
+        "link_url": "/pages/la-maison#savoir-faire"
+      }
+    },
+    "voices": {
+      "type": "testimonials",
+      "blocks": {
+        "quote1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Je suis vraiment étonné de la qualité des chaussures que j’ai prises chez la Maison Gianato. C’est devenu ma marque de chaussures préférée. Je la recommande vivement, sans oublier leur service personnalisé assuré par Mme Ferdaous.",
+            "name": "Driss Roukh"
+          }
+        },
+        "quote2": {
+          "type": "quote",
+          "settings": {
+            "quote": "C’est magnifique, merci pour la qualité du service.",
+            "name": "Othmane Lamine"
+          }
+        },
+        "press1": {
+          "type": "press",
+          "settings": {
+            "logo": "shopify://shop_images/LOpinion_Logo_full-2048x496_1a33ae99-58e6-4b2b-9ba5-f2a712a87dba.png",
+            "name": "L’Opinion"
+          }
+        },
+        "press2": {
+          "type": "press",
+          "settings": {
+            "logo": "shopify://shop_images/LVE-LOGO-NEW-BON_5935eb02-6285-4bc6-a02c-fc2cd8adb3af.jpg",
+            "name": "La Vie éco"
+          }
+        }
+      },
+      "block_order": [
+        "quote1",
+        "quote2",
+        "press1",
+        "press2"
+      ],
+      "settings": {
+        "eyebrow": "Les amis de la Maison",
+        "title": "Ils portent GIANATO"
+      }
     }
   },
   "order": [
@@ -254,6 +351,8 @@
     "marly",
     "campaign",
     "maison",
+    "craft",
+    "voices",
     "services"
   ]
 }

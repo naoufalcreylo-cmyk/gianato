@@ -26,7 +26,8 @@ window.GIANATO_SITE = {
     { title: 'Nouveautés', href: 'collection.html?c=nouveautes' },
     { title: 'Occasions', mega: 'occasions' },
     { title: 'Maroquinerie', href: 'collection.html?c=essential-business' },
-    { title: 'Soldes', href: 'collection.html?c=soldes', sale: true, end: true },   // live collection « soldes » (146 produits)
+    { title: 'Soldes', href: 'collection.html?c=soldes', sale: true, end: true },
+    { title: 'Fin de collection', href: 'collection.html?c=destockage', end: true },   // live collection « destockage »   // live collection « soldes » (146 produits)
     { title: 'La Maison', mega: 'maison', end: true },   // right side of the header, beside the tools
   ],
   mega: {

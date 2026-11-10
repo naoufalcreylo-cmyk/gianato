@@ -22,14 +22,14 @@
       "settings": {
         "enabled": true,
         "image": "shopify://shop_images/9daa76c8-a99f-4a29-b1b4-61bf1b5af530.png",
-        "image_alt": "Soldes GIANATO : bottine chelsea, derby brogue cognac et mocassin en cuir",
-        "eyebrow": "Fin de saison",
-        "title": "Soldes d’automne",
-        "rate": "Jusqu’à −60 %",
+        "image_alt": "Bottines chelsea GIANATO en cuir noir et marron",
+        "eyebrow": "Offre exceptionnelle",
+        "title": "Happy Friday",
+        "rate": "Jusqu’à −70 %",
         "text": "Sur une sélection de souliers, dans la limite des pointures disponibles.",
-        "collection": "soldes-automne",
+        "collection": "happy-friday",
         "url": "",
-        "cta_label": "Découvrir les soldes"
+        "cta_label": "Découvrir l’offre"
       }
     },
     "business": {

@@ -26,8 +26,8 @@ window.GIANATO_SITE = {
     { title: 'Nouveautés', href: 'collection.html?c=nouveautes' },
     { title: 'Occasions', mega: 'occasions' },
     { title: 'Maroquinerie', href: 'collection.html?c=essential-business' },
-    { title: 'Soldes', href: 'collection.html?c=soldes', sale: true, end: true },
-    { title: 'Fin de collection', href: 'collection.html?c=destockage', end: true },   // live collection « destockage »   // live collection « soldes » (146 produits)
+    { title: 'Happy Friday', href: 'collection.html?c=happy-friday', sale: true, end: true },   // live collection « happy-friday » (replaces Soldes, 2026-11-10)
+    { title: 'Fin de collection', href: 'collection.html?c=destockage', end: true },   // live collection « destockage »
     { title: 'La Maison', mega: 'maison', end: true },   // right side of the header, beside the tools
   ],
   mega: {
@@ -71,11 +71,11 @@ window.GIANATO_SITE = {
      146 produits en promotion, remises de 10 % à 60 % (60 % sur quelques pointures) → « jusqu'à −60 % sur une sélection ». */
   sale: {
     enabled: true,
-    eyebrow: 'Fin de saison',
-    title: 'Soldes d’automne',
-    rate: 'Jusqu’à −60 %',
+    eyebrow: 'Offre exceptionnelle',
+    title: 'Happy Friday',
+    rate: 'Jusqu’à −70 %',
     text: 'Sur une sélection de souliers, dans la limite des pointures disponibles.',
-    cta: ['Découvrir les soldes', 'collection.html?c=soldes-automne'],
+    cta: ['Découvrir l’offre', 'collection.html?c=happy-friday'],
     image: 'img:sale-autumn',   // composed from real packshots (tools/sale-visual.html)
   },
   hero: {

@@ -26,7 +26,7 @@ window.GIANATO_SITE = {
     { title: 'Nouveautés', href: 'collection.html?c=nouveautes' },
     { title: 'Occasions', mega: 'occasions' },
     { title: 'Maroquinerie', href: 'collection.html?c=essential-business' },
-    { title: 'Happy Friday', href: 'collection.html?c=happy-friday', sale: true, end: true },   // live collection « happy-friday » (replaces Soldes, 2026-11-10)
+    { title: 'Happy Friday', href: 'collection.html?c=happy-friday-2026', sale: true, end: true },   // live collection « happy-friday-2026 » (replaces Soldes, 2026-11-10)
     { title: 'Fin de collection', href: 'collection.html?c=destockage', end: true },   // live collection « destockage »
     { title: 'La Maison', mega: 'maison', end: true },   // right side of the header, beside the tools
   ],
@@ -75,7 +75,7 @@ window.GIANATO_SITE = {
     title: 'Happy Friday',
     rate: 'Jusqu’à −70 %',
     text: 'Sur une sélection de souliers, dans la limite des pointures disponibles.',
-    cta: ['Découvrir l’offre', 'collection.html?c=happy-friday'],
+    cta: ['Découvrir l’offre', 'collection.html?c=happy-friday-2026'],
     image: 'img:sale-autumn',   // composed from real packshots (tools/sale-visual.html)
   },
   hero: {

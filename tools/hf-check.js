@@ -20,12 +20,12 @@ const { chromium } = require('playwright-core');
     await p.close();
   }
   const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
-  const resp = await p.goto('https://gianato.ma/collections/happy-friday', { waitUntil: 'domcontentloaded' });
+  const resp = await p.goto('https://gianato.ma/collections/happy-friday-2026', { waitUntil: 'domcontentloaded' });
   console.log('collection', resp.status(), await p.title());
   const data = await p.evaluate(async () => {
     const out = []; let page = 1;
     while (page < 6) {
-      const r = await fetch('/collections/happy-friday/products.json?limit=250&page=' + page); if (!r.ok) return { err: r.status, out };
+      const r = await fetch('/collections/happy-friday-2026/products.json?limit=250&page=' + page); if (!r.ok) return { err: r.status, out };
       const j = await r.json(); if (!j.products.length) break; out.push(...j.products); page++;
     }
     return { out };
